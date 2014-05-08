@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141006143346) do
+ActiveRecord::Schema.define(version: 20141008061651) do
 
   create_table "add_go_down_id_to_sub_orders", force: true do |t|
     t.string   "GoDownId"
@@ -89,6 +89,14 @@ ActiveRecord::Schema.define(version: 20141006143346) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "GoDownId"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

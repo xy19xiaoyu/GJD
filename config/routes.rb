@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
+  get 'admin/index'
+
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
+  resources :users
+
   resources :sub_orders
 
   resources :orders
 
-  get 'static_pages/home'
+  get 'static_pages/home', :as => 'home'
 
   get 'static_pages/help'
 
