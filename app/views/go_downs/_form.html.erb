@@ -1,0 +1,37 @@
+<%= form_for(@go_down) do |f| %>
+  <% if @go_down.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@go_down.errors.count, "error") %> prohibited this go_down from being saved:</h2>
+
+      <ul>
+      <% @go_down.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    仓库编号<br>
+    <%= f.text_field :GoDownId %>
+  </div>
+  <div class="field">
+    仓库名称<br>
+    <%= f.text_field :Name %>
+  </div>
+  <div class="field">
+    地址：<br>
+    <%= f.text_field :Address %>
+  </div>
+  <div class="field">
+    管理员<br>
+    <%= f.text_field :Admin %>
+  </div>
+  <div class="field">
+    电话<br>
+    <%= f.text_field :Tel %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  GoDownId: MyString
+  Name: MyString
+  Address: MyString
+  Admin: MyString
+  Tel: MyString
+
+two:
+  GoDownId: MyString
+  Name: MyString
+  Address: MyString
+  Admin: MyString
+  Tel: MyString

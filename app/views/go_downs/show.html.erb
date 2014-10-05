@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>仓库编号:</strong>
+  <%= @go_down.GoDownId %>
+</p>
+
+<p>
+  <strong>仓库名称:</strong>
+  <%= @go_down.Name %>
+</p>
+
+<p>
+  <strong>地址:</strong>
+  <%= @go_down.Address %>
+</p>
+
+<p>
+  <strong>管理员:</strong>
+  <%= @go_down.Admin %>
+</p>
+
+<p>
+  <strong>电话:</strong>
+  <%= @go_down.Tel %>
+</p>
+
+<%= link_to '编辑', edit_go_down_path(@go_down) %> |
+<%= link_to '返回', go_downs_path %>

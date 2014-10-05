@@ -1,0 +1,27 @@
+<h1>生产流水管理</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>流水号</th>
+      <th>生产日期</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @batches.each do |batch| %>
+      <tr>
+        <td><%= batch.Batchid %></td>
+        <td><%= batch.Date %></td>
+        <td><%= link_to '查看', batch %></td>
+        <td><%= link_to '编辑', edit_batch_path(batch) %></td>
+        <td><%= link_to '删除', batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新建流水', new_batch_path %>

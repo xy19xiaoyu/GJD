@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>流水号:</strong>
+  <%= @batch.Batchid %>
+</p>
+
+<p>
+  <strong>生产日期:</strong>
+  <%= @batch.Date %>
+</p>
+
+<%= link_to '编辑', edit_batch_path(@batch) %> |
+<%= link_to '返回', batches_path %>

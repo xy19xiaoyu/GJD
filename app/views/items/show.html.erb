@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>物品编号:</strong>
+  <%= @item.ItemId %>
+</p>
+
+<p>
+  <strong>名称:</strong>
+  <%= @item.Name %>
+</p>
+
+
+<p>
+  <strong>类型:</strong>
+  <%= @item.Type %>
+</p>
+
+<p>
+  <strong>品目:</strong>
+  <%= @item.CategoryName %>
+</p>
+
+<p>
+  <strong>型号:</strong>
+  <%= @item.subCategoryName %>
+</p>
+
+
+<%= link_to '编辑', edit_item_path(@item) %> |
+<%= link_to '后退', items_path %>

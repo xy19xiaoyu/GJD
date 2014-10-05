@@ -1,0 +1,99 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    物品编号：<br>
+    <%= f.text_field :ItemId %>
+  </div>
+  <div class="field">
+    名称：<br>
+    <%= f.text_field :Name %>
+  </div>
+    <div class="field">
+      类型(原料|产品)<br>
+      <%= select(:item,:Type, [['原料',"原料"], ['产品', "产品"]]) %>
+    </div>
+  <div class="field" style="display:none">
+    <%= f.label :CategoryId %><br>
+    <%= f.number_field :CategoryId %>
+  </div>
+  <div class="field">
+    品目<br>
+    <%= select(:item,:CategoryName,@CategoryList.map{|c| [c.Name, c.Name]}) %>
+  </div>
+    <div class="field" style="display:none">
+    <%= f.label :subCategoryid %><br>
+    <%= f.number_field :subCategoryid %>
+  </div>
+  <div class="field">
+    型号<br>
+    <%= select(:item,:subCategoryName,@subCategory.map{|c| [c.Name, c.Name]}) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+
+    <script>
+    $(document).ready(function(){
+        $("#item_Type").change(function(){
+            changecategory();
+        });
+        //选择品目--型号变化
+         $("#item_CategoryName").change(function(){
+            changeSubCategory();
+        });
+    });
+    function changecategory()
+    {
+         //选择产品--品目变化
+        var CategoryUrl = "http://"+ window.location.host +  "/categories.json/"
+         $.get(CategoryUrl,function(data,status){
+                debugger;
+                $("#item_CategoryName").empty();
+                $("#item_subCategoryName").empty();
+                var select = $("#item_Type").find("option:selected").text();
+                var Categories  =eval(data);
+                for(var i=0;i< Categories.length;i++)
+                {
+                    if(Categories[i].Type == select)
+                    {
+                        $("#item_CategoryName").append("<option value='"+Categories[i].Name +"'>"+ Categories[i].Name +"</option>")
+                    }
+                }
+                $("#item_CategoryName ").get(0).selectedIndex=0;
+                changeSubCategory();
+            });
+    }
+
+            function changeSubCategory()
+            {
+
+                var subCategoryUrl = "http://"+ window.location.host +  "/sub_categories.json/"
+                $.get(subCategoryUrl,function(data,status){
+                    debugger;
+                    $("#item_subCategoryName").empty();
+                    var select = $("#item_CategoryName").find("option:selected").text();
+                    var subCategories  =eval(data);
+                    for(var i=0;i< subCategories.length;i++)
+                    {
+                        if(subCategories[i].CategoryName == select)
+                        {
+                            $("#item_subCategoryName").append("<option value='"+subCategories[i].Name +"'>"+ subCategories[i].Name +"</option>")
+                        }
+                    }
+                });
+            }
+
+    </script>
+<% end %>
