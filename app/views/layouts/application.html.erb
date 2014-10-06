@@ -7,8 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<h1>进销存</h1>
+<hr/>
+<div style="float: left;width:200px;">
+  <h1>配置管理</h1>
 
+  <ul>
+    <li>  <a href="/categories/">品目配置</a></li>
+    <li>  <a href="/items/">物品配制</a></li>
+    <li>  <a href="/go_downs/">仓库配置</a></li>
+    <li>  <a href="/batches/">生产流水配置</a></li>
+  </ul>
+  <h2>订单</h2>
+  <ul>
+    <li><a href="/orders/">订单</a></li>
+    <li><a href="#">入库单</a></li>
+    <li><a href="#">出库单</a></li>
+  </ul>
+  <h2>仓库</h2>
+  <ul>
+  <li><a href="#">入库</a></li>
+  <li><a href="#">出库</a></li>
+  <li><a href="#">查询</a></li></ul>
+</div>
+<div style="float: left;">
 <%= yield %>
-
+</div>
 </body>
 </html>

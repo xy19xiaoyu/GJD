@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :sub_orders
+
+  resources :orders
+
   get 'static_pages/home'
 
   get 'static_pages/help'
