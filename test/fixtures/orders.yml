@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  OrderId: MyString
+  Name: MyString
+  Type: MyString
+  CreateTime: 2014-10-06
+  CreateUser: MyString
+  ExecTime: 2014-10-06
+  Execer: MyString
+  State: MyString
+
+two:
+  OrderId: MyString
+  Name: MyString
+  Type: MyString
+  CreateTime: 2014-10-06
+  CreateUser: MyString
+  ExecTime: 2014-10-06
+  Execer: MyString
+  State: MyString

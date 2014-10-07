@@ -1,0 +1,95 @@
+<%= form_for(@sub_order) do |f| %>
+<% if @sub_order.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@sub_order.errors.count, "error") %> prohibited this sub_order from being saved:</h2>
+
+    <ul>
+        <% @sub_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+<h3>添加订单项</h3>
+<ul class="sub">
+    <li style="display: none"><%= f.text_field :OrderId %></li>
+    <li> 类型:</li><li> <%= select(:item,:Type, [['原料',"原料"], ['产品', "产品"]]) %></li>
+    <li> 物品名称:</li><li><%= select(:sub_order,:ItemNo,[["",""]]) %></li>
+    <li>品目：</li><li><input type="text" id="category" readonly="true"></li>
+    <li>型号：</li><li><input type="text" id="subcategory" readonly="true"></li>
+    <li>数量:</li><li><%= f.number_field :Sum %></li>
+  <!--
+    <li> 实际数量:</li><li><%= f.number_field :Sum1 %></li>
+    <li>生产批次号:</li><li><%= select(:sub_order,:BatchId,[["",""]]) %></li>
+    <li>生产日期:</li><li><%= f.text_field :CreateTime %></li>
+    <li>保质期:</li><li><%= f.number_field :ShelfLife %></li>
+    -->
+    <li>供应商:</li><li><%= f.text_field :MadeIn %></li>
+    <li>仓库:</li><li><%= select(:sub_order,:GoDownId,@GoDwons.map{|c| [c.Name, c.GoDownId]}) %></li>
+
+    <li></li><li><%= f.submit %></li>
+    <li style="clear:both"></li>
+</ul>
+<div style="clear:both"></div>
+
+<% end %>
+<style>
+    .sub{
+        width: 240px;
+    }
+    .sub li{
+        list-style-type:none;
+        width: 120px;
+        float: left;
+    }
+    input[type=text]
+    {
+        width:80px;
+    }
+    input[type=number]
+    {
+        width:80px;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        changecategory();
+        $("#item_Type").change(function(){
+            changecategory();
+        });
+        //选择品目--型号变化
+        $("#sub_order_ItemNo").change(function(){
+            changeItem();
+        });
+    });
+
+    function changecategory()
+    {
+        //选择产品--品目变化
+        var ItmeUrl = "http://"+ window.location.host +  "/items.json/"
+        $.get(ItmeUrl,function(data,status){
+            debugger;
+            $("#sub_order_ItemNo").empty();
+            var select = $("#item_Type").find("option:selected").text();
+            var items  =eval(data);
+            for(var i=0;i< items.length;i++)
+            {
+                if(items[i].Type == select)
+                {
+                    $("#sub_order_ItemNo").append("<option value='"+items[i].ItemId +"'  data='" + items[i].CategoryName + "|" + items[i].subCategoryName + "'>"+ items[i].Name +"</option>")
+                }
+            }
+            $("#sub_order_ItemNo ").get(0).selectedIndex=0;
+            changeItem();
+        });
+    }
+
+    function changeItem()
+    {
+            var select = $("#sub_order_ItemNo").find("option:selected").attr("data").split('|');
+        $("#category").val(select[0]);
+        $("#subcategory").val(select[1]);
+//        /alert(select);
+    }
+
+</script>

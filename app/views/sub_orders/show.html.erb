@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Orderid:</strong>
+  <%= @sub_order.OrderId %>
+</p>
+
+<p>
+  <strong>Itemno:</strong>
+  <%= @sub_order.ItemNo %>
+</p>
+
+<p>
+  <strong>Createtime:</strong>
+  <%= @sub_order.CreateTime %>
+</p>
+
+<p>
+  <strong>Shelflife:</strong>
+  <%= @sub_order.ShelfLife %>
+</p>
+
+<p>
+  <strong>Sum:</strong>
+  <%= @sub_order.Sum %>
+</p>
+
+<p>
+  <strong>Sum1:</strong>
+  <%= @sub_order.Sum1 %>
+</p>
+
+<p>
+  <strong>Batchid:</strong>
+  <%= @sub_order.BatchId %>
+</p>
+
+<p>
+  <strong>Madein:</strong>
+  <%= @sub_order.MadeIn %>
+</p>
+
+<%= link_to 'Edit', edit_sub_order_path(@sub_order) %> |
+<%= link_to 'Back', sub_orders_path %>

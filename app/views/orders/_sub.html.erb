@@ -1,0 +1,30 @@
+<h3>详细</h3>
+<ul>
+  <li style="list-style-type:none">
+<table>
+  <thead>
+  <tr>
+    <th>订单编号</th>
+    <th>物品名称</th>
+    <th>数量</th>
+    <th>供应商</th>
+    <th>仓库</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @sub_orders.each do |sub_order| %>
+      <tr>
+        <td><%= sub_order.OrderId %></td>
+        <td><%= sub_order.ItemNo %></td>
+        <td><%= sub_order.Sum %></td>
+        <td><%= sub_order.MadeIn %></td>
+        <td><%= sub_order.GoDownId %></td>
+        <td><%= link_to '查看', sub_order %></td>
+        <td><%= link_to '编辑', edit_sub_order_path(sub_order) %></td>
+        <td><%= link_to '删除', sub_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table></li></ul>

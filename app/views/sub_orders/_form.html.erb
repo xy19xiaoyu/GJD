@@ -1,0 +1,49 @@
+<%= form_for(@sub_order) do |f| %>
+  <% if @sub_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sub_order.errors.count, "error") %> prohibited this sub_order from being saved:</h2>
+
+      <ul>
+      <% @sub_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <ul class="xx">
+    <li>
+      订单编号: <%= f.text_field :OrderId %>
+    </li>
+    <li>
+      物品名称:
+      <%= f.text_field :ItemNo %>
+    </li>
+<li>
+    生产日期:
+    <%= f.text_field :CreateTime %>
+<li>
+    保质期:
+    <%= f.number_field :ShelfLife %>
+<li>
+    数量:
+    <%= f.number_field :Sum %>
+</li>
+<li>
+    实际数量:
+    <%= f.number_field :Sum1 %>
+</li>
+<li>
+    生产批次号:
+    <%= f.text_field :BatchId %>
+</li>
+<li>
+    供应商:
+    <%= f.text_field :MadeIn %>
+</li>
+    <div style="clear:both"></div>
+  </ul>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

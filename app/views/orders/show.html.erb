@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+<h2>订单信息</h2>
+<style>
+    .xx{
+      width: 600px;
+     
+  }
+    .xx li{
+            list-style-type:none;
+            width: 200px;
+            float: left;
+        }
+</style>
+<ul class="xx">
+  <li><strong>订单编号:</strong>
+    <%= @order.OrderId %></li>
+  <li> <strong>订单名称:</strong>
+    <%= @order.Name %></li>
+  <li> <strong>类型:</strong>
+    <%=OrdersHelper.getReviewsValues(@order.Type)%>
+  </li>
+  <li><strong>状态:</strong>
+  <%= @order.State %></li>
+  <li><strong>创建时间:</strong>
+    <%= @order.CreateTime %></li>
+  <li> <strong>创建人:</strong>
+    <%= @order.CreateUser %></li>
+
+  <li> <strong>执行时间:</strong>
+  <%= @order.ExecTime %></li>
+  <li> <strong>执行人:</strong>
+  <%= @order.Execer %></li>
+  <div style="clear:both"></div>
+</ul>
+<div style="clear:both"></div>
+<hr/>
+<%= render 'orders/sub' %>
+<hr/>
+<%= render 'orders/new_sub' %>
+<hr/>
+<br/>
+<br/>
+<br/>
+
+<%= link_to '编辑', edit_order_path(@order) %> |
+<%= link_to '返回', orders_path %>
