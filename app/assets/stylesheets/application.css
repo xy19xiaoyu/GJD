@@ -13,3 +13,34 @@
  *= require_tree .
  *= require_self
  */
+ul li{ list-style-type:none;}
+
+.sub{
+    width: 240px;
+}
+.sub  li{
+    width: 120px;
+    float: left;
+}
+.sub input[type=text]
+{
+    width:80px;
+    margin-left:2px;
+}
+.sub input[type=number]
+{
+    width:80px;
+    margin-left:2px;
+}
+.main li{
+    float: left;
+    width:250px;
+}
+.main li:first-child
+{
+    width: 110px;
+}
+.clear
+{
+    clear:both;
+}

@@ -26,20 +26,45 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @sub_orders = SubOrder.where(OrderId:@order.OrderId)
+    @sub_order = SubOrder.new
+    @sub_order.OrderId ="tmp_陈晓雨"
+    @GoDwons = GoDown.all
   end
 
 
   # GET /orders/1/edit
   def edit
+    @GoDwons = GoDown.all
   end
+
 
   # POST /orders
   # POST /orders.json
   def create
+
     @order = Order.new(order_params)
     @order.State = "新建"
     @order.CreateTime=  Time.new.strftime("%Y-%m-%d %H:%M:%S");
     @order.CreateUser ="陈晓雨"
+    params
+
+    for x in 1..10
+      @tmp = params.require("itemline#{x}").permit(:OrderId, :ItemNo, :Sum, :GoDownId)
+      puts @tmp
+      @sub_order =SubOrder.new(:OrderId=>@tmp[:OrderId],:ItemNo=>@tmp[:ItemNo],:Sum=>@tmp[:Sum],:GoDownId=>@tmp[:GoDownId])
+      if @sub_order.ItemNo != ""
+        @sub_order.OrderId  = @order.OrderId
+        @sub_order.save
+      end
+
+    end
+
+
+
+     # @items.append(@tmp)
+
+
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
