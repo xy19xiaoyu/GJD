@@ -1,6 +1,72 @@
-<h1>Editing order</h1>
+<h1>编辑</h1>
+<%= form_for(@order) do |f| %>
+    <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-<%= render 'form' %>
+          <ul>
+            <% @order.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <ul class="main">
+      <li>类型： <%= select(:order,:Type, [['采购',"1"], ['销售', "2"]]) %> </li>
+      <li>  订单编号： <%= f.text_field :OrderId %></li>
+      <li>名称： <%= f.text_field :Name %></li>
+      <div class="clear"></div>
+    </ul>
+    <hr/>
+    <ul>
+      <li style="list-style-type:none">
+        <table>
+          <thead>
+          <tr>
+            <th>序号</th>
+            <th>类型</th>
+            <th>物品名称</th>
+            <th>品目</th>
+            <th>型号</th>
+            <th>数量</th>
+            <th>仓库</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @x =0%>
+          <% @order.sub_orders.each do|sub_order| %>
+          <% @x = @x+1%>
+              <% @item = Item.find(sub_order.Item_id) %>
+              <tr>
+                <td><%=@x%>
+                  <input id="itemline<%=@x%>_Item_id" name="itemline<%=@x%>[Item_id]" value="<%=sub_order.Item_id %>" type="hidden">
+                <input id="itemline<%=@x%>_id" name="itemline<%=@x%>[id]" value="<%=sub_order.id %>" type="hidden"></td>
+                <td>
+                  <select id="type<%=@x%>" class="item_Type" rowid="<%=@x%>" >
+                    <option value="请选择">请选择</option>
+                    <option value="原料">原料</option>
+                    <option value="产品">产品</option>
+                  </select>
+                </td>
+                <td><select id="itemNo<%=@x%>" class="items"  rowid="<%=@x%>"> <option value="<%= @item.Name %>"><%= @item.Name %></option></select></td>
+                <td><input type="text" id="category<%=@x%>" readonly="true" value="<%= @item.CategoryName %>"</td>
+                <td><input type="text" id="subcategory<%=@x%>" readonly="true" value="<%= @item.subCategoryName %>"></td>
+                <td><input id="itemline<%=@x%>_Sum" name="itemline<%=@x%>[Sum]" value="<%=sub_order.Sum %>" type="text"></td>
+                <td><%= select("itemline#{@x}","GoDown_id",options_for_select(@GoDwons.map{|c| [c.Name, c.id]},sub_order.GoDown_id)) %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+    <hr/>
+    <div><input type="hidden" id="itemscount" value ="0"><%= f.submit %></div>
+<% end %>
+<script>
+    $(document).ready(function(){
+        iniItems();
+    });
+</script>
 
-<%= link_to 'Show', @order %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to '查看', @order %> |
+<%= link_to '返回', orders_path %>

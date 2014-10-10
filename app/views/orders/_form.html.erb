@@ -34,7 +34,7 @@
           <tbody>
           <% for x in 1..10 %>
               <tr id="<%=x%>">
-                <td><%=x%><%= hidden_field "itemline#{x}","ItemNo" %></td>
+                <td><%=x%><%= hidden_field "itemline#{x}","Item_id" %></td>
                 <td>
                   <select id="type<%=x%>" class="item_Type" rowid="<%=x%>">
                       <option value="请选择">请选择</option>
@@ -46,7 +46,8 @@
                 <td><input type="text" id="category<%=x%>" readonly="true"></td>
                 <td><input type="text" id="subcategory<%=x%>" readonly="true"></td>
                 <td><%= text_field "itemline#{x}","Sum" %></td>
-                <td><%= select("itemline#{x}","GoDownId",@GoDwons.map{|c| [c.Name, c.GoDownId]}) %></td>
+                <td><%= select("itemline#{x}","GoDown_id",@GoDwons.map{|c| [c.Name, c.id]}) %></td>
+                <!-- <td><select id="itemline<%=x%>_GoDown_id" name="itemline<%=x%>[GoDown_id]" rowid="<%=@x%>"></select></td>-->
               </tr>
           <% end %>
           </tbody>

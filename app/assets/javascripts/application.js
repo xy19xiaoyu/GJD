@@ -45,7 +45,7 @@ function changecategory(obj)
     }else
     {
         $("#itemNo"+rowid).empty();
-        $("#itemNo"+rowid).append("<option value='请选择'  data='|'>请选择</option>")
+        $("#itemNo"+rowid).append("<option value='请选择'  data='|'>请选择</option>");
         var select = $(obj).find("option:selected").text();
         if(select !="请选择")
         {
@@ -53,14 +53,14 @@ function changecategory(obj)
             {
                 if(items[i].Type == select)
                 {
-                    $("#itemNo"+rowid).append("<option value='"+items[i].ItemId +"'  data='" + items[i].CategoryName + "|" + items[i].subCategoryName + "'>"+ items[i].Name +"</option>")
+                    $("#itemNo"+rowid).append("<option value='"+items[i].id +"'  data='" + items[i].CategoryName + "|" + items[i].subCategoryName + "'>"+ items[i].Name +"</option>");
                 }
             }
         }
         debugger;
         $("#category"+rowid).val("");
         $("#subcategory"+rowid).val("");
-        $("#itemline"+rowid+"_ItemNo").val("");
+        $("#itemline"+rowid+"_Item_id").val("");
     }
 }
 
@@ -72,12 +72,12 @@ function changeItem(obj)
     {
         $("#category"+rowid).val(select[0]);
         $("#subcategory"+rowid).val(select[1]);
-        $("#itemline"+rowid+"_ItemNo").val($(obj).find("option:selected").val());
+        $("#itemline"+rowid+"_Item_id").val($(obj).find("option:selected").val());
     }
     else
     {
         $("#category"+rowid).val("");
         $("#subcategory"+rowid).val("");
-        $("#itemline"+rowid+"_ItemNo").val("");
+        $("#itemline"+rowid+"_Item_id").val("");
     }
 }
