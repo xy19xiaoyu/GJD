@@ -4,4 +4,8 @@ module OrdersHelper
   def self.getReviewsValues(key)
       return  $OrderType[key]
   end
+
+  def self.getSplistUrl
+    return ""
+  end
 end

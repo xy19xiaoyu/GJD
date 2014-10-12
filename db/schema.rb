@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010165009) do
+ActiveRecord::Schema.define(version: 20141012151432) do
 
   create_table "batches", force: true do |t|
     t.string   "Batchid"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20141010165009) do
 
   create_table "go_down_items", force: true do |t|
     t.integer  "Order_id"
-    t.integer  "GoDowinId"
+    t.integer  "GoDown_id"
     t.integer  "Item_id"
     t.date     "CreateTime"
     t.integer  "ShelfLife"
@@ -54,6 +54,21 @@ ActiveRecord::Schema.define(version: 20141010165009) do
     t.datetime "updated_at"
   end
 
+  create_table "in_orders", force: true do |t|
+    t.integer  "Order_id"
+    t.integer  "GoDown_id"
+    t.string   "InOrderId"
+    t.string   "Name"
+    t.string   "Type"
+    t.date     "CreateTime"
+    t.string   "CreateUser"
+    t.date     "ExecTime"
+    t.string   "Execer"
+    t.string   "State"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "items", force: true do |t|
     t.string   "ItemId"
     t.string   "Name"
@@ -68,6 +83,21 @@ ActiveRecord::Schema.define(version: 20141010165009) do
 
   create_table "orders", force: true do |t|
     t.string   "OrderId"
+    t.string   "Name"
+    t.string   "Type"
+    t.date     "CreateTime"
+    t.string   "CreateUser"
+    t.date     "ExecTime"
+    t.string   "Execer"
+    t.string   "State"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "out_orders", force: true do |t|
+    t.integer  "Order_id"
+    t.integer  "GoDown_id"
+    t.string   "OutOrderId"
     t.string   "Name"
     t.string   "Type"
     t.date     "CreateTime"

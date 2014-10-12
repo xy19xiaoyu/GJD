@@ -1,45 +1,40 @@
-<h1>Listing go_down_items</h1>
+<h1>仓库库存信息</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Order</th>
-      <th>Godowinid</th>
-      <th>Item</th>
-      <th>Createtime</th>
-      <th>Shelflife</th>
-      <th>Sum</th>
-      <th>Batchid</th>
-      <th>Madein</th>
-      <th>Intime</th>
-      <th>Execer</th>
-      <th>State</th>
-      <th colspan="3"></th>
+      <th>仓库</th>
+      <th>物品名称</th>
+      <th>品目</th>
+      <th>规格</th>
+      <th>批次</th>
+      <th>生产日期</th>
+      <th>保质期</th>
+      <th>库存</th>
+      <th>供应商</th>
+      <th>入库时间</th>
+      <th>执行人</th>
+      <th>状态</th>
     </tr>
   </thead>
 
   <tbody>
     <% @go_down_items.each do |go_down_item| %>
       <tr>
-        <td><%= go_down_item.Order_id %></td>
-        <td><%= go_down_item.GoDowinId %></td>
-        <td><%= go_down_item.Item_id %></td>
+        <td><%= GoDown.find(go_down_item.GoDown_id).Name %></td>
+        <% @item = Item.find(go_down_item.Item_id) %>
+        <td><%= @item.Name %></td>
+        <td><%= @item.CategoryName %></td>
+        <td><%= @item.subCategoryName %></td>
+        <td><%= go_down_item.BatchId %></td>
         <td><%= go_down_item.CreateTime %></td>
         <td><%= go_down_item.ShelfLife %></td>
         <td><%= go_down_item.Sum %></td>
-        <td><%= go_down_item.BatchId %></td>
         <td><%= go_down_item.MadeIn %></td>
         <td><%= go_down_item.InTime %></td>
         <td><%= go_down_item.Execer %></td>
         <td><%= go_down_item.State %></td>
-        <td><%= link_to 'Show', go_down_item %></td>
-        <td><%= link_to 'Edit', edit_go_down_item_path(go_down_item) %></td>
-        <td><%= link_to 'Destroy', go_down_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Go down item', new_go_down_item_path %>

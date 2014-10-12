@@ -69,6 +69,6 @@ class GoDownItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def go_down_item_params
-      params.require(:go_down_item).permit(:Order_id, :GoDowinId, :Item_id, :CreateTime, :ShelfLife, :Sum, :BatchId, :MadeIn, :InTime, :Execer, :State)
+      params.require(:go_down_item).permit(:Order_id, :GoDown_id, :Item_id, :CreateTime, :ShelfLife, :Sum, :BatchId, :MadeIn, :InTime, :Execer, :State)
     end
 end

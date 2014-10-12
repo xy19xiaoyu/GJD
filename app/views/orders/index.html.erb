@@ -3,7 +3,6 @@
 <table>
   <thead>
     <tr>
-      <th>订单类型</th>
       <th>订单编号</th>
       <th>订单名称</th>
       <th>创建时间</th>
@@ -18,7 +17,6 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%=OrdersHelper.getReviewsValues(order.Type)%></td>
         <td><%= order.OrderId %></td>
         <td><%= order.Name %></td>
         <td><%= order.CreateTime %></td>
@@ -33,7 +31,5 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to '新建订单', new_order_path %>
+<%= link_to '新建订单', "/orders/new?type=#{params[:type]}" %>

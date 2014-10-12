@@ -2,7 +2,7 @@ class CreateGoDownItems < ActiveRecord::Migration
   def change
     create_table :go_down_items do |t|
       t.integer :Order_id
-      t.integer :GoDowinId
+      t.integer :GoDown_id
       t.integer :Item_id
       t.date :CreateTime
       t.integer :ShelfLife
