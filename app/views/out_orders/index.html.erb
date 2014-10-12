@@ -1,0 +1,30 @@
+<h1>出库单列表</h1>
+<hr/>
+<% @Orders.each do |order| %>
+    <h3>订单编号：<a href="/out_orders/<%= order.id %>"><%=order.OrderId%> </a> 订单名称：<a href="/out_orders/<%= order.id %>"><%= order.Name %></a> 状态：<%= order.State %> 创建时间：<%= order.CreateTime %> 创建人：<%= order.CreateUser %>  </h3>
+    <table>
+      <tr>
+        <th>出库单编号</th>
+        <th>仓库名称</th>
+        <th>执行时间</th>
+        <th>执行人</th>
+        <th>状态</th>
+      </tr>
+      <% OutOrder.where(:Order_id => order.id).each do|outorder| %>
+          <tr>
+            <td><%= outorder.OutOrderId %></td>
+            <td><%= GoDown.find(outorder.GoDown_id).Name %></td>
+            <td><%= outorder.ExecTime %></td>
+            <td><%= outorder.Execer %></td>
+            <td>
+              <% if outorder.State == "新建" %>
+                  <a href="/out_orders/exec/<%= outorder.id %>">执行出库</a>
+              <% else %>
+                  <%= inorder.State %>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+

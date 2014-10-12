@@ -36,10 +36,6 @@ ul li{ list-style-type:none;}
     float: left;
     width:250px;
 }
-.main li:first-child
-{
-    width: 110px;
-}
 .clear
 {
     clear:both;

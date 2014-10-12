@@ -1,12 +1,26 @@
 Rails.application.routes.draw do
 
-  get 'io_go_down/InList'
-  get 'io_go_down/In'
-  get 'io_go_down/OutList'
-  get 'io_go_down/Out'
-
   resources :go_down_items
 
+  get 'o_order/index'
+
+  get 'o_order/new'
+
+  get 'o_order/show'
+
+  get 'o_order/edit'
+
+  get 'in_orders'  => 'in_orders#index'
+  get 'in_orders/:id'  => 'in_orders#index'
+  post 'in_orders/ingodown' => 'in_orders#ingodown'
+  get 'in_orders/exec/:id'  => 'in_orders#exec'
+  get 'in_orders/show/:id'  => 'in_orders#show'
+
+  get 'out_orders/'  => 'out_orders#index'
+  get 'out_orders/:id'  => 'out_orders#index'
+  post 'out_orders/outgodown' => 'out_orders#outgodown'
+  get 'out_orders/exec/:id'  => 'out_orders#exec'
+  get 'out_orders/show/:id'  => 'out_orders#show'  
   get 'admin/index'
 
   get 'sessions/new'
@@ -14,6 +28,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
 
   get 'sessions/destroy'
+  get 'orders/split/:id'  => 'orders#split'
 
   resources :users
 
@@ -34,10 +49,6 @@ Rails.application.routes.draw do
   resources :sub_categories
 
   resources :categories
-
-  get 'static_page/home'
-
-  get 'static_page/help'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

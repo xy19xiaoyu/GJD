@@ -16,9 +16,6 @@
     <%= @order.OrderId %></li>
   <li> <strong>订单名称:</strong>
     <%= @order.Name %></li>
-  <li> <strong>类型:</strong>
-    <%=OrdersHelper.getReviewsValues(@order.Type)%>
-  </li>
   <li><strong>状态:</strong>
   <%= @order.State %></li>
   <li><strong>创建时间:</strong>
@@ -35,9 +32,12 @@
 <div style="clear:both"></div>
 <hr/>
 <%= render 'orders/sub' %>
-<br/>
-<br/>
-<br/>
+<% if @order.State=="新建" %>
+    <%= link_to @urlName, "/orders/split/#{@order.id}"%>
+<% end %>
 
+<br/>
+<br/>
+<br/>
 <%= link_to '编辑', edit_order_path(@order) %> |
-<%= link_to '返回', orders_path %>
+<%= link_to '返回', "/orders/?type=#{@order.Type}" %>
