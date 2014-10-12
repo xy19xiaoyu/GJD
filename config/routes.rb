@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'io_go_down/InList'
   get 'io_go_down/In'
   get 'io_go_down/OutList'
@@ -6,11 +7,21 @@ Rails.application.routes.draw do
 
   resources :go_down_items
 
+  get 'admin/index'
+
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
+  resources :users
+
   resources :sub_orders
 
   resources :orders
 
-  get 'static_pages/home'
+  get 'static_pages/home', :as => 'home'
 
   get 'static_pages/help'
 
