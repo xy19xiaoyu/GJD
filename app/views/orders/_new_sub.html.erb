@@ -12,7 +12,7 @@
 <% end %>
 <h3>添加订单项</h3>
 <ul class="sub">
-    <li style="display: none"><%= f.text_field :OrderId %></li>
+    <%= f.hidden_field :OrderId %>
     <li> 类型:</li><li> <%= select(:item,:Type, [['原料',"原料"], ['产品', "产品"]]) %></li>
     <li> 物品名称:</li><li><%= select(:sub_order,:ItemNo,[["",""]]) %></li>
     <li>品目：</li><li><input type="text" id="category" readonly="true"></li>
@@ -33,63 +33,17 @@
 <div style="clear:both"></div>
 
 <% end %>
-<style>
-    .sub{
-        width: 240px;
-    }
-    .sub li{
-        list-style-type:none;
-        width: 120px;
-        float: left;
-    }
-    input[type=text]
-    {
-        width:80px;
-    }
-    input[type=number]
-    {
-        width:80px;
-    }
-</style>
 <script>
+
     $(document).ready(function(){
         changecategory();
         $("#item_Type").change(function(){
             changecategory();
         });
-        //选择品目--型号变化
+//选择品目--型号变化
         $("#sub_order_ItemNo").change(function(){
             changeItem();
         });
     });
-
-    function changecategory()
-    {
-        //选择产品--品目变化
-        var ItmeUrl = "http://"+ window.location.host +  "/items.json/"
-        $.get(ItmeUrl,function(data,status){
-            debugger;
-            $("#sub_order_ItemNo").empty();
-            var select = $("#item_Type").find("option:selected").text();
-            var items  =eval(data);
-            for(var i=0;i< items.length;i++)
-            {
-                if(items[i].Type == select)
-                {
-                    $("#sub_order_ItemNo").append("<option value='"+items[i].ItemId +"'  data='" + items[i].CategoryName + "|" + items[i].subCategoryName + "'>"+ items[i].Name +"</option>")
-                }
-            }
-            $("#sub_order_ItemNo ").get(0).selectedIndex=0;
-            changeItem();
-        });
-    }
-
-    function changeItem()
-    {
-            var select = $("#sub_order_ItemNo").find("option:selected").attr("data").split('|');
-        $("#category").val(select[0]);
-        $("#subcategory").val(select[1]);
-//        /alert(select);
-    }
 
 </script>

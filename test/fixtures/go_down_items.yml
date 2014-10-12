@@ -2,22 +2,26 @@
 
 one:
   Order_id: 1
+  GoDowinId: 1
   Item_id: 1
-  CreateTime: MyString
+  CreateTime: 2014-10-11
   ShelfLife: 1
   Sum: 1
-  Sum1: 1
   BatchId: MyString
   MadeIn: MyString
-  GoDown_id: 1
+  InTime: 2014-10-11
+  Execer: MyString
+  State: MyString
 
 two:
   Order_id: 1
+  GoDowinId: 1
   Item_id: 1
-  CreateTime: MyString
+  CreateTime: 2014-10-11
   ShelfLife: 1
   Sum: 1
-  Sum1: 1
   BatchId: MyString
   MadeIn: MyString
-  GoDown_id: 1
+  InTime: 2014-10-11
+  Execer: MyString
+  State: MyString

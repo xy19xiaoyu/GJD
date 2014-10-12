@@ -11,13 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008061651) do
-
-  create_table "add_go_down_id_to_sub_orders", force: true do |t|
-    t.string   "GoDownId"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20141010165009) do
 
   create_table "batches", force: true do |t|
     t.string   "Batchid"
@@ -30,6 +24,22 @@ ActiveRecord::Schema.define(version: 20141008061651) do
     t.string   "Name"
     t.string   "Type"
     t.integer  "Parentid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "go_down_items", force: true do |t|
+    t.integer  "Order_id"
+    t.integer  "GoDowinId"
+    t.integer  "Item_id"
+    t.date     "CreateTime"
+    t.integer  "ShelfLife"
+    t.integer  "Sum"
+    t.string   "BatchId"
+    t.string   "MadeIn"
+    t.date     "InTime"
+    t.string   "Execer"
+    t.string   "State"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -78,17 +88,17 @@ ActiveRecord::Schema.define(version: 20141008061651) do
   end
 
   create_table "sub_orders", force: true do |t|
-    t.string   "OrderId"
-    t.string   "ItemNo"
+    t.integer  "Order_id"
+    t.integer  "Item_id"
     t.string   "CreateTime"
     t.integer  "ShelfLife"
     t.integer  "Sum"
     t.integer  "Sum1"
     t.string   "BatchId"
     t.string   "MadeIn"
+    t.integer  "GoDown_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "GoDownId"
   end
 
   create_table "users", force: true do |t|

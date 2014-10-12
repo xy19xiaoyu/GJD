@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  get 'io_go_down/InList'
+  get 'io_go_down/In'
+  get 'io_go_down/OutList'
+  get 'io_go_down/Out'
+
+  resources :go_down_items
+
   get 'admin/index'
 
   get 'sessions/new'
