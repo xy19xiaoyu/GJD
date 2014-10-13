@@ -1,25 +1,24 @@
 <%= form_for(@order) do |f| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+    <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <ul>
-      <% @order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @order.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
     <ul class="main">
-       <%= f.hidden_field :Type %>
-      <li>  订单编号： <%= f.text_field :OrderId %></li>
+      <%= f.hidden_field :Type %>
+      <li> 订单编号： <%= f.text_field :OrderId %></li>
       <li>名称： <%= f.text_field :Name %></li>
       <div class="clear"></div>
     </ul>
-    <hr/>
     <ul>
       <li style="list-style-type:none">
-        <table>
+        <table class="table">
           <thead>
           <tr>
             <th>序号</th>
@@ -32,25 +31,29 @@
           </thead>
           <tbody>
           <% for x in 1..10 %>
-              <tr id="<%=x%>">
-                <td><%=x%><%= hidden_field "itemline#{x}","Item_id" %></td>
-                <td><select id="itemNo<%=x%>" class="items"  rowid="<%=x%>"> <option value="请选择">请选择</option></select></td>
-                <td><input type="text" id="category<%=x%>" readonly="true"></td>
-                <td><input type="text" id="subcategory<%=x%>" readonly="true"></td>
-                <td><%= text_field "itemline#{x}","Sum" %></td>
-                <td><%= select("itemline#{x}","GoDown_id",@GoDwons.map{|c| [c.Name, c.id]}) %></td>
-                <!-- <td><select id="itemline<%=x%>_GoDown_id" name="itemline<%=x%>[GoDown_id]" rowid="<%=@x%>"></select></td>-->
+              <tr id="<%= x %>">
+                <td><%= x %><%= hidden_field "itemline#{x}", "Item_id" %></td>
+                <td><select id="itemNo<%= x %>" class="items" rowid="<%= x %>">
+                  <option value="请选择">请选择</option>
+                </select></td>
+                <td><input type="text" id="category<%= x %>" readonly="true"></td>
+                <td><input type="text" id="subcategory<%= x %>" readonly="true"></td>
+                <td><%= text_field "itemline#{x}", "Sum" %></td>
+                <td><%= select("itemline#{x}", "GoDown_id", @GoDwons.map { |c| [c.Name, c.id] }) %></td>
+                <!-- <td><select id="itemline<%= x %>_GoDown_id" name="itemline<%= x %>[GoDown_id]" rowid="<%= @x %>"></select></td>-->
               </tr>
           <% end %>
           </tbody>
         </table>
       </li>
     </ul>
-    <hr/>
-   <div><input type="hidden" id="itemscount" value ="0"><%= f.submit %></div>
+    <input type="hidden" id="itemscount" value="0">
+    <div class="align-center">
+      <%= f.submit("新建", {:Class => "btn btn-large btn-primary"}) %>
+    </div>
 <% end %>
 <script>
-  $(document).ready(function(){
-      iniItems();
-  });
+    $(document).ready(function () {
+        iniItems();
+    });
 </script>

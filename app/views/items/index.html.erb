@@ -1,6 +1,9 @@
-<h1>物品配置</h1>
-
-<table>
+<div class="row-fluid">
+  <div class="form-actions span8">
+    <div class="nav">
+      <div class="navbar-inner"><h6><b>物品配置</b></h6></div>
+    </div>
+<table class="table">
   <thead>
   <tr>
     <th>物品编号</th>
@@ -27,7 +30,8 @@
   <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to '新增物品', new_item_path %>
+    <div class="align-center">
+      <%= link_to '新增物品', new_item_path, {:class => "btn btn-primary"} %>
+    </div>
+  </div>
+</div>
