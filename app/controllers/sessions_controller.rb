@@ -1,5 +1,8 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
+  skip_before_filter :authorize
+  layout 'login', :only => :new
+
   def new
   end
 
@@ -13,5 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:user_id] = nil
+    redirect_to home_url, :notice => '您已经成功登出'
   end
 end

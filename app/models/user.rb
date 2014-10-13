@@ -3,12 +3,13 @@ require 'digest/sha2'
 
 class User < ActiveRecord::Base
   validate :name, :presence => true, :uniqueness => true
-  validate :password, :confirmation => true
+  validate :password, :presence => true
+  validates_confirmation_of :password, message: '两次密码输入不一致'
 
-  attr_accessor :password_confirmation
   attr_reader :password
-
   validate :password_must_be_present
+
+  after_destroy :ensure_an_admin_remains
 
   def User.authenticate(name, password)
     if user = find_by_name(name)
@@ -38,5 +39,11 @@ class User < ActiveRecord::Base
 
   def generate_salt
     self.salt = self.object_id.to_s + rand.to_s
+  end
+
+  def ensure_an_admin_remains
+    if User.count.zero?
+      raise '不能删除最后一个管理员'
+    end
   end
 end
