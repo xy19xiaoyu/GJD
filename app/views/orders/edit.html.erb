@@ -1,70 +1,79 @@
-<h1>编辑</h1>
-<%= form_for(@order) do |f| %>
-    <% if @order.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<div class="row-fluid">
+  <%= form_for(@order) do |f| %>
+      <% if @order.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-          <ul>
-            <% @order.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
+            <ul>
+              <% @order.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <div class="right-content span10">
+        <div class="nav">
+          <div class="navbar-inner"><h6>编辑采购订单</h6></div>
         </div>
-    <% end %>
-    <ul class="main">
-      <%= f.hidden_field :Type %>
-      <li> 订单编号： <%= f.text_field :OrderId %></li>
-      <li>名称： <%= f.text_field :Name %></li>
-      <div class="clear"></div>
-    </ul>
-    <hr/>
-    <ul>
-      <li style="list-style-type:none">
-        <table>
-          <thead>
-          <tr>
-            <th>序号</th>
-            <th>物品名称</th>
-            <th>品目</th>
-            <th>型号</th>
-            <th>数量</th>
-            <th>仓库</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @x =0 %>
-          <% @order.sub_orders.each do |sub_order| %>
-              <% @x = @x+1 %>
-              <% @item = Item.find(sub_order.Item_id) %>
+        <div class="well-white body">
+          <div class="widget">
+            <div class="span3">
+              <div class="input-prepend">
+                <span class="add-on">订单编号： </span>
+                <%= f.text_field :OrderId %>
+              </div>
+            </div>
+            <div class="span3">
+              <div class="input-prepend">
+                <span class="add-on">名称： </span>
+                <%= f.text_field :Name %>
+              </div>
+            </div>
+            <div class="span6">
+              <%= f.hidden_field :Type %>
+            </div>
+            <table class="table">
+              <thead>
               <tr>
-                <td><%= @x %>
-                  <input id="itemline<%= @x %>_Item_id" name="itemline<%= @x %>[Item_id]" value="<%= sub_order.Item_id %>" type="hidden">
-                  <input id="itemline<%= @x %>_id" name="itemline<%= @x %>[id]" value="<%= sub_order.id %>" type="hidden">
-                </td>
-                <td><select id="itemNo<%= @x %>" class="items" rowid="<%= @x %>">
-                  <option value="<%= @item.Name %>"><%= @item.Name %></option>
-                </select></td>
-                <td><input type="text" id="category<%= @x %>" readonly="true" value="<%= @item.CategoryName %>"</td>
-                <td><input type="text" id="subcategory<%= @x %>" readonly="true" value="<%= @item.subCategoryName %>">
-                </td>
-                <td>
-                  <input id="itemline<%= @x %>_Sum" name="itemline<%= @x %>[Sum]" value="<%= sub_order.Sum %>" type="text">
-                </td>
-                <td><%= select("itemline#{@x}", "GoDown_id", options_for_select(@GoDwons.map { |c| [c.Name, c.id] }, sub_order.GoDown_id)) %></td>
+                <th>序号</th>
+                <th>物品名称</th>
+                <th>品目</th>
+                <th>型号</th>
+                <th>数量</th>
+                <th>仓库</th>
               </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </li>
-    </ul>
-    <hr/>
-    <div><input type="hidden" id="itemscount" value="0"><%= f.submit %></div>
-<% end %>
-<script>
-    $(document).ready(function () {
-        iniItems();
-    });
-</script>
-
-<%= link_to '查看', @order %> |
-<%= link_to '返回', "/orders/?type=#{@order.Type}" %>
+              </thead>
+              <tbody>
+              <% @x =0 %>
+              <% @order.sub_orders.each do |sub_order| %>
+                  <% @x = @x+1 %>
+                  <% @item = Item.find(sub_order.Item_id) %>
+                  <tr>
+                    <td><%= @x %>
+                      <input id="itemline<%= @x %>_Item_id" name="itemline<%= @x %>[Item_id]" value="<%= sub_order.Item_id %>" type="hidden">
+                      <input id="itemline<%= @x %>_id" name="itemline<%= @x %>[id]" value="<%= sub_order.id %>" type="hidden">
+                    </td>
+                    <td><select id="itemNo<%= @x %>" class="items" rowid="<%= @x %>">
+                      <option value="<%= @item.Name %>"><%= @item.Name %></option>
+                    </select></td>
+                    <td><input type="text" id="category<%= @x %>" readonly="true" value="<%= @item.CategoryName %>"
+                    </td>
+                    <td>
+                      <input type="text" id="subcategory<%= @x %>" readonly="true" value="<%= @item.subCategoryName %>">
+                    </td>
+                    <td>
+                      <input id="itemline<%= @x %>_Sum" name="itemline<%= @x %>[Sum]" value="<%= sub_order.Sum %>" type="text">
+                    </td>
+                    <td><%= select("itemline#{@x}", "GoDown_id", options_for_select(@GoDwons.map { |c| [c.Name, c.id] }, sub_order.GoDown_id)) %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+            <div class="align-center"><input type="hidden" id="itemscount" value="0"><%= f.submit("修改",{:Class=>"btn btn-primary"}) %></div>
+  <% end %>
+  <script>
+      $(document).ready(function () {
+          iniItems();
+      });
+  </script>
+  </div>

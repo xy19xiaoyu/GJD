@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012151432) do
+ActiveRecord::Schema.define(version: 20141013124219) do
 
   create_table "batches", force: true do |t|
     t.string   "Batchid"
@@ -77,6 +77,21 @@ ActiveRecord::Schema.define(version: 20141012151432) do
     t.integer  "subCategoryid"
     t.string   "subCategoryName"
     t.string   "Type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "o_orders", force: true do |t|
+    t.string   "OrderId"
+    t.string   "Name"
+    t.string   "Type"
+    t.date     "CreateTime"
+    t.string   "CreateUser"
+    t.date     "ExecTime"
+    t.string   "Execer"
+    t.string   "State"
+    t.string   "Customer"
+    t.string   "Address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

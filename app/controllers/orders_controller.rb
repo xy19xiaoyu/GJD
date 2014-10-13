@@ -84,7 +84,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-
+    puts params;
     @order = Order.new(order_params)
     @order.State = "新建"
     @order.CreateTime=  Time.new.strftime("%Y-%m-%d %H:%M:%S")

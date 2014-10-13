@@ -1,44 +1,50 @@
 <p id="notice"><%= notice %></p>
-<h2>订单信息</h2>
-<style>
-    .xx {
-        width: 600px;
+<div class="row-fluid">
+  <div class="right-content span10">
+    <div class="nav">
+      <div class="navbar-inner"><h6>销售订单</h6></div>
+    </div>
+    <div class="well-white body">
+      <div class="row-fluid">
+        <div class="widget">
+          <div class="span2">
+            <div class="input-prepend">
+              <span class="add-on">订单编号： </span>
+              <%= text_field :order, :OrderId, {:disabled => "disabled"} %>
+            </div>
+          </div>
+          <div class="span2">
+            <div class="input-prepend">
+              <span class="add-on">订单名称： </span>
+              <%= text_field :order, :Name, {:disabled => "disabled"} %>
+            </div>
+          </div>
+          <div class="span2">
+            <div class="input-prepend">
+              <span class="add-on"> 状态：</span>
+              <%= text_field :order, :State, {:disabled => "disabled"} %>
+            </div>
+          </div>
+          <div class="span2">
+            <div class="input-prepend">
+              <span class="add-on"> 创建人：</span>
+              <%= text_field :order, :CreateUser, {:disabled => "disabled"} %>
+            </div>
+          </div>
+          <div class="span2">
+            <div class="input-prepend">
+              <span class="add-on"> 创建时间：</span>
+              <%= text_field :order, :CreateTime, {:disabled => "disabled"} %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= render 'orders/sub' %>
 
-    }
+      <% if @order.State=="新建" %>
+        <div class="align-center"> <%= link_to @urlName, "/orders/split/#{@order.id}",{:Class=>"btn btn-primary"} %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-    .xx li {
-        list-style-type: none;
-        width: 200px;
-        float: left;
-    }
-</style>
-<ul class="xx">
-  <li><strong>订单编号:</strong>
-    <%= @order.OrderId %></li>
-  <li><strong>订单名称:</strong>
-    <%= @order.Name %></li>
-  <li><strong>状态:</strong>
-    <%= @order.State %></li>
-  <li><strong>创建时间:</strong>
-    <%= @order.CreateTime %></li>
-  <li><strong>创建人:</strong>
-    <%= @order.CreateUser %></li>
-
-  <li><strong>执行时间:</strong>
-    <%= @order.ExecTime %></li>
-  <li><strong>执行人:</strong>
-    <%= @order.Execer %></li>
-  <div style="clear:both"></div>
-</ul>
-<div style="clear:both"></div>
-<hr/>
-<%= render 'orders/sub' %>
-<% if @order.State=="新建" %>
-    <%= link_to @urlName, "/orders/split/#{@order.id}" %>
-<% end %>
-
-<br/>
-<br/>
-<br/>
-<%= link_to '编辑', edit_order_path(@order) %> |
-<%= link_to '返回', "/orders/?type=#{@order.Type}" %>
