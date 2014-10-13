@@ -20,23 +20,27 @@ Rails.application.routes.draw do
   get 'out_orders/:id'  => 'out_orders#index'
   post 'out_orders/outgodown' => 'out_orders#outgodown'
   get 'out_orders/exec/:id'  => 'out_orders#exec'
-  get 'out_orders/show/:id'  => 'out_orders#show'  
-  get 'admin/index'
+  get 'out_orders/show/:id'  => 'out_orders#show'
 
-  get 'sessions/new'
+  #---------------------------------------LEE ADD START
+  get 'admin' => 'admin#index'
 
-  get 'sessions/create'
-
-  get 'sessions/destroy'
-  get 'orders/split/:id'  => 'orders#split'
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    get 'logout' => :destroy
+  end
 
   resources :users
+  #---------------------------------------LEE ADD END
+
+  get 'orders/split/:id'  => 'orders#split'
 
   resources :sub_orders
 
   resources :orders
 
-  get 'static_pages/home', :as => 'home'
+  get 'static_pages/home'
 
   get 'static_pages/help'
 
@@ -54,7 +58,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root :to =>'static_pages#home', :as => 'home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

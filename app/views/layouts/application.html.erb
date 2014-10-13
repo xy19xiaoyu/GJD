@@ -25,7 +25,7 @@
           <li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
           <li><a href="#" title=""><i class="icon-inbox"></i>Messages<span class="badge badge-info">9</span></a></li>
           <li><a href="#" title=""><i class="icon-cog"></i>Settings</a></li>
-          <li><a href="#" title=""><i class="icon-remove"></i>Logout</a></li>
+          <li><a href="/logout" title=""><i class="icon-remove"></i>Logout</a></li>
         </ul>
       </li>
     </ul>
@@ -36,52 +36,8 @@
 <!-- Content container -->
 <div id="container">
   <!-- Sidebar -->
-  <div id="sidebar">
-
-    <div class="sidebar-tabs">
-      <ul class="tabs-nav two-items">
-        <li><a href="#general" title=""><i class="icon-reorder"></i></a></li>
-        <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
-      </ul>
-
-      <div id="general">
-
-        <!-- Main navigation -->
-        <ul class="navigation widget">
-          <li class="active">
-            <a href="/static_pages/home" title=""><i class="icon-home"></i>管家爹进销存</a>
-          </li>
-          <li>
-            <a href="#" title="" class="expand"><i class="icon-reorder"></i>配置管理<strong>4</strong></a>
-            <ul>
-              <li><a href="/categories" title="">品目配置</a></li>
-              <li><a href="/items" title="">物品配制</a></li>
-              <li><a href="/go_downs" title="">仓库配置</a></li>
-              <li><a href="/batches" title="">生产流水配置</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#" title="" class="expand"><i class="icon-tasks"></i>订单管理<strong>2</strong></a>
-            <ul>
-              <li><a href="/orders/?type=1" title="">采购订单</a></li>
-              <li><a href="/o_order/index" title="">销售订单</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#" title="" class="expand"><i class="icon-tasks"></i>仓库管理<strong>2</strong></a>
-            <ul>
-              <li><a href="/in_orders" title="">入库</a></li>
-              <li><a href="/out_orders" title="">出库</a></li>
-              <li><a href="/go_down_items" title="">查询</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- /main navigation -->
-      </div>
-    </div>
-
-  </div>
-  <!-- /sidebar -->
+  <%= render :partial => 'common/sidebar' %>
+  <!-- /Sidebar -->
   <!-- Content -->
   <div id="content">
     <%= yield %>
