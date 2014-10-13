@@ -1,33 +1,36 @@
-<h1>仓库列表</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>仓库编号：</th>
-      <th>仓库名称：</th>
-      <th>地址</th>
-      <th>管理员</th>
-      <th>电话</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @go_downs.each do |go_down| %>
+<div class="row-fluid">
+  <div class="form-actions span8">
+    <div class="nav">
+      <div class="navbar-inner"><h6><b>仓库列表</b></h6></div>
+    </div>
+    <table class="table">
+      <thead>
       <tr>
-        <td><%= go_down.GoDownId %></td>
-        <td><%= go_down.Name %></td>
-        <td><%= go_down.Address %></td>
-        <td><%= go_down.Admin %></td>
-        <td><%= go_down.Tel %></td>
-        <td><%= link_to '查看', go_down %></td>
-        <td><%= link_to '编辑', edit_go_down_path(go_down) %></td>
-        <td><%= link_to '删除', go_down, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>仓库编号：</th>
+        <th>仓库名称：</th>
+        <th>地址</th>
+        <th>管理员</th>
+        <th>电话</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to '创建仓库', new_go_down_path %>
+      </thead>
+      <tbody>
+      <% @go_downs.each do |go_down| %>
+          <tr>
+            <td><%= go_down.GoDownId %></td>
+            <td><%= go_down.Name %></td>
+            <td><%= go_down.Address %></td>
+            <td><%= go_down.Admin %></td>
+            <td><%= go_down.Tel %></td>
+            <td><%= link_to '查看', go_down %></td>
+            <td><%= link_to '编辑', edit_go_down_path(go_down) %></td>
+            <td><%= link_to '删除', go_down, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="align-center">
+      <%= link_to '创建仓库', new_go_down_path, {:class => "btn btn-primary"} %>
+    </div>
+  </div>
+</div>
