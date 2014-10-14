@@ -2422,7 +2422,10 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 
 
 /*===== Form actions =====*/
-
+.right-content
+{
+    padding:16px;
+}
 .form-actions { padding: 16px; background-color: #fafafa; border-top: 1px solid #d5d5d5; box-shadow: 0 1px 0 #fff inset; -webkit-box-shadow: 0 1px 0 #fff inset; -moz-box-shadow: 0 1px 0 #fff inset; *zoom: 1; }
 .form-actions:before, .form-actions:after { display: table; line-height: 0; content: ""; }
 .form-actions:after { clear: both; }

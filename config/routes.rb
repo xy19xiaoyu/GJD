@@ -1,23 +1,8 @@
 Rails.application.routes.draw do
+  resources :o_orders
 
-  namespace :origin do
-    resources :sidebar_items
-  end
-
-  namespace :origin do
-    resources :sites
-  end
-
+  get 'go_down_items/search' => 'go_down_items#search'
   resources :go_down_items
-
-  get 'o_order/index'
-
-  get 'o_order/new'
-
-  get 'o_order/show'
-
-  get 'o_order/edit'
-
   get 'in_orders'  => 'in_orders#index'
   get 'in_orders/:id'  => 'in_orders#index'
   post 'in_orders/ingodown' => 'in_orders#ingodown'
@@ -31,6 +16,14 @@ Rails.application.routes.draw do
   get 'out_orders/show/:id'  => 'out_orders#show'
 
   #---------------------------------------LEE ADD START
+  namespace :origin do
+    resources :sidebar_items
+  end
+
+  namespace :origin do
+    resources :sites
+  end
+
   get 'admin' => 'admin#index'
 
   controller :sessions do

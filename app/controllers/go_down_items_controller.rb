@@ -61,14 +61,21 @@ class GoDownItemsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_go_down_item
-      @go_down_item = GoDownItem.find(params[:id])
+  def search
+    @group =GoDownItem.all.group(:Item_id).sum(:Sum)
+    respond_to do |format|
+      format.json { render :json => @group }
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def go_down_item_params
-      params.require(:go_down_item).permit(:Order_id, :GoDown_id, :Item_id, :CreateTime, :ShelfLife, :Sum, :BatchId, :MadeIn, :InTime, :Execer, :State)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_go_down_item
+    @go_down_item = GoDownItem.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def go_down_item_params
+    params.require(:go_down_item).permit(:Order_id, :GoDown_id, :Item_id, :CreateTime, :ShelfLife, :Sum, :BatchId, :MadeIn, :InTime, :Execer, :State)
+  end
 end

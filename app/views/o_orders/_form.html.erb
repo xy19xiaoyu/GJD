@@ -1,0 +1,57 @@
+<%= form_for(@o_order) do |f| %>
+  <% if @o_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@o_order.errors.count, "error") %> prohibited this o_order from being saved:</h2>
+
+      <ul>
+      <% @o_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :OrderId %><br>
+    <%= f.text_field :OrderId %>
+  </div>
+  <div class="field">
+    <%= f.label :Name %><br>
+    <%= f.text_field :Name %>
+  </div>
+  <div class="field">
+    <%= f.label :Type %><br>
+    <%= f.text_field :Type %>
+  </div>
+  <div class="field">
+    <%= f.label :CreateTime %><br>
+    <%= f.date_select :CreateTime %>
+  </div>
+  <div class="field">
+    <%= f.label :CreateUser %><br>
+    <%= f.text_field :CreateUser %>
+  </div>
+  <div class="field">
+    <%= f.label :ExecTime %><br>
+    <%= f.date_select :ExecTime %>
+  </div>
+  <div class="field">
+    <%= f.label :Execer %><br>
+    <%= f.text_field :Execer %>
+  </div>
+  <div class="field">
+    <%= f.label :State %><br>
+    <%= f.text_field :State %>
+  </div>
+  <div class="field">
+    <%= f.label :Customer %><br>
+    <%= f.text_field :Customer %>
+  </div>
+  <div class="field">
+    <%= f.label :Address %><br>
+    <%= f.text_field :Address %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,47 @@
+<div class="row-fluid">
+  <div class="right-content span12">
+    <div class="nav">
+      <div class="navbar-inner"><h6><b>销售订单列表</b></h6></div>
+    </div>
+    <div class="well-white body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>订单编号</th>
+          <th>客户</th>
+          <th>客户地址</th>
+          <th>创建时间</th>
+          <th>创建人</th>
+          <th>执行时间</th>
+          <th>执行人</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @o_orders.each do |o_order| %>
+            <tr>
+              <td><%= o_order.OrderId %></td>
+              <td><%= o_order.Customer %></td>
+              <td><%= o_order.Address %></td>
+              <td><%= o_order.CreateTime %></td>
+              <td><%= o_order.CreateUser %></td>
+              <td><%= o_order.ExecTime %></td>
+              <td><%= o_order.Execer %></td>
+              <td><%= o_order.State %></td>
+              <td><%= link_to '查看', o_order %>&nbsp;
+                <% if o_order.State =="新建" %>
+                    <%= link_to '编辑', edit_o_order_path(o_order) %>&nbsp;<%= link_to '删除', o_order, method: :delete, data: {confirm: 'Are you sure?'} %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="align-center">
+        <%= link_to '新建销售订单', new_o_order_path, {:class => "btn btn-primary"} %>
+      </div>
+    </div>
+  </div>
+</div>

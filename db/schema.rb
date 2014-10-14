@@ -81,6 +81,21 @@ ActiveRecord::Schema.define(version: 20141014070316) do
     t.datetime "updated_at"
   end
 
+  create_table "o_orders", force: true do |t|
+    t.string   "OrderId"
+    t.string   "Name"
+    t.string   "Type"
+    t.date     "CreateTime"
+    t.string   "CreateUser"
+    t.date     "ExecTime"
+    t.string   "Execer"
+    t.string   "State"
+    t.string   "Customer"
+    t.string   "Address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "orders", force: true do |t|
     t.string   "OrderId"
     t.string   "Name"
