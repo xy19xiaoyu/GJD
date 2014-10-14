@@ -10,17 +10,29 @@
           </ul>
         </div>
     <% end %>
-
-    <div class="field">
-      分类<br>
-      <%= select(:category,:Type, [['原料',"原料"], ['产品', "产品"]]) %>
+    <div class="row-fluid">
+      <div class="widget">
+        <div class="span2">
+          <div class="input-prepend">
+            <span class="add-on">分类： </span>
+            <%= select(:category, :Type, [['原料', "原料"], ['产品', "产品"]]) %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      品目<br>
-      <%= f.text_field :Name %>
+    <div class="row-fluid">
+      <div class="widget">
+        <div class="span2">
+          <div class="input-prepend">
+            <span class="add-on">品目： </span>
+            <%= f.text_field :Name, {:Class => "input-large"} %>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="actions">
-      <%= f.submit %>
+    <div class="row-fluid">
+      <div class="align-center">
+        <%= f.submit("确定", {:Class => "btn btn-primary btn-large"}) %>
+      </div>
     </div>
 <% end %>
