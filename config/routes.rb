@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :origin do
+    resources :sidebar_items
+  end
+
+  namespace :origin do
+    resources :sites
+  end
+
   resources :go_down_items
 
   get 'o_order/index'

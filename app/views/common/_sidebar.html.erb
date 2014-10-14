@@ -10,9 +10,23 @@
 
       <!-- Main navigation -->
       <ul class="navigation widget">
-        <li class="active">
-          <a href="/static_pages/home" title=""><i class="icon-home"></i>管家爹进销存</a>
-        </li>
+        <% Origin::Site.current_site.sidebar_items.each do |p_item| %>
+          <li<%= ' class=active' if p_item.active_flag %>>
+            <a href="<%= p_item.url %>" title="">
+              <i class="icon-home"></i>
+              <%= p_item.name %>
+              <%= raw "<strong>#{p_item.sub_item.count}</strong>" unless p_item.sub_item.empty? %>
+            </a>
+            <% unless p_item.sub_item.empty? %>
+              <ul>
+                <% p_item.sub_item.each do |s_item| %>
+                  <li><a href="<%= s_item.url %>" title=""><%= s_item.name %></a></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </li>
+        <% end %>
+
         <li>
           <a href="#" title="" class="expand"><i class="icon-reorder"></i>配置管理<strong>4</strong></a>
           <ul>

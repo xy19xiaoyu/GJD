@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require turbolinks
-//= require_tree .
+//= require turbolinks
+//= require_tree ./jquery
+//= require_tree ./pannonia
 var select;
 
 function iniItems() {
