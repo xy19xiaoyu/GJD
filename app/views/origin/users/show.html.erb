@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @origin_user.name %>
+</p>
+
+<p>
+  <strong>Hashed password:</strong>
+  <%= @origin_user.hashed_password %>
+</p>
+
+<p>
+  <strong>Salt:</strong>
+  <%= @origin_user.salt %>
+</p>
+
+<%= link_to 'Edit', edit_origin_user_path(@origin_user) %> |
+<%= link_to 'Back', origin_users_path %>

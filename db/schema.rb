@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014070316) do
+ActiveRecord::Schema.define(version: 20141014164758) do
 
   create_table "batches", force: true do |t|
     t.string   "Batchid"
@@ -128,6 +128,14 @@ ActiveRecord::Schema.define(version: 20141014070316) do
     t.boolean  "isSidebar"
     t.boolean  "isTopbar"
     t.boolean  "isNavbar"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "origin_users", force: true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
+    t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

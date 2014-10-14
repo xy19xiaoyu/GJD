@@ -1,4 +1,5 @@
 class Origin::SitesController < ApplicationController
+  skip_before_action :authorize
   layout 'origin'
   before_action :set_origin_site, only: [:show, :edit, :update, :destroy]
 

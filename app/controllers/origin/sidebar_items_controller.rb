@@ -1,4 +1,5 @@
 class Origin::SidebarItemsController < ApplicationController
+  skip_before_action :authorize
   layout 'origin'
   before_action :set_origin_sidebar_item, only: [:show, :edit, :update, :destroy]
 
