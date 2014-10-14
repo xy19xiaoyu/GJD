@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141013124219) do
+ActiveRecord::Schema.define(version: 20141014070316) do
 
   create_table "batches", force: true do |t|
     t.string   "Batchid"
@@ -105,6 +105,29 @@ ActiveRecord::Schema.define(version: 20141013124219) do
     t.date     "ExecTime"
     t.string   "Execer"
     t.string   "State"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "origin_sidebar_items", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "site_id"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "serial_number"
+    t.boolean  "active_flag"
+  end
+
+  create_table "origin_sites", force: true do |t|
+    t.string   "logo"
+    t.string   "title"
+    t.boolean  "isAuthorize"
+    t.boolean  "isRole"
+    t.boolean  "isSidebar"
+    t.boolean  "isTopbar"
+    t.boolean  "isNavbar"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

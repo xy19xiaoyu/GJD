@@ -1,0 +1,31 @@
+<h1>Listing origin_sidebar_items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th>Site</th>
+      <th>Parent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @origin_sidebar_items.each do |origin_sidebar_item| %>
+      <tr>
+        <td><%= origin_sidebar_item.name %></td>
+        <td><%= origin_sidebar_item.url %></td>
+        <td><%= origin_sidebar_item.site_id %></td>
+        <td><%= origin_sidebar_item.parent_id %></td>
+        <td><%= link_to 'Show', origin_sidebar_item %></td>
+        <td><%= link_to 'Edit', edit_origin_sidebar_item_path(origin_sidebar_item) %></td>
+        <td><%= link_to 'Destroy', origin_sidebar_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sidebar item', new_origin_sidebar_item_path %>

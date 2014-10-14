@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :o_orders
   get 'o_orders/split/:id'  => 'o_orders#split'
   get 'go_down_items/search' => 'go_down_items#search'
@@ -17,6 +16,14 @@ Rails.application.routes.draw do
   get 'out_orders/show/:id'  => 'out_orders#show'
 
   #---------------------------------------LEE ADD START
+  namespace :origin do
+    resources :sidebar_items
+  end
+
+  namespace :origin do
+    resources :sites
+  end
+
   get 'admin' => 'admin#index'
 
   controller :sessions do
