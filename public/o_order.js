@@ -14,7 +14,7 @@ var GoDowinItmeUrl = "http://" + window.location.host + "/go_down_items/search.j
 var GoDowinItmes;
 function iniGoDownItems() {
     if (GoDowinItmes == null) {
-        $.getJSON(GoDowinItmeUrl,function(json){
+        $.getJSON(GoDowinItmeUrl, function (json) {
             debugger;
             GoDowinItmes = eval(json);
         });
@@ -30,9 +30,7 @@ function changecategory(obj) {
             changecategory(obj);
         });
     } else {
-        debugger;
         $(".items").each(function () {
-            debugger;
             $(this).empty();
             var itemno = $("#itemline" + $(this).attr("rowid") + "_Item_id").val();
             $(this).append("<option value='请选择'  data='|'>请选择</option>");
@@ -56,23 +54,22 @@ function changeItem(obj) {
     var select = $(obj).find("option:selected").attr("data").split('|');
     debugger;
     if ($(obj).find("option:selected").val() != "请选择") {
-        var itemid =$(obj).find("option:selected").val();
+        var itemid = $(obj).find("option:selected").val();
         $("#category" + rowid).val(select[0]);
         $("#subcategory" + rowid).val(select[1]);
         $("#itemline" + rowid + "_Item_id").val(itemid);
-        var sum =GoDowinItmes[itemid];
-        if(sum!= null)
-        {
-            $("#Sum"+rowid).val(sum);
+        var sum = GoDowinItmes[itemid];
+        if (sum != null) {
+            $("#Sum" + rowid).val(sum);
+            test();
         }
-        else
-        {
+        else {
             alert("没有库存");
             $(obj).get(0).selectedIndex = 0;
             $("#category" + rowid).val("");
             $("#subcategory" + rowid).val("");
             $("#itemline" + rowid + "_Item_id").val("");
-            $("#Sum"+rowid).val("");
+            $("#Sum" + rowid).val("");
         }
 
     }
@@ -80,6 +77,30 @@ function changeItem(obj) {
         $("#category" + rowid).val("");
         $("#subcategory" + rowid).val("");
         $("#itemline" + rowid + "_Item_id").val("");
-        $("#Sum"+rowid).val("");
+        $("#Sum" + rowid).val("");
     }
+}
+
+$("#myModal").on("show", function () {    // wire up the OK button to dismiss the modal when shown
+    $("#myModal a.btn").on("click", function (e) {
+        console.log("button pressed");   // just as an example...
+        $("#myModal").modal('hide');     // dismiss the dialog
+    });
+});
+
+$("#myModal").on("hide", function () {    // remove the event listeners when the dialog is dismissed
+    $("#myModal a.btn").off("click");
+});
+
+$("#myModal").on("hidden", function () {  // remove the actual elements from the DOM when fully hidden
+    // $("#myModal").remove();
+});
+
+
+function test() {
+    $("#myModal").modal({
+        "backdrop": "static",
+        "keyboard": true,
+        "show": true
+    });
 }

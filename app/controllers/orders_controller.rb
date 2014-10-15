@@ -118,7 +118,6 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.update(order_params)
-        @order.in_orders.each { |inorder| inorder.destroy }
         for x in 1..@order.sub_orders.count
           @tmp = params.require("itemline#{x}").permit(:id,:Item_id, :Sum, :GoDown_id)
           if(@tmp[:id] !="")

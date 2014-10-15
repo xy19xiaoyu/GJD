@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
 <div class="row-fluid">
   <div class="right-content span10">
     <div class="nav">
-      <div class="navbar-inner"><h6>销售订单</h6></div>
+      <div class="navbar-inner"><h6>采购订单</h6></div>
     </div>
     <div class="well-white body">
       <div class="row-fluid">
@@ -42,7 +41,7 @@
       <%= render 'orders/sub' %>
 
       <% if @order.State=="新建" %>
-        <div class="align-center"> <%= link_to @urlName, "/orders/split/#{@order.id}",{:Class=>"btn btn-primary"} %></div>
+          <div class="align-center"> <%= link_to @urlName, "/orders/split/#{@order.id}", {:Class => "btn btn-primary"} %></div>
       <% end %>
     </div>
   </div>

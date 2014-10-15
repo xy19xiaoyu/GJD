@@ -1,32 +1,34 @@
 <div class="row-fluid">
-  <div class="form-actions span8">
+  <div class="right-content span8">
     <div class="nav">
       <div class="navbar-inner"><h6><b>生产流水管理</b></h6></div>
     </div>
-    <table class="table">
-      <thead>
-      <tr>
-        <th>流水号</th>
-        <th>生产日期</th>
-        <th colspan="3"></th>
-      </tr>
-      </thead>
+    <div class="well-white body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>流水号</th>
+          <th>生产日期</th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
 
-      <tbody>
-      <% @batches.each do |batch| %>
-          <tr>
-            <td><%= batch.Batchid %></td>
-            <td><%= batch.Date %></td>
-            <td><%= link_to '查看', batch %></td>
-            <td><%= link_to '编辑', edit_batch_path(batch) %></td>
-            <td><%= link_to '删除', batch, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-    <div class="align-center">
-      <%= link_to '新建流水', new_batch_path, {:class => "btn btn-primary"} %>
+        <tbody>
+        <% @batches.each do |batch| %>
+            <tr>
+              <td><%= batch.Batchid %></td>
+              <td><%= batch.Date %></td>
+              <td><%= link_to '查看', batch %></td>
+              <td><%= link_to '编辑', edit_batch_path(batch) %></td>
+              <td><%= link_to '删除', batch, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="align-center">
+        <%= link_to '新建流水', new_batch_path, {:class => "btn btn-primary"} %>
+      </div>
+
     </div>
-
   </div>
 </div>

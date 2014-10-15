@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
 
   resources :o_orders
-
+  get 'o_orders/split/:id'  => 'o_orders#split'
   get 'go_down_items/search' => 'go_down_items#search'
   resources :go_down_items
   get 'in_orders' => 'in_orders#index'

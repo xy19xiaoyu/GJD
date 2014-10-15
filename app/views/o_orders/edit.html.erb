@@ -50,22 +50,29 @@
             </tr>
             </thead>
             <tbody>
-            <% for x in 1..10 %>
-                <tr id="<%= x %>">
-                  <td><%= x %><%= hidden_field "itemline#{x}", "Item_id" %></td>
-                  <td><select id="itemNo<%= x %>" class="items" rowid="<%= x %>">
+            <% @x = 1%>
+
+            <% @sub_orders.each do| sub_order| %>
+                <% @item = Item.find(sub_order.Item_id) %>
+                <tr id="<%= @x %>">
+                  <td><%= @x %>
+                    <input type="hidden" id="itemline<%=@x%>_Item_id" name="itemline<%=@x%>[Item_id]" value="<%= sub_order.Item_id %>"/>
+                    <input id="itemline<%= @x %>_id" name="itemline<%= @x %>[id]" value="<%= sub_order.id %>" type="hidden"/>
+                  </td>
+                  <td><select id="itemNo<%= @x %>" class="items" rowid="<%= @x %>">
                     <option value="请选择">请选择</option>
                   </select></td>
-                  <td><input type="text" id="category<%= x %>" readonly="true"></td>
-                  <td><input type="text" id="subcategory<%= x %>" readonly="true"></td>
-                  <td><input type="number" id="Sum<%= x %>" readonly="true"></td>
-                  <td><%= number_field "itemline#{x}", "Sum" %></td>
+                  <td><input type="text" id="category<%= @x %>" readonly="true" value="<%= @item.CategoryName  %>" ></td>
+                  <td><input type="text" id="subcategory<%= @x %>" readonly="true" value="<%= @item.subCategoryName  %>"></td>
+                  <td><input type="number" id="Sum<%= @x %>" readonly="true"></td>
+                  <td><input type="number" id="itemline<%= @x %>_Sum" name="itemline<%= @x %>[Sum]"  value="<%= sub_order.Sum %>"></td>
                 </tr>
+            <% @x = @x +1%>
             <% end %>
             </tbody>
           </table>
           <div class="align-center">
-            <input type="hidden" id="itemscount" value="0"><%= f.submit("创建销售订单", {:class => "btn btn-primary"}) %>
+            <input type="hidden" id="itemscount" value="0"><%= f.submit("更新销售订单", {:class => "btn btn-primary"}) %>
           </div>
   <% end %>
   </div>
