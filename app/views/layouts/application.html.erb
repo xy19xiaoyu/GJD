@@ -8,6 +8,7 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 
@@ -25,7 +26,7 @@
           <li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
           <li><a href="#" title=""><i class="icon-inbox"></i>Messages<span class="badge badge-info">9</span></a></li>
           <li><a href="#" title=""><i class="icon-cog"></i>Settings</a></li>
-          <li><a href="/logout" title=""><i class="icon-remove"></i>Logout</a></li>
+          <li><%= link_to raw('<i class="icon-remove"></i>Logout'), origin_logout_path, :method => :delete %></li>
         </ul>
       </li>
     </ul>

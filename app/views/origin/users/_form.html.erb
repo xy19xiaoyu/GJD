@@ -1,0 +1,32 @@
+<%= form_for(@origin_user) do |f| %>
+  <% if @origin_user.errors.any? %>
+    <div id="error_explanation">
+      <h2>有<%= @origin_user.errors.count %>个验证条件没有通过</h2>
+
+      <ul>
+        <% @origin_user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>请输入用户信息</legend>
+    <div>
+      <%= f.label :name, '用户名' %>:
+      <%= f.text_field :name, :size => 40 %>
+    </div>
+    <div>
+      <%= f.label :password, '密码' %>:
+      <%= f.password_field :password, :size => 40 %>
+    </div>
+    <div>
+      <%= f.label :password_confirmation, '重复密码' %>:
+      <%= f.password_field :password_confirmation, :size => 40 %>
+    </div>
+    <div>
+      <%= f.submit %>
+    </div>
+  </fieldset>
+<% end %>
