@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014164758) do
+ActiveRecord::Schema.define(version: 20141018113039) do
 
   create_table "batches", force: true do |t|
     t.string   "Batchid"
@@ -81,6 +81,14 @@ ActiveRecord::Schema.define(version: 20141014164758) do
     t.datetime "updated_at"
   end
 
+  create_table "o_order_items", force: true do |t|
+    t.integer  "OOrder_id"
+    t.integer  "Item_id"
+    t.integer  "Sum"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "o_orders", force: true do |t|
     t.string   "OrderId"
     t.string   "Name"
@@ -132,10 +140,28 @@ ActiveRecord::Schema.define(version: 20141014164758) do
     t.datetime "updated_at"
   end
 
-  create_table "origin_users", force: true do |t|
-    t.string   "name"
-    t.string   "hashed_password"
-    t.string   "salt"
+  create_table "out_order_item_his", force: true do |t|
+    t.integer  "OOrder_id"
+    t.integer  "OutOrder_id"
+    t.integer  "Item_id"
+    t.integer  "GoDown_id"
+    t.string   "BatchId"
+    t.date     "CreateTime"
+    t.integer  "Sum"
+    t.date     "ExecTime"
+    t.string   "Execer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "out_order_items", force: true do |t|
+    t.integer  "OOrder_id"
+    t.integer  "OutOrder_id"
+    t.integer  "Item_id"
+    t.integer  "GoDown_id"
+    t.string   "BatchId"
+    t.date     "CreateTime"
+    t.integer  "Sum"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

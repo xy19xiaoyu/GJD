@@ -1,31 +1,33 @@
 <p id="notice"><%= notice %></p>
+<div class="row-fluid">
+  <div class="right-content span5">
+    <div class="nav">
+      <div class="navbar-inner"><h6>添加物品</h6></div>
+    </div>
+    <div class="well-white body">
+      <table class="table">
+        <tr>
+          <td>物品编号：</td>
+          <td> <%= @item.ItemId %></td>
+        </tr>
+        <tr>
+          <td> 名称：</td>
+          <td>    <%= @item.Name %></td>
+        </tr>
+        <tr>
+          <td> 类型(原料|产品):</td>
+          <td>   <%= @item.Type %></td>
+        </tr>
+        <tr>
+          <td> 品目：</td>
+          <td>  <%= @item.CategoryName %></td>
+        </tr>
+        <tr>
+          <td>型号：</td>
+          <td> <%= @item.subCategoryName %></td>
+        </tr>
+      </table>
 
-<p>
-  <strong>物品编号:</strong>
-  <%= @item.ItemId %>
-</p>
-
-<p>
-  <strong>名称:</strong>
-  <%= @item.Name %>
-</p>
-
-
-<p>
-  <strong>类型:</strong>
-  <%= @item.Type %>
-</p>
-
-<p>
-  <strong>品目:</strong>
-  <%= @item.CategoryName %>
-</p>
-
-<p>
-  <strong>型号:</strong>
-  <%= @item.subCategoryName %>
-</p>
-
-
-<%= link_to '编辑', edit_item_path(@item) %> |
-<%= link_to '后退', items_path %>
+    </div>
+  </div>
+</div>

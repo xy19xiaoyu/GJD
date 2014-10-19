@@ -1,16 +1,21 @@
 <p id="notice"><%= notice %></p>
-<p>
-  <strong>分类:</strong>
-  <%= @category.Type %>
-</p>
+<div class="row-fluid">
+  <div class="right-content span3">
+    <div class="nav">
+      <div class="navbar-inner"><h3>品目查看</h3></div>
+    </div>
+    <div class="well-white body">
+      <div class="nav">
+        <div class="navbar-inner"><h6>
+          <span><strong>分类:</strong><%= @category.Type %></span>
+          <span><strong>品目:</strong><%= @category.Name %></span>
+        </h6></div>
+      </div>
+      <div class="well-white body">
+        <%= render :partial => "sub" %>
+        <%= render :partial => "new_sub" %>
+      </div>
 
-<p>
-  <strong>品目:</strong>
-  <%= @category.Name %>
-</p>
-
-<%= render :partial =>  "sub" %>
-<%= render :partial => "new_sub" %>
-
-<%= link_to '编辑', edit_category_path(@category) %> |
-<%= link_to '后退', categories_path %>
+    </div>
+  </div>
+</div>

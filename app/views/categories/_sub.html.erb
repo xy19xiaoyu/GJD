@@ -1,14 +1,17 @@
-<h3>规格</h3>
-
-<table>
-  <tbody>
-  <% @sub_categories.each do |sub_category| %>
-      <tr>
-        <td><%= sub_category.Name %></td>
-        <td><%= link_to '编辑', edit_sub_category_path(sub_category) %></td>
-        <td><%= link_to '删除', sub_category, method: :delete, data: { confirm: '确认删除?' } %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="nav">
+  <div class="navbar-inner"><h6>
+    规格
+  </h6>
+  </div>
+  <table class="table">
+    <tbody>
+    <% @sub_categories.each do |sub_category| %>
+        <tr>
+          <td><%= sub_category.Name %></td>
+          <td><%= link_to '编辑', edit_sub_category_path(sub_category) %></td>
+          <td><%= link_to '删除', sub_category, method: :delete, data: {confirm: '确认删除?'} %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 

@@ -1,9 +1,15 @@
-<h4>新建规格</h4>
+<div class="nav" style="margin-top: 5px">
+  <div class="navbar-inner"><h6>
+    新建规格
+  </h6>
+  </div>
+</div>
 
 <%= form_for(@sub_category) do |f| %>
     <% if @sub_category.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@sub_category.errors.count, "error") %> prohibited this sub_category from being saved:</h2>
+          <h2><%= pluralize(@sub_category.errors.count, "error") %> prohibited this sub_category from being
+            saved:</h2>
 
           <ul>
             <% @sub_category.errors.full_messages.each do |message| %>
@@ -12,19 +18,22 @@
           </ul>
         </div>
     <% end %>
-    <div class="field" style="display: none">
-      品目ID：（以后隐藏）<br>
-      <%= f.text_field :CategoryId %>
-    </div>
-    <div class="field" style="display: none">
-      品目名称：（以后隐藏）<br>
-      <%= f.text_field :CategoryName %>
-    </div>
-    <div class="field">
-      规格：<br>
-      <%= f.text_field :Name %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
+    <div class="well-white body">
+      <div class="field" style="display: none">
+        品目ID：（以后隐藏）<br>
+        <%= f.text_field :CategoryId %>
+      </div>
+      <div class="field" style="display: none">
+        品目名称：（以后隐藏）<br>
+        <%= f.text_field :CategoryName %>
+      </div>
+      <div class="field">
+        规格:
+        <%= f.text_field :Name %>
+        <%= f.submit("添加规格",{:Class=>"btn btn-primary"}) %>
+      </div>
+
+
+
     </div>
 <% end %>

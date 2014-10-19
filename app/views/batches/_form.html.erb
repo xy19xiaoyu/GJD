@@ -1,25 +1,30 @@
 <%= form_for(@batch) do |f| %>
-  <% if @batch.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@batch.errors.count, "error") %> prohibited this batch from being saved:</h2>
+    <% if @batch.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@batch.errors.count, "error") %> prohibited this batch from being saved:</h2>
 
-      <ul>
-      <% @batch.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @batch.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <table class="table">
+      <tr>
+        <td>流水号:
+        </td>
+        <td> <%= f.text_field :Batchid %>
+        </td>
+      </tr>
+      <tr>
+        <td>生产日期:
+        </td>
+        <td>  <%= f.text_field :Date %>
+        </td>
+      </tr>
+    </table>
+    <div class="align-center">
+      <%= f.submit("确定", {:Class => "btn btn-primary"}) %>
     </div>
-  <% end %>
-
-  <div class="field">
-    流水号<br>
-    <%= f.text_field :Batchid %>
-  </div>
-  <div class="field">
-    生产日期<br>
-    <%= f.text_field :Date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

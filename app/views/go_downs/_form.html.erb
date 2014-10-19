@@ -1,37 +1,40 @@
 <%= form_for(@go_down) do |f| %>
-  <% if @go_down.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@go_down.errors.count, "error") %> prohibited this go_down from being saved:</h2>
+    <% if @go_down.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@go_down.errors.count, "error") %> prohibited this go_down from being saved:</h2>
 
-      <ul>
-      <% @go_down.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @go_down.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <table class="table">
+      <tr>
+        <td>仓库编号:</td>
+        <td><%= f.text_field :GoDownId %></td>
+      </tr>
+      <tr>
+        <td>仓库名称:</td>
+        <td> <%= f.text_field :Name %></td>
+      </tr>
+
+      <tr>
+        <td> 地址：</td>
+        <td> <%= f.text_field :Address %></td>
+      </tr>
+      <tr>
+        <td> 管理员:</td>
+        <td> <%= f.text_field :Admin %></td>
+      </tr>
+      <tr>
+        <td> 电话:</td>
+        <td> <%= f.text_field :Tel %></td>
+      </tr>
+    </table>
+    <div class="align-center">
+      <%= f.submit("确定", {:Class => "btn btn-primary"}) %>
     </div>
-  <% end %>
 
-  <div class="field">
-    仓库编号<br>
-    <%= f.text_field :GoDownId %>
-  </div>
-  <div class="field">
-    仓库名称<br>
-    <%= f.text_field :Name %>
-  </div>
-  <div class="field">
-    地址：<br>
-    <%= f.text_field :Address %>
-  </div>
-  <div class="field">
-    管理员<br>
-    <%= f.text_field :Admin %>
-  </div>
-  <div class="field">
-    电话<br>
-    <%= f.text_field :Tel %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
