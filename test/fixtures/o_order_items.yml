@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  OOrder_id: 1
+  Item_id: 1
+  Sum: 1
+
+two:
+  OOrder_id: 1
+  Item_id: 1
+  Sum: 1

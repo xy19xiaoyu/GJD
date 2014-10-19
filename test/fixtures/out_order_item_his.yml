@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  OOrder_id: 1
+  OutOrder_id: 1
+  Item_id: 1
+  GoDown_id: 1
+  BatchId: MyString
+  CreateTime: 2014-10-18
+  Sum: 1
+  ExecTime: 2014-10-18
+  Execer: MyString
+
+two:
+  OOrder_id: 1
+  OutOrder_id: 1
+  Item_id: 1
+  GoDown_id: 1
+  BatchId: MyString
+  CreateTime: 2014-10-18
+  Sum: 1
+  ExecTime: 2014-10-18
+  Execer: MyString

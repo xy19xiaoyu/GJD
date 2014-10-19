@@ -1,0 +1,138 @@
+<p id="notice"><%= notice %></p>
+<%= form_tag("/o_orders/CreateOutOrder", method: "post") do %>
+    <div class="row-fluid">
+      <div class="right-content span9">
+        <div class="nav">
+          <div class="navbar-inner"><h6>销售订单</h6></div>
+        </div>
+        <div class="well-white body">
+          <div class="row-fluid">
+            <div class="widget">
+              <div class="span3">
+                <div class="input-prepend">
+                  <span class="add-on">订单编号： </span>
+                  <%= text_field :o_order, :OrderId, {:disabled => "disabled"} %>
+                  <input type="hidden" id="o_order_id" name="o_order_id" value= <%= @o_order.id %>/>
+                </div>
+              </div>
+              <div class="span3">
+                <div class="input-prepend">
+                  <span class="add-on">客户： </span>
+                  <%= text_field :o_order, :Customer, {:disabled => "disabled"} %>
+                </div>
+              </div>
+              <div class="span3">
+                <div class="input-prepend">
+                  <span class="add-on"> 地址：</span>
+                  <%= text_field :o_order, :Address, {:Class => "input-xlarge", :disabled => "disabled"} %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>物品名称</th>
+              <th>规格</th>
+              <th>型号</th>
+              <th>订单数量</th>
+              <th width="120px;">出库数量</th>
+              <th>&nbsp;</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% i=1 %>
+            <% @outordercount %>
+            <% @outordercount =0 %>
+            <% @o_order_items.each do |sub_order| %>
+                <tr id="row_<%= i %>">
+                  <td><%= i %></td>
+                  <% @item = Item.find(sub_order.Item_id) %>
+                  <td><%= @item.Name %></td>
+                  <td><%= @item.CategoryName %></td>
+                  <td><%= @item.subCategoryName %></td>
+                  <td><%= sub_order.Sum %></td>
+                  <td><input type="text" id="sum<%= i %>" class="input-mini align-center" readonly="true"/></td>
+                  <td><a href="#" data="<%= i %>" type="button" onclick="test(this);" class="btn">选择库存</a></td>
+                </tr>
+                <tr class="hide">
+                  <td colspan="7">
+                    <div class="row-fluid">
+                      <div class="navbar">
+                        <div class="navbar-inner"><h6>选择库存</h6></div>
+                      </div>
+                      <div class="well-white body">
+                        <table class="table">
+                          <thead>
+                          <tr>
+                            <th>仓库</th>
+                            <th>生产日期</th>
+                            <th>生产批次</th>
+                            <th>库存数量</th>
+                            <th width="200px">出库数量</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <% GoDownItem.where(:Item_id => sub_order.Item_id).where("Sum > ?", 0).group(:GoDown_id, :BatchId, :CreateTime).sum(:Sum).each do |goditem| %>
+                              <% @outordercount = @outordercount+1 %>
+                              <tr>
+                                <input type="hidden" id="outOrder<%= @outordercount %>_[Item_Id]" name="outOrder<%= @outordercount %>[Item_Id]" value="<%= sub_order.Item_id %>">
+                                <input type="hidden" id="outOrder<%= @outordercount %>_[BatchId]" name="outOrder<%= @outordercount %>[BatchId]" value="<%= goditem[0][1] %>">
+                                <input type="hidden" id="outOrder<%= @outordercount %>_[CreateTime]" name="outOrder<%= @outordercount %>[CreateTime]" value="<%= goditem[0][2] %>">
+                                <input type="hidden" id="outOrder<%= @outordercount %>_[GoDown_id]" name="outOrder<%= @outordercount %>[GoDown_id]" value="<%= goditem[0][0] %>">
+                                <td> <%= GoDown.find(goditem[0][0]).Name %></td>
+                                <td><%= goditem[0][2] %></td>
+                                <td><%= goditem[0][1] %></td>
+                                <td><%= goditem[1] %></td>
+                                <td>
+                                  <input type="number" id="outOrder<%= @outordercount %>_[Sum]" name="outOrder<%= @outordercount %>[Sum]" class="input-mini align-center" min="0" max="<%= goditem[1] %>"/>
+                                </td>
+                              </tr>
+                          <% end %>
+                          <tr>
+                            <td colspan="4"></td>
+                            <td><a href="#" data="<%= i %>" onclick="showSum(this);" class="btn btn-primary">确定</a></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                  </td>
+                </tr>
+                <% i =i+1 %>
+            <% end %>
+            </tbody>
+          </table>
+          <input type="hidden" id="outordercount" name="outordercount" value="<%= @outordercount %>"/>
+
+          <div class="align-center">  <%= submit_tag("生成出库单", {:Class => "btn btn-primary"}) %></div>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+        function test(obj) {
+            $("#row_" + $(obj).attr("data")).next().toggle();
+            //bootbox.alert();
+        }
+        function showSum(obj) {
+            var row_id = $(obj).attr("data");
+            //计算总和
+            var order_sum = $("#sum" + row_id).val();
+            //记录 仓库-批次-生产日期-库存
+            var numbers = $("#row_" + $(obj).attr("data")).next().find("input[type=number]");
+            var input_sum = 0;
+            debugger;
+            numbers.each(function () {
+                input_sum += parseInt($(this).val());
+            });
+            $("#sum" + row_id).val(input_sum);
+            $("#row_" + $(obj).attr("data")).next().toggle();
+        }
+    </script>
+
+<% end %>
