@@ -28,13 +28,6 @@ function initPage()
         tabActiveClass: "active"
     });
 
-    $('.actions').easytabs({
-        animationSpeed: 300,
-        collapsible: false,
-        tabActiveClass: "current"
-    });
-
-
     //===== Collapsible plugin for main nav =====//
 
     $('.expand').collapsible({

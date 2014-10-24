@@ -1,30 +1,28 @@
 <h4>新建规格</h4>
 
 <%= form_for(@sub_category) do |f| %>
-    <% if @sub_category.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@sub_category.errors.count, "error") %> prohibited this sub_category from being saved:</h2>
+  <% if @sub_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sub_category.errors.count, "error") %> prohibited this sub_category from being saved:</h2>
 
-          <ul>
-            <% @sub_category.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-    <div class="field" style="display: none">
-      品目ID：（以后隐藏）<br>
-      <%= f.text_field :CategoryId %>
+      <ul>
+        <% @sub_category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
-    <div class="field" style="display: none">
-      品目名称：（以后隐藏）<br>
-      <%= f.text_field :CategoryName %>
-    </div>
-    <div class="field">
-      规格：<br>
-      <%= f.text_field :Name %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+  <% end %>
+  <div class="field" style="display: none">
+    品目ID：（以后隐藏）<br>
+    <%= f.text_field :CategoryId %>
+  </div>
+  <div class="field" style="display: none">
+    品目名称：（以后隐藏）<br>
+    <%= f.text_field :CategoryName %>
+  </div>
+  <div class="field">
+    规格：<br>
+    <%= f.text_field :Name %>
+  </div>
+  <%= f.submit("确定", {:Class => "btn btn-primary btn-large"}) %>
 <% end %>
