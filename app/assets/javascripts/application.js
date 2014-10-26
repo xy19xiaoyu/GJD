@@ -15,6 +15,13 @@
 //= require turbolinks
 //= require_tree ./jquery
 //= require_tree ./pannonia
+
+$(window).bind('page:change', function () {
+    $(".field_with_errors").each(function () {
+        //alert(this);
+        $(this).addClass("control-group error");
+    });
+});
 var select;
 
 function iniItems() {
@@ -119,7 +126,7 @@ function getItemGoDown(obj, itemid) {
         }
     }
     $("#itemline" + rowid + "_GoDown_id").empty();
-    if (item!= ",") {
+    if (item != ",") {
         $("#itemline" + rowid + "_GoDown_id").append("<option value='请选择'  data='|'>请选择</option>");
         for (var j = 0; j < GoDowns.length; j++) {
             if (item.indexOf("," + GoDowns[j].id + ",") >= 0) {
@@ -137,12 +144,11 @@ function getItemGoDown(obj, itemid) {
 
 
 }
-function changeGoDowns(obj)
-{
+function changeGoDowns(obj) {
     debugger;
     var rowid = $(obj).attr("rowid");
-    var itemid =$("#itemline" + rowid + "_Item_id").val();
-    var godid  = $(obj).find("option:selected").val();
+    var itemid = $("#itemline" + rowid + "_Item_id").val();
+    var godid = $(obj).find("option:selected").val();
     var item = ","
     for (var i = 0; i < GoDowinItmes.length; i++) {
         if (GoDowinItmes[i].Item_id == itemid && GoDowinItmes[i].GoDown_id == godid) {
@@ -152,7 +158,7 @@ function changeGoDowns(obj)
         }
     }
     $("#itemline" + rowid + "_Batch_id").empty();
-    if (item!= ",") {
+    if (item != ",") {
         $("#itemline" + rowid + "_Batch_id").append("<option value='请选择'  data='|'>请选择</option>");
         for (var j = 0; j < Batchs.length; j++) {
             if (item.indexOf("," + Batchs[j].id + ",") >= 0) {

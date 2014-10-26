@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
   resources :o_orders
   post 'o_orders/CreateOutOrder' => 'o_orders#CreateOutOrder'
-  get 'o_orders/split/:id'  => 'o_orders#split'
+  get 'o_orders/split/:id' => 'o_orders#split'
   get 'go_down_items/search' => 'go_down_items#search'
   resources :go_down_items
-  get 'in_orders'  => 'in_orders#index'
-  get 'in_orders/:id'  => 'in_orders#index'
+  get 'in_orders' => 'in_orders#index'
+  get 'in_orders/:id' => 'in_orders#index'
   post 'in_orders/ingodown' => 'in_orders#ingodown'
-  get 'in_orders/exec/:id'  => 'in_orders#exec'
-  get 'in_orders/show/:id'  => 'in_orders#show'
+  get 'in_orders/exec/:id' => 'in_orders#exec'
+  get 'in_orders/show/:id' => 'in_orders#show'
 
-  get 'out_orders/'  => 'out_orders#index'
+  get 'out_orders/' => 'out_orders#index'
   post 'out_orders/outgodown' => 'out_orders#outgodown'
-  get 'out_orders/exec/:id'  => 'out_orders#exec'
-  get 'out_orders/show/:id'  => 'out_orders#show'
+  get 'out_orders/exec/:id' => 'out_orders#exec'
+  get 'out_orders/show/:id' => 'out_orders#show'
 
   #---------------------------------------LEE ADD START
   namespace :origin do
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :users
   #---------------------------------------LEE ADD END
 
-  get 'orders/split/:id'  => 'orders#split'
+  get 'orders/split/:id' => 'orders#split'
 
   resources :sub_orders
 
@@ -51,15 +51,17 @@ Rails.application.routes.draw do
 
   resources :items
 
+  #post '/sub_categories' => 'categories#create_sub'
   resources :sub_categories
 
   resources :categories
+  post 'Category/create_sub' => 'categories#create_sub'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root :to =>'static_pages#home', :as => 'home'
+  root :to => 'static_pages#home', :as => 'home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

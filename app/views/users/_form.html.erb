@@ -1,13 +1,19 @@
 <%= form_for(@user) do |f| %>
     <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2>有<%= @user.errors.count %>个验证条件没有通过</h2>
-
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
+        <div class="well-white body">
+          <div class="nav">
+            <div class="navbar-inner">
+              <h6><strong><span class="badge badge-important"><%= @user.errors.count %></span>个验证条件没有通过</strong>
+              </h6>
+            </div>
+          </div>
+          <div class="well-white body">
+            <ul class="alert alert-error">
+              <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         </div>
     <% end %>
     <table class="table">

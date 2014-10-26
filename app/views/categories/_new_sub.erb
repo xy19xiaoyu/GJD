@@ -4,36 +4,42 @@
   </h6>
   </div>
 </div>
-
-<%= form_for(@sub_category) do |f| %>
+<%= form_tag(:controller => "categories", :action => "create_sub", :method => "post") do |f| %>
     <% if @sub_category.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@sub_category.errors.count, "error") %> prohibited this sub_category from being
-            saved:</h2>
-
-          <ul>
-            <% @sub_category.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
+        <div class="well-white body">
+          <div class="nav">
+            <div class="navbar-inner">
+              <h6>
+                <span class="badge badge-important"><%= @sub_category.errors.count %></span>个验证条件没有通过
+              </h6>
+            </div>
+          </div>
+          <div class="well-white body">
+            <ul class="alert alert-error">
+              <% @sub_category.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         </div>
     <% end %>
     <div class="well-white body">
       <div class="field" style="display: none">
         品目ID：（以后隐藏）<br>
-        <%= f.text_field :CategoryId %>
+        <%= text_field_tag 'sub_category[CategoryId]', @sub_category.CategoryId %>
       </div>
       <div class="field" style="display: none">
         品目名称：（以后隐藏）<br>
-        <%= f.text_field :CategoryName %>
+        <%= text_field_tag 'sub_category[CategoryName]', @sub_category.CategoryName %>
       </div>
-      <div class="field">
-        规格:
-        <%= f.text_field :Name %>
-        <%= f.submit("添加规格",{:Class=>"btn btn-primary"}) %>
+      <table class="table table-bordered">
+        <tr>
+          <td> 规格:</td>
+          <td>  <%= text_field_tag 'sub_category[Name]' %></td>
+        </tr>
+      </table>
+      <div class="align-center">
+        <%= submit_tag("添加规格", {:Class => "btn btn-primary"}) %>
       </div>
-
-
-
     </div>
 <% end %>
