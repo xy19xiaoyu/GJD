@@ -11,8 +11,8 @@
       <!-- Main navigation -->
       <ul class="navigation widget">
         <% Origin::Site.current_site.sidebar_items.each do |p_item| %>
-          <li<%= ' class=active' if p_item.active_flag %>>
-            <a href="<%= p_item.url %>" title="" class="expand">
+          <li<%= ' class=active' if current_page?(p_item.url) %>>
+            <a href="<%= p_item.url %>" title="" <%= 'class=expand' unless p_item.url == '/' %> <%= 'id=current' unless (p_item.sub_items.to_ary.delete_if {|i| !current_page?(i.url)}).empty? %>>
               <i class="icon-home"></i>
               <%= p_item.name %>
               <%= raw "<strong>#{p_item.sub_items.count}</strong>" unless p_item.sub_items.empty? %>
@@ -20,7 +20,13 @@
             <% unless p_item.sub_items.empty? %>
               <ul>
                 <% p_item.sub_items.each do |s_item| %>
-                  <li><a href="<%= s_item.url %>" title=""><%= s_item.name %></a></li>
+                  <li>
+                    <%=
+                        link_to_unless_current(s_item.name, s_item.url) do
+                          link_to(s_item.name, s_item.url, {class: 'current'})
+                        end
+                    %>
+                  </li>
                 <% end %>
               </ul>
             <% end %>
