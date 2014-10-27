@@ -140,6 +140,14 @@ ActiveRecord::Schema.define(version: 20141018113039) do
     t.datetime "updated_at"
   end
 
+  create_table "origin_users", force: true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "out_order_item_his", force: true do |t|
     t.integer  "OOrder_id"
     t.integer  "OutOrder_id"
@@ -199,6 +207,14 @@ ActiveRecord::Schema.define(version: 20141018113039) do
     t.string   "BatchId"
     t.string   "MadeIn"
     t.integer  "GoDown_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
+    t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

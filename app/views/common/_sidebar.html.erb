@@ -13,7 +13,7 @@
         <% Origin::Site.current_site.sidebar_items.each do |p_item| %>
           <li<%= ' class=active' if current_page?(p_item.url) %>>
             <a href="<%= p_item.url %>" title="" <%= 'class=expand' unless p_item.url == '/' %> <%= 'id=current' unless (p_item.sub_items.to_ary.delete_if {|i| !current_page?(i.url)}).empty? %>>
-              <i class="icon-home"></i>
+              <i class="fa-home"></i>
               <%= p_item.name %>
               <%= raw "<strong>#{p_item.sub_items.count}</strong>" unless p_item.sub_items.empty? %>
             </a>
