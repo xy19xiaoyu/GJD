@@ -1,3 +1,4 @@
+#encoding:utf-8
 class SubCategoriesController < ApplicationController
   before_action :set_sub_category, only: [:show, :edit, :update, :destroy]
 
@@ -25,13 +26,17 @@ class SubCategoriesController < ApplicationController
   # POST /sub_categories.json
   def create
     @sub_category = SubCategory.new(sub_category_params)
-
+    @category = Category.find(@sub_category.CategoryId)
     respond_to do |format|
       if @sub_category.save
-        format.html { redirect_to @sub_category, notice: 'Sub category was successfully created.' }
+        format.html { redirect_to @category, notice: 'Sub category was successfully created.' }
         format.json { render :show, status: :created, location: @sub_category }
       else
-        format.html { render :new }
+
+        format.html { redirect_to "/categories/#{@category.id}", notice: '<div class="alert alert-error">添加失败</div>' }
+        #format.html { render "categories/new_sub", :locals => {:subCategory => @sub_category} }
+        #format.html { redirect_to "/categories/#{@category.id}", notice: 'asdf'}
+        #format.html { render "/categories/new_sub", :locals => {:subCategory => @sub_category} }
         format.json { render json: @sub_category.errors, status: :unprocessable_entity }
       end
     end
@@ -40,13 +45,14 @@ class SubCategoriesController < ApplicationController
   # PATCH/PUT /sub_categories/1
   # PATCH/PUT /sub_categories/1.json
   def update
+    @category = Category.find(@sub_category.CategoryId)
     respond_to do |format|
       if @sub_category.update(sub_category_params)
         format.html { redirect_to @sub_category, notice: 'Sub category was successfully updated.' }
         format.json { render :show, status: :ok, location: @sub_category }
       else
         format.html { render :edit }
-        format.json { render json: @sub_category.errors, status: :unprocessable_entity }
+        format.json { render json: @categor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,13 +68,13 @@ class SubCategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sub_category
-      @sub_category = SubCategory.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sub_category
+    @sub_category = SubCategory.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sub_category_params
-      params.require(:sub_category).permit(:CategoryId, :CategoryName, :Name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sub_category_params
+    params.require(:sub_category).permit(:CategoryId, :CategoryName, :Name)
+  end
 end

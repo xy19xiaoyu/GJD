@@ -4,7 +4,7 @@ class OutOrdersController < ApplicationController
   # GET /out_orders
   # GET /out_orders.json
   def index
-    @Orders =  Order.where(:State=>"待出库")
+    @OOrders = OOrder.where(:State => "待出库")
   end
 
   # GET /out_orders/1
@@ -12,9 +12,7 @@ class OutOrdersController < ApplicationController
   def show
     puts params
     @orderid = params[:id]
-    @order = Order.find(@orderid)
-    @out_orders = OutOrder.where(:Order_id => @orderid)
-    @gds = @out_orders.select(:GoDown_id).map(&:GoDown_id).uniq
+    @OOrders = OOrder.where(:id => @orderid)
   end
 
   # GET /out_orders/new
@@ -41,34 +39,53 @@ class OutOrdersController < ApplicationController
       end
     end
   end
+
   def exec
     @outorderid = params[:id]
     @out_order = OutOrder.find(@outorderid)
-    @order = Order.find(@out_order.Order_id)
+    @order = OOrder.find(@out_order.Order_id)
     @gd = GoDown.find(@out_order.GoDown_id)
-    @sub_orders = SubOrder.where(:Order_id => @order.id,:GoDown_id => @gd.id)
+    @o_order_items = @out_order.out_order_items
   end
 
   # POST /in_orders
   # POST /in_orders.json
-  def ingodown
-    puts params
-    @outorder = Outorder.find(params.require(:out_order).permit(:id)[:id])
-    @itemcount =params.require(:items).permit(:count)[:count]
-    for x in 1..@itemcount.to_i
-      @tmp = params.require("itemline#{x}").permit(:Item_id, :Sum, :BatchId, :CreateTime ,:ShelfLife, :MadeIn)
-      if(@tmp[:Item_id] !="")
-        puts @tmp
-        #@godownitem =GoDownItem.new(:Item_id=>@tmp[:Item_id],:Sum=>@tmp[:Sum],:GoDown_id=>@outorder.GoDown_id,:CreateTime=>@tmp[:CreateTime],:ShelfLife=>@tmp[:ShelLeft],:MadeIn=>@tmp[:MadIn])
-        #@godownitem.Execer = "陈晓雨"
-        #@godownitem.State = "入库"
-        #@godownitem.InTime =Time.new.strftime("%Y-%m-%d %H:%M:%S")
-        #@godownitem.save
+  def outgodown
+    @out_order = OutOrder.find(params.require(:out_order).permit(:id)[:id])
+    @oorder = OOrder.find(@out_order.Order_id)
+    for x in 1..@out_order.out_order_items.count
+      @tmp = params.require("itemline#{x}").permit(:out_item_id, :Sum)
+      #得到出库物品的物品编号、生产批次、生产日期、仓库id
+      puts @tmp[:out_item_id]
+      @outitem = OutOrderItem.find(@tmp[:out_item_id])
+      puts @outitem.CreateTime
+      #查询库存
+      #      @gditem = GoDownItem.where(:Item_id => @outitem.Item_id, :GoDown_id => @outitem.GoDown_id, :BatchId => @outitem.BatchId, :CreateTime => @outitem.CreateTime).first()
+      @gditem = GoDownItem.where(:Item_id => @outitem.Item_id, :GoDown_id => @outitem.GoDown_id, :BatchId => @outitem.BatchId).first()
+      puts @gditem
+      @sum=@tmp[:Sum].to_i
+      if @gditem.Sum < @sum
+        #库存不足
+        redirect_to "/out_orders/exec/#{@out_order.id}"
+      else
+        #更新仓库库存数量
+        @gditem.update(:Sum => @gditem.Sum-@sum)
+        #插入出库历史表
+        @outitemhis = OutOrderItemHis.new()
+        @outitemhis.OOrder_id = @outitem.OOrder_id
+        @outitemhis.OutOrder_id = @outitem.OutOrder_id
+        @outitemhis.Item_id = @outitem.Item_id
+        @outitemhis.GoDown_id = @outitem.GoDown_id
+        @outitemhis.BatchId = @outitem.BatchId
+        @outitemhis.CreateTime = @outitem.CreateTime
+        @outitemhis.Sum =@tmp[:Sum]
+        @outitemhis.ExecTime =Time.new.strftime("%Y-%m-%d %H:%M:%S")
+        @outitemhis.Execer = "陈晓雨"
+        @outitemhis.save
       end
     end
-    @outorder.update(:State=>"已执行",:Execer=>"陈晓雨", :ExecTime=>Time.new.strftime("%Y-%m-%d %H:%M:%S"))
-    redirect_to "/in_orders/"
-
+    @out_order.update(:State => "已执行", :Execer => "陈晓雨", :ExecTime => Time.new.strftime("%Y-%m-%d %H:%M:%S"))
+    #redirect_to @out_order
   end
 
   # PATCH/PUT /out_orders/1
@@ -96,13 +113,13 @@ class OutOrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_out_order
-      @out_order = OutOrder.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_out_order
+    @out_order = OutOrder.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def out_order_params
-      params.require(:out_order).permit(:Order_id, :GoDown_id, :OutOrderId, :Name, :Type, :CreateTime, :CreateUser, :ExecTime, :Execer, :State)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def out_order_params
+    params.require(:out_order).permit(:Order_id, :GoDown_id, :OutOrderId, :Name, :Type, :CreateTime, :CreateUser, :ExecTime, :Execer, :State)
+  end
 end

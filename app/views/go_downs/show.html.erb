@@ -1,29 +1,33 @@
 <p id="notice"><%= notice %></p>
+<div class="row-fluid">
+  <div class="right-content span3">
+    <div class="nav">
+      <div class="navbar-inner"><h6>仓库信息</h6></div>
+    </div>
+    <div class="well-white body">
+      <table class="table">
+        <tr>
+          <td>仓库编号:</td>
+          <td>  <%= @go_down.GoDownId %></td>
+        </tr>
+        <tr>
+          <td>仓库名称:</td>
+          <td> <%= @go_down.Name %></td>
+        </tr>
 
-<p>
-  <strong>仓库编号:</strong>
-  <%= @go_down.GoDownId %>
-</p>
-
-<p>
-  <strong>仓库名称:</strong>
-  <%= @go_down.Name %>
-</p>
-
-<p>
-  <strong>地址:</strong>
-  <%= @go_down.Address %>
-</p>
-
-<p>
-  <strong>管理员:</strong>
-  <%= @go_down.Admin %>
-</p>
-
-<p>
-  <strong>电话:</strong>
-  <%= @go_down.Tel %>
-</p>
-
-<%= link_to '编辑', edit_go_down_path(@go_down) %> |
-<%= link_to '返回', go_downs_path %>
+        <tr>
+          <td> 地址：</td>
+          <td>      <%= @go_down.Address %></td>
+        </tr>
+        <tr>
+          <td> 管理员:</td>
+          <td>  <%= @go_down.Admin %></td>
+        </tr>
+        <tr>
+          <td> 电话:</td>
+          <td>  <%= @go_down.Tel %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

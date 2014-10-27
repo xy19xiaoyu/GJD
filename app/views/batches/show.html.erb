@@ -1,14 +1,24 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>流水号:</strong>
-  <%= @batch.Batchid %>
-</p>
-
-<p>
-  <strong>生产日期:</strong>
-  <%= @batch.Date %>
-</p>
-
-<%= link_to '编辑', edit_batch_path(@batch) %> |
-<%= link_to '返回', batches_path %>
+<div class="row-fluid">
+  <div class="right-content span3">
+    <div class="nav">
+      <div class="navbar-inner"><h6>新建流水号</h6></div>
+    </div>
+    <div class="well-white body">
+      <table class="table">
+        <tr>
+          <td>流水号:
+          </td>
+          <td>   <%= @batch.Batchid %>
+          </td>
+        </tr>
+        <tr>
+          <td>生产日期:
+          </td>
+          <td>   <%= @batch.Date %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -52,7 +52,7 @@
             <tbody>
             <% @x = 1%>
 
-            <% @sub_orders.each do| sub_order| %>
+            <% @o_order_items.each do| sub_order| %>
                 <% @item = Item.find(sub_order.Item_id) %>
                 <tr id="<%= @x %>">
                   <td><%= @x %>

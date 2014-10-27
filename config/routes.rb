@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-  namespace :origin do
-    resources :users
-  end
-
   resources :o_orders
-  get 'o_orders/split/:id'  => 'o_orders#split'
+  post 'o_orders/CreateOutOrder' => 'o_orders#CreateOutOrder'
+  get 'o_orders/split/:id' => 'o_orders#split'
   get 'go_down_items/search' => 'go_down_items#search'
   resources :go_down_items
   get 'in_orders' => 'in_orders#index'
@@ -14,7 +11,6 @@ Rails.application.routes.draw do
   get 'in_orders/show/:id' => 'in_orders#show'
 
   get 'out_orders/' => 'out_orders#index'
-  get 'out_orders/:id' => 'out_orders#index'
   post 'out_orders/outgodown' => 'out_orders#outgodown'
   get 'out_orders/exec/:id' => 'out_orders#exec'
   get 'out_orders/show/:id' => 'out_orders#show'
@@ -22,16 +18,22 @@ Rails.application.routes.draw do
   #---------------------------------------LEE ADD START
   namespace :origin do
     resources :sidebar_items
+  end
+
+  namespace :origin do
     resources :sites
+  end
 
-    get 'admin' => 'admin#index'
+  get 'admin' => 'admin#index'
 
-    controller :sessions do
-      get 'login' => :new
-      post 'login' => :create
-      delete 'logout' => :destroy
-    end
-  end  #---------------------------------------LEE ADD END
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    get 'logout' => :destroy
+  end
+
+  resources :users
+  #---------------------------------------LEE ADD END
 
   get 'orders/split/:id' => 'orders#split'
 
@@ -49,9 +51,11 @@ Rails.application.routes.draw do
 
   resources :items
 
+  #post '/sub_categories' => 'categories#create_sub'
   resources :sub_categories
 
   resources :categories
+  post 'Category/create_sub' => 'categories#create_sub'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

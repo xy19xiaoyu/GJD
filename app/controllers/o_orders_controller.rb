@@ -11,7 +11,8 @@ class OOrdersController < ApplicationController
   # GET /o_orders/1
   # GET /o_orders/1.json
   def show
-    @sub_orders = SubOrder.where(:Order_id => @o_order.id)
+    #@o_order_items = OOrderItem.where(:OOrder_id => @o_order.id)
+    @o_order_items= @o_order.o_order_items
   end
 
   # GET /o_orders/new
@@ -21,7 +22,8 @@ class OOrdersController < ApplicationController
 
   # GET /o_orders/1/edit
   def edit
-    @sub_orders = @o_order.sub_orders
+    @o_order_items = @o_order.o_order_items
+    #@o_order_items = OOrderItem.where(:OOrder_id => @o_order.id)
   end
 
   # POST /o_orders
@@ -39,9 +41,9 @@ class OOrdersController < ApplicationController
           @tmp = params.require("itemline#{x}").permit(:Item_id, :Sum)
           if (@tmp[:Item_id] !="")
             puts @tmp
-            @sub_order =SubOrder.new(:Item_id => @tmp[:Item_id], :Sum => @tmp[:Sum], :GoDown_id => @tmp[:GoDown_id])
-            @sub_order.Order_id= @o_order.id
-            @sub_order.save
+            @o_order_item =OOrderItem.new(:Item_id => @tmp[:Item_id], :Sum => @tmp[:Sum])
+            @o_order_item.OOrder_id= @o_order.id
+            @o_order_item.save
           end
         end
 
@@ -59,12 +61,12 @@ class OOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @o_order.update(o_order_params)
-        for x in 1..@o_order.sub_orders.count
+        for x in 1..@o_order.o_order_items.count
           @tmp = params.require("itemline#{x}").permit(:id, :Item_id, :Sum)
           if (@tmp[:id] !="")
             puts @tmp
-            @sub_order =SubOrder.find(@tmp[:id])
-            @sub_order.update(@tmp)
+            @o_order_item =OOrderItem.find(@tmp[:id])
+            @o_order_item.update(@tmp)
           end
         end
         format.html { redirect_to @o_order, notice: 'O order was successfully updated.' }
@@ -77,30 +79,53 @@ class OOrdersController < ApplicationController
   end
 
   def split
-    @i =1;
-    @gdids = @o_order.sub_orders.select(:GoDown_id).map(&:GoDown_id).uniq
-    puts @gdids.count
-    @order.sub_orders.select(:GoDown_id).map(&:GoDown_id).uniq.each do |gdid|
-      puts "gdid:#{gdid}"
-      @OutOrder = OutOrder.new()
-      @OutOrder.OutOrderId = "#{@order.OrderId}_#{@i.to_s}"
-      @OutOrder.GoDown_id = gdid
-      @OutOrder.Type= @order.Type
-      @OutOrder.Order_id = @order.id
-      @OutOrder.State = "新建"
-      @OutOrder.save();
-      @i = @i+1
+    @o_order = OOrder.find(params[:id])
+    @o_order_items = @o_order.o_order_items
+  end
+
+  def CreateOutOrder
+    puts params
+    @o_order = OOrder.find( params[:o_order_id])
+    @count = params[:outordercount]
+    @gods = Array.new
+    @items = Array.new
+    #@o_order = OOrder.find(params[:id])
+    for x in 1..@count.to_i
+      @tmp = params.require("outOrder#{x}").permit(:Item_Id, :BatchId, :CreateTime, :GoDown_id, :Sum)
+      if @tmp[:Sum] != ""
+        @gods<< @tmp[:GoDown_id]
+        @items<<@tmp
+      end
     end
+    @i =0
+    @gods.each do|godid|
+      @i = @i +1
+      @out_Order = OutOrder.new()
+      @out_Order.Order_id =@o_order.id
+      @out_Order.GoDown_id = godid
+      @out_Order.OutOrderId ="#{@o_order.OrderId}_#{@i}"
+      @out_Order.State = "新建"
+      @out_Order.CreateTime= Time.new.strftime("%Y-%m-%d %H:%M:%S")
+      @out_Order.CreateUser ="陈晓雨"
 
-    if @order.Type=="1"
-      @order.update(:State => "待入库")
-      redirect_to "/in_orders/#{@order.id}"
-
-    else
-      @order.update(:State => "待出库")
-      redirect_to "/out_orders/#{@order.id}"
+      if @out_Order.save
+        @items.each do|item|
+          if item[:GoDown_id] =godid
+            @outorderitem = OutOrderItem.new()
+            @outorderitem.OOrder_id=@o_order.id
+            @outorderitem.OutOrder_id=@out_Order.id
+            @outorderitem.Item_id= item[:Item_Id]
+            @outorderitem.GoDown_id= item[:GoDown_id]
+            @outorderitem.BatchId= item[:BatchId]
+            @outorderitem.CreateTime= item[:CreateTime]
+            @outorderitem.Sum= item[:Sum]
+            @outorderitem.save
+          end
+        end
+      end
     end
-
+    @o_order.update(:State=>"待出库")
+    puts @gods;
   end
 
   # DELETE /o_orders/1

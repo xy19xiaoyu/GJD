@@ -1,12 +1,16 @@
-<h1>新建物品</h1>
-
-<%= render 'form' %>
-
-<%= link_to '返回', items_path %>
-
-<script>
-  $(document).ready(function(){
-      $("#item_Type ").get(0).selectedIndex=0;
-      changecategory();
-  });
-</script>
+<div class="row-fluid">
+  <div class="right-content span5">
+    <div class="nav">
+      <div class="navbar-inner"><h6>添加物品</h6></div>
+    </div>
+    <div class="well-white body">
+      <%= render 'form' %>
+      <script>
+          $(document).ready(function () {
+              $("#item_Type ").get(0).selectedIndex = 0;
+              changecategory();
+          });
+      </script>
+    </div>
+  </div>
+</div>
