@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018113039) do
+ActiveRecord::Schema.define(version: 20141028173455) do
 
   create_table "batches", force: true do |t|
     t.string   "Batchid"
@@ -117,6 +117,20 @@ ActiveRecord::Schema.define(version: 20141018113039) do
     t.datetime "updated_at"
   end
 
+  create_table "origin_role_item_ships", force: true do |t|
+    t.integer  "role_id"
+    t.integer  "sidebar_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "origin_roles", force: true do |t|
+    t.string   "name"
+    t.boolean  "adminFlag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "origin_sidebar_items", force: true do |t|
     t.string   "name"
     t.string   "url"
@@ -146,6 +160,7 @@ ActiveRecord::Schema.define(version: 20141018113039) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role_id"
   end
 
   create_table "out_order_item_his", force: true do |t|

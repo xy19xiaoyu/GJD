@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Origin::UsersController < ApplicationController
+  layout 'origin'
   before_action :set_origin_user, only: [:show, :edit, :update, :destroy]
 
   # GET /origin/users
