@@ -43,7 +43,7 @@
 .dropdown-menu > .active > a > [class*=" ico-"],
 .dropdown-submenu:hover > a > [class^="ico-"],
 .dropdown-submenu:hover > a > [class*=" ico-"] {
-  background-image: url("../img/icons/glyphicons-halflings-white.png");
+  background-image: url("/p/img/icons/glyphicons-halflings-white.png");
 }
 
 .ico-glass { background-position: 0 0; }

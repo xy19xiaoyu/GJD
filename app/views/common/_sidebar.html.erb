@@ -11,52 +11,28 @@
       <!-- Main navigation -->
       <ul class="navigation widget">
         <% Origin::Site.current_site.sidebar_items.each do |p_item| %>
-          <li<%= ' class=active' if p_item.active_flag %>>
-            <a href="<%= p_item.url %>" title="">
-              <i class="icon-home"></i>
+          <li<%= ' class=active' if current_page?(p_item.url) %>>
+            <a href="<%= p_item.url %>" title="" <%= 'class=expand' unless p_item.url == '/' %> <%= 'id=current' unless (p_item.sub_items.to_ary.delete_if {|i| !current_page?(i.url)}).empty? %>>
+              <%= fa_icon('home') %>
               <%= p_item.name %>
-              <%= raw "<strong>#{p_item.sub_item.count}</strong>" unless p_item.sub_item.empty? %>
+              <%= raw "<strong>#{p_item.sub_items.count}</strong>" unless p_item.sub_items.empty? %>
             </a>
-            <% unless p_item.sub_item.empty? %>
+            <% unless p_item.sub_items.empty? %>
               <ul>
-                <% p_item.sub_item.each do |s_item| %>
-                  <li><a href="<%= s_item.url %>" title=""><%= s_item.name %></a></li>
+                <% p_item.sub_items.each do |s_item| %>
+                  <li>
+                    <%=
+                        link_to_unless_current(s_item.name, s_item.url) do
+                          link_to(s_item.name, s_item.url, {class: 'current'})
+                        end
+                    %>
+                  </li>
                 <% end %>
               </ul>
             <% end %>
           </li>
         <% end %>
 
-        <li>
-          <a href="#" title="" class="expand"><i class="icon-reorder"></i>配置管理<strong>4</strong></a>
-          <ul>
-            <li><a href="/categories" title="">品目配置</a></li>
-            <li><a href="/items" title="">物品配制</a></li>
-            <li><a href="/go_downs" title="">仓库配置</a></li>
-            <li><a href="/batches" title="">生产流水配置</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" title="" class="expand"><i class="icon-tasks"></i>订单管理<strong>2</strong></a>
-          <ul>
-            <li><a href="/orders/?type=1" title="">采购订单</a></li>
-            <li><a href="/o_orders" title="">销售订单</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" title="" class="expand"><i class="icon-tasks"></i>仓库管理<strong>2</strong></a>
-          <ul>
-            <li><a href="/in_orders" title="">入库管理</a></li>
-            <li><a href="/out_orders" title="">出库管理</a></li>
-            <li><a href="/go_down_items" title="">库存查询</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" title="" class="expand"><i class="icon-tasks"></i>系统管理<strong>2</strong></a>
-          <ul>
-            <li><a href="/users" title="">用户管理</a></li>
-          </ul>
-        </li>
       </ul>
       <!-- /main navigation -->
     </div>

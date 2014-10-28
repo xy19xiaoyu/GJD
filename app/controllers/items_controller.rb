@@ -15,15 +15,15 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @CategoryList = Category.all
-    @subCategory = SubCategory.where(CategoryId:@CategoryList.first().id)
+    @subCategory = SubCategory.where(CategoryId: @CategoryList.first().id)
     @item = Item.new
   end
 
   # GET /items/1/edit
   def edit
     @CategoryList = Category.all
-    puts  @item.subCategoryName
-    @subCategory = SubCategory.where(Name:@item.subCategoryName)
+    puts @item.subCategoryName
+    @subCategory = SubCategory.where(Name: @item.subCategoryName)
   end
 
   # POST /items
@@ -67,13 +67,13 @@ class ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def item_params
-      params.require(:item).permit(:ItemId, :Name, :CategoryId, :CategoryName, :subCategoryid, :subCategoryName, :Type)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def item_params
+    params.require(:item).permit(:ItemId, :Name, :CategoryId, :CategoryName, :subCategoryid, :subCategoryName, :Type)
+  end
 end
