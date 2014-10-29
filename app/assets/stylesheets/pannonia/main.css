@@ -490,7 +490,7 @@ span.green { background-color: #41CA83; }
 .user-menu { padding: 12px 14px; height: 20px; }
 .top-menu .dropdown .caret { display: inline-block; border-top-color: white; margin: 9px 0 0 8px; }
 .user-menu > img { display: inline-block; float: left; margin-right: 10px; margin-top: -1px; }
-.user-menu > span { font-size: 11px; margin-left: 32px; display: block; color: white; font-weight: bold; white-space: nowrap; }
+.user-menu > span { font-size: 11px; margin-left: 0px; display: block; color: white; font-weight: bold; white-space: nowrap; }
 .new-message { width: 8px; height: 8px; position: absolute; top: 8px; right: 8px; background: url(/p/img/elements/interface/new_message.png) no-repeat; }
 
 .fullview { background: url(/p/img/icons/top/fullview.png) no-repeat 50%; width: 18px; height: 16px; padding: 14px; }

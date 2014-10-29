@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :origin do
-
-  end
 
   resources :o_orders
   post 'o_orders/CreateOutOrder' => 'o_orders#CreateOutOrder'
@@ -25,15 +22,15 @@ Rails.application.routes.draw do
     resources :roles
     resources :sites
     resources :users
+    controller :sessions do
+      get 'login' => :new
+      post 'login' => :create
+      get 'logout' => :destroy
+    end
   end
 
   get 'admin' => 'admin#index'
-
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    get 'logout' => :destroy
-  end
+  get 'static_pages/403' => 'static_pages#page_403'
 
   #---------------------------------------LEE ADD END
 

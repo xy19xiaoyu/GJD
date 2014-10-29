@@ -36,4 +36,4 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 end
 
-CC_LOGIN_ENABLE = false
+CC_LOGIN_ENABLE = true

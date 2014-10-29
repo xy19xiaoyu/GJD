@@ -1,5 +1,4 @@
 class Origin::SidebarItemsController < ApplicationController
-  layout 'origin'
   before_action :set_origin_sidebar_item, only: [:show, :edit, :update, :destroy]
 
   # GET /origin/sidebar_items

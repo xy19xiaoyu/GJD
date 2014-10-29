@@ -1,5 +1,4 @@
 class Origin::RolesController < ApplicationController
-  layout 'origin'
   before_action :set_origin_role, only: [:show, :edit, :update, :destroy]
   before_action :init_sidebar_item, only: [:new, :edit]
 
@@ -29,8 +28,8 @@ class Origin::RolesController < ApplicationController
     @origin_role = Origin::Role.new(origin_role_params)
 
     respond_to do |format|
+      set_sidebar_item(@origin_role)
       if @origin_role.save
-        set_sidebar_item(@origin_role)
         format.html { redirect_to @origin_role, notice: 'Role was successfully created.' }
         format.json { render :show, status: :created, location: @origin_role }
       else
@@ -44,8 +43,8 @@ class Origin::RolesController < ApplicationController
   # PATCH/PUT /origin/roles/1.json
   def update
     respond_to do |format|
+      set_sidebar_item(@origin_role)
       if @origin_role.update(origin_role_params)
-        set_sidebar_item(@origin_role)
         format.html { redirect_to @origin_role, notice: 'Role was successfully updated.' }
         format.json { render :show, status: :ok, location: @origin_role }
       else
@@ -81,9 +80,9 @@ class Origin::RolesController < ApplicationController
   end
 
   def set_sidebar_item(role)
-    role.sidebar_items.clear
-    params[:item].map { |id| Origin::SidebarItem.find(id) }.each do |item|
-      role.sidebar_items.push(item)
+    role.role_item_ships.clear
+    params[:item].each do |item|
+      role.role_item_ships.build(:sidebar_item_id => item)
     end
   end
 end

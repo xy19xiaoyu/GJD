@@ -6,4 +6,8 @@ class StaticPagesController < ApplicationController
   def help
     render action: :home
   end
+
+  def page_403
+
+  end
 end

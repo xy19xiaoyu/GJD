@@ -7,8 +7,17 @@ class ApplicationController < ActionController::Base
 
   protected
   def authorize
-    unless !CC_LOGIN_ENABLE || User.find_by_id(session[:user_id])
-      redirect_to login_url, :notice => '请登录'
+    user = Origin::User.find_by_id(session[:user_id])
+    unless !CC_LOGIN_ENABLE || user
+      redirect_to origin_login_url, :notice => '请登录'
+      return
     end
+
+    return if params[:controller].include?('static_pages')
+
+    user.sidebar_items.each do |item|
+      return if item.url.include?(params[:controller])
+    end
+    redirect_to static_pages_403_path
   end
 end

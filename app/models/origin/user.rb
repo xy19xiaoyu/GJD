@@ -32,6 +32,18 @@ class Origin::User < ActiveRecord::Base
     end
   end
 
+  def sidebar_items
+    if role
+      if role.adminFlag
+        Origin::SidebarItem.where.not(:parent_id => nil)
+      else
+        role.sidebar_items
+      end
+    else
+      []
+    end
+  end
+
   private
 
   def password_must_be_present
