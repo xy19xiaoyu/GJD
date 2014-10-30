@@ -22,11 +22,11 @@ function initPage()
 
     //===== Easy tabs =====//
 
-    $('.sidebar-tabs').easytabs({
+    /*$('.sidebar-tabs').easytabs({
         animationSpeed: 150,
         collapsible: false,
         tabActiveClass: "active"
-    });
+    });*/
 
     //===== Collapsible plugin for main nav =====//
 

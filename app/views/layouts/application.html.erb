@@ -14,18 +14,15 @@
 <!-- Fixed top -->
 <div id="top">
   <div class="fixed">
-    <a href="index.html" title="" class="logo"><img src="/p/img/logo.png" alt=""/></a>
+    <a href="/" title="" class="logo"><img src="/p/img/logo.png" alt=""/></a>
     <ul class="top-menu">
       <li><a class="fullview"></a></li>
-      <li><a class="showmenu"></a></li>
-      <li><a href="#" title="" class="messages"><i class="new-message"></i></a></li>
       <li class="dropdown">
-        <a class="user-menu" data-toggle="dropdown"><img src="/p/img/userpic.png" alt=""/><span>Howdy, Eugene! <b class="caret"></b></span></a>
+        <a class="user-menu" data-toggle="dropdown"><span>欢迎回来，<%= Origin::User.find(session[:user_id]).name %> <b class="caret"></b></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
-          <li><a href="#" title=""><i class="icon-inbox"></i>Messages<span class="badge badge-info">9</span></a></li>
-          <li><a href="#" title=""><i class="icon-cog"></i>Settings</a></li>
-          <li><a href="/logout" title=""><i class="icon-remove"></i>Logout</a></li>
+          <li><a href="#" title=""><i class="fa fa-user"></i>个人信息</a></li>
+          <li><a href="#" title=""><i class="fa fa-cog"></i>修改密码</a></li>
+          <li><a href="/origin/logout" title=""><i class="fa fa-remove"></i>退出</a></li>
         </ul>
       </li>
     </ul>
@@ -43,5 +40,12 @@
     <%= yield %>
   </div>
 </div>
+
+<!-- Footer -->
+<div id="footer">
+  <div class="copyrights">Copyright &copy; 2014 管家爹 All rights reserved.
+  </div>
+</div>
+<!-- /footer -->
 </body>
 </html>
