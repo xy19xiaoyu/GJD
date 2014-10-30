@@ -2,10 +2,8 @@
 
 one:
   name: MyString
-  hashed_password: MyString
-  salt: MyString
+  adminFlag: false
 
 two:
   name: MyString
-  hashed_password: MyString
-  salt: MyString
+  adminFlag: false

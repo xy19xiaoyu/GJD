@@ -1,25 +1,23 @@
 <div id="sidebar">
 
   <div class="sidebar-tabs">
-    <ul class="tabs-nav two-items">
-      <li><a href="#general" title=""><i class="icon-reorder"></i></a></li>
-      <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
-    </ul>
-
     <div id="general">
-
       <!-- Main navigation -->
       <ul class="navigation widget">
+        <% role_items = [] %>
+        <% role_items = Origin::User.find(session[:user_id]).sidebar_items if session[:user_id] %>
         <% Origin::Site.current_site.sidebar_items.each do |p_item| %>
+          <% sub_items = p_item.sub_items & role_items %>
+          <% next if sub_items.empty? && p_item.url != '/' %>
           <li<%= ' class=active' if current_page?(p_item.url) %>>
             <a href="<%= p_item.url %>" title="" <%= 'class=expand' unless p_item.url == '/' %> <%= 'id=current' unless (p_item.sub_items.to_ary.delete_if {|i| !current_page?(i.url)}).empty? %>>
               <%= fa_icon('home') %>
               <%= p_item.name %>
-              <%= raw "<strong>#{p_item.sub_items.count}</strong>" unless p_item.sub_items.empty? %>
+              <%= raw "<strong>#{sub_items.count}</strong>" unless p_item.sub_items.empty? %>
             </a>
-            <% unless p_item.sub_items.empty? %>
+            <% unless sub_items.empty? %>
               <ul>
-                <% p_item.sub_items.each do |s_item| %>
+                <% sub_items.each do |s_item| %>
                   <li>
                     <%=
                         link_to_unless_current(s_item.name, s_item.url) do
@@ -32,7 +30,6 @@
             <% end %>
           </li>
         <% end %>
-
       </ul>
       <!-- /main navigation -->
     </div>

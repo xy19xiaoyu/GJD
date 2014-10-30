@@ -43,7 +43,7 @@ class Origin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @origin_user.update(origin_user_params)
-        format.html { redirect_to origin_users_url, notice: "用户 #{@user.name} 已经修改完成！" }
+        format.html { redirect_to origin_users_url, notice: "用户 #{@origin_user.name} 已经修改完成！" }
         format.json { render :show, status: :ok, location: @origin_user }
       else
         format.html { render :edit }
@@ -75,6 +75,6 @@ class Origin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def origin_user_params
-      params.require(:origin_user).permit(:name, :hashed_password, :salt, :password, :password_confirmation)
+      params.require(:origin_user).permit(:name, :hashed_password, :salt, :password, :password_confirmation, :role_id)
     end
 end

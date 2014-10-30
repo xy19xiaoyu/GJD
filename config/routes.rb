@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :o_orders
   post 'o_orders/CreateOutOrder' => 'o_orders#CreateOutOrder'
   get 'o_orders/split/:id' => 'o_orders#split'
@@ -18,21 +19,19 @@ Rails.application.routes.draw do
   #---------------------------------------LEE ADD START
   namespace :origin do
     resources :sidebar_items
-  end
-
-  namespace :origin do
+    resources :roles
     resources :sites
+    resources :users
+    controller :sessions do
+      get 'login' => :new
+      post 'login' => :create
+      get 'logout' => :destroy
+    end
   end
 
   get 'admin' => 'admin#index'
+  get 'static_pages/403' => 'static_pages#page_403'
 
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    get 'logout' => :destroy
-  end
-
-  resources :users
   #---------------------------------------LEE ADD END
 
   get 'orders/split/:id' => 'orders#split'

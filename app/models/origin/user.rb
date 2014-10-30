@@ -2,6 +2,7 @@
 require 'digest/sha2'
 
 class Origin::User < ActiveRecord::Base
+  belongs_to :role, :class_name => 'Origin::Role', foreign_key: :role_id
   validate :name, :presence => true, :uniqueness => true
   validate :password, :presence => true
   validates_confirmation_of :password, message: '两次密码输入不一致'
@@ -28,6 +29,18 @@ class Origin::User < ActiveRecord::Base
     if password.present?
       generate_salt
       self.hashed_password = self.class.encrypt_password(password, salt)
+    end
+  end
+
+  def sidebar_items
+    if role
+      if role.adminFlag
+        Origin::SidebarItem.where.not(:parent_id => nil)
+      else
+        role.sidebar_items
+      end
+    else
+      []
     end
   end
 

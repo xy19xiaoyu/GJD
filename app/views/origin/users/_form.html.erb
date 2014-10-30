@@ -26,6 +26,10 @@
       <%= f.password_field :password_confirmation, :size => 40 %>
     </div>
     <div>
+      <%= f.label :role_id, '角色' %>:
+      <%= f.select :role_id, Origin::Role.all.map { |role| [role.name, role.id] } %>
+    </div>
+    <div>
       <%= f.submit %>
     </div>
   </fieldset>
