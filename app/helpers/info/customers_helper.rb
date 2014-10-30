@@ -1,0 +1,2 @@
+module Info::CustomersHelper
+end

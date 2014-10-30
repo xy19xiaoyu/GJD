@@ -1,0 +1,89 @@
+<%= form_for(@info_customer) do |f| %>
+  <% if @info_customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@info_customer.errors.count, "error") %> prohibited this info_customer from being saved:</h2>
+
+      <ul>
+      <% @info_customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cid %><br>
+    <%= f.text_field :cid %>
+  </div>
+  <div class="field">
+    <%= f.label :shortName %><br>
+    <%= f.text_field :shortName %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :contact %><br>
+    <%= f.text_field :contact %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :tel %><br>
+    <%= f.text_field :tel %>
+  </div>
+  <div class="field">
+    <%= f.label :fax %><br>
+    <%= f.text_field :fax %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :zip %><br>
+    <%= f.text_field :zip %>
+  </div>
+  <div class="field">
+    <%= f.label :bank %><br>
+    <%= f.text_field :bank %>
+  </div>
+  <div class="field">
+    <%= f.label :bankAccountNum %><br>
+    <%= f.text_field :bankAccountNum %>
+  </div>
+  <div class="field">
+    <%= f.label :bankAccountName %><br>
+    <%= f.text_field :bankAccountName %>
+  </div>
+  <div class="field">
+    <%= f.label :deposit %><br>
+    <%= f.number_field :deposit %>
+  </div>
+  <div class="field">
+    <%= f.label :alarmMoney %><br>
+    <%= f.number_field :alarmMoney %>
+  </div>
+  <div class="field">
+    <%= f.label :payType %><br>
+    <%= f.number_field :payType %>
+  </div>
+  <div class="field">
+    <%= f.label :rebateFlag %><br>
+    <%= f.check_box :rebateFlag %>
+  </div>
+  <div class="field">
+    <%= f.label :upper_id %><br>
+    <%= f.number_field :upper_id %>
+  </div>
+  <div class="field">
+    <%= f.label :lower_id %><br>
+    <%= f.number_field :lower_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
