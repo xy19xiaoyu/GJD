@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
       return
     end
 
+    return if user.role.adminFlag
     return if params[:controller].include?('static_pages')
 
     user.sidebar_items.each do |item|
