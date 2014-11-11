@@ -1,0 +1,41 @@
+<%= form_for(@info_customer_fin_dtl) do |f| %>
+  <% if @info_customer_fin_dtl.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@info_customer_fin_dtl.errors.count, "error") %> prohibited this info_customer_fin_dtl from being saved:</h2>
+
+      <ul>
+      <% @info_customer_fin_dtl.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :customer_fin_id %><br>
+    <%= f.number_field :customer_fin_id %>
+  </div>
+  <div class="field">
+    <%= f.label :do_time %><br>
+    <%= f.text_field :do_time %>
+  </div>
+  <div class="field">
+    <%= f.label :in_or_out %><br>
+    <%= f.check_box :in_or_out %>
+  </div>
+  <div class="field">
+    <%= f.label :money %><br>
+    <%= f.text_field :money %>
+  </div>
+  <div class="field">
+    <%= f.label :cfd_id %><br>
+    <%= f.number_field :cfd_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status_id %><br>
+    <%= f.number_field :status_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

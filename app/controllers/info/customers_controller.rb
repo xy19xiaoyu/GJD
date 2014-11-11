@@ -69,6 +69,6 @@ class Info::CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def info_customer_params
-      params.require(:info_customer).permit(:cid, :shortName, :name, :contact, :email, :tel, :fax, :address, :zip, :bank, :bankAccountNum, :bankAccountName, :deposit, :alarmMoney, :payType, :rebateFlag, :upper_id, :lower_id)
+      params.require(:info_customer).permit(:cid, :shortName, :name, :contact, :email, :tel, :mobile_tel, :fax, :address, :zip, :bank, :bankAccountNum, :bankAccountName, :deposit, :alarmMoney, :payType, :rebateFlag, :upper_id, :lower_id, :finance_id)
     end
 end

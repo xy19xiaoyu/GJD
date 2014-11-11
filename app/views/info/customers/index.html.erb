@@ -1,59 +1,40 @@
-<h1>Listing info_customers</h1>
+<h1>客户列表</h1>
 
 <table>
   <thead>
-    <tr>
-      <th>Cid</th>
-      <th>Shortname</th>
-      <th>Name</th>
-      <th>Contact</th>
-      <th>Email</th>
-      <th>Tel</th>
-      <th>Fax</th>
-      <th>Address</th>
-      <th>Zip</th>
-      <th>Bank</th>
-      <th>Bankaccountnum</th>
-      <th>Bankaccountname</th>
-      <th>Deposit</th>
-      <th>Alarmmoney</th>
-      <th>Paytype</th>
-      <th>Rebateflag</th>
-      <th>Upper</th>
-      <th>Lower</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>客户编号</th>
+    <th>名称</th>
+    <th>联系人</th>
+    <th>电话</th>
+    <th>地址</th>
+    <th>当前账户金额</th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @info_customers.each do |info_customer| %>
-      <tr>
-        <td><%= info_customer.cid %></td>
-        <td><%= info_customer.shortName %></td>
-        <td><%= info_customer.name %></td>
-        <td><%= info_customer.contact %></td>
-        <td><%= info_customer.email %></td>
-        <td><%= info_customer.tel %></td>
-        <td><%= info_customer.fax %></td>
-        <td><%= info_customer.address %></td>
-        <td><%= info_customer.zip %></td>
-        <td><%= info_customer.bank %></td>
-        <td><%= info_customer.bankAccountNum %></td>
-        <td><%= info_customer.bankAccountName %></td>
-        <td><%= info_customer.deposit %></td>
-        <td><%= info_customer.alarmMoney %></td>
-        <td><%= info_customer.payType %></td>
-        <td><%= info_customer.rebateFlag %></td>
-        <td><%= info_customer.upper_id %></td>
-        <td><%= info_customer.lower_id %></td>
-        <td><%= link_to 'Show', info_customer %></td>
-        <td><%= link_to 'Edit', edit_info_customer_path(info_customer) %></td>
-        <td><%= link_to 'Destroy', info_customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <% @info_customers.each do |info_customer| %>
+    <tr>
+      <td><%= info_customer.cid %></td>
+      <td>
+        <% if info_customer.has_short_name? %>
+          <%= info_customer.shortName %>
+        <% else %>
+          <%= info_customer.name %>
+        <% end %>
+      </td>
+      <td><%= info_customer.contact %></td>
+      <td><%= info_customer.tel %></td>
+      <td><%= info_customer.address %></td>
+      <td></td>
+      <td><%= link_to 'Show', info_customer %></td>
+      <td><%= link_to 'Edit', edit_info_customer_path(info_customer) %></td>
+      <td><%= link_to 'Destroy', info_customer, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Customer', new_info_customer_path %>
+<%= link_to '增加客户', new_info_customer_path %>

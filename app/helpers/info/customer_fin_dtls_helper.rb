@@ -1,0 +1,2 @@
+module Info::CustomerFinDtlsHelper
+end

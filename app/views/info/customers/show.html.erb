@@ -1,94 +1,198 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Cid:</strong>
-  <%= @info_customer.cid %>
-</p>
+<!-- Invoice -->
+<div class="widget">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <h6>客户资料</h6>
+      <%= link_to '返回', info_customers_path, :class => 'btn btn-warning pull-right' %>
+      <button href="<%= edit_info_customer_path(@info_customer) %>" type="button" class="btn btn-danger pull-right">删除</button>
+      <%= link_to '编辑', edit_info_customer_path(@info_customer), :class => 'btn btn-success pull-right' %>
+      <%= link_to '出入账', new_info_customer_fin_dtl_path, :class => 'btn btn-info pull-right' %>
+    </div>
+  </div>
 
-<p>
-  <strong>Shortname:</strong>
-  <%= @info_customer.shortName %>
-</p>
+  <div class="well invoice">
 
-<p>
-  <strong>Name:</strong>
-  <%= @info_customer.name %>
-</p>
+    <div class="invoice-head">
+      <div class="invoice-logo" style="margin-left: 20px; ">
+        <span>客户编号：<%= @info_customer.cid %></span>
 
-<p>
-  <strong>Contact:</strong>
-  <%= @info_customer.contact %>
-</p>
+        <h1 style="line-height: 20px;"><%= @info_customer.name %>
+          <% if @info_customer.has_short_name? %>（<%= @info_customer.shortName %>）
+          <% end %></h1>
+      </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @info_customer.email %>
-</p>
+      <div class="total pull-right" style="margin: 0px; margin-right: 20px;">
+        <span>当前账户余额</span>
+        <strong class="text-error">￥<%= @info_customer.finance.amount %></strong>
+      </div>
+    </div>
 
-<p>
-  <strong>Tel:</strong>
-  <%= @info_customer.tel %>
-</p>
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="invoice-from pull-left">
+          <h5>联系信息</h5>
+          <ul class="plus-list">
+            <li><%= @info_customer.address %></li>
+            <li><%= @info_customer.contact %></li>
+            <% if @info_customer.tel %>
+              <li>固定电话：<strong class="text-error"><%= @info_customer.tel %></strong></li>
+            <% end %>
+            <% if @info_customer.mobile_tel %>
+              <li>手机：<strong class="text-error"><%= @info_customer.mobile_tel %></strong></li>
+            <% end %>
+            <% if @info_customer.fax %>
+              <li>传真：<strong class="text-error"><%= @info_customer.fax %></strong></li>
+            <% end %>
+            <% if @info_customer.zip %>
+              <li>邮编：<%= @info_customer.zip %></li>
+            <% end %>
+            <% if @info_customer.email %>
+              <li>Email：<strong class="text-info"><%= @info_customer.email %></strong></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
 
-<p>
-  <strong>Fax:</strong>
-  <%= @info_customer.fax %>
-</p>
+      <div class="span4">
+        <div class="invoice-to pull-left">
+          <h5>账户信息</h5>
+          <ul class="plus-list">
+            <% if @info_customer.bank %>
+              <li>开户行：<%= @info_customer.bank %></li>
+            <% end %>
+            <% if @info_customer.bankAccountNum %>
+              <li>银行账号：<%= @info_customer.bankAccountNum %></li>
+            <% end %>
+            <% if @info_customer.bankAccountName %>
+              <li>开户名称：<%= @info_customer.bankAccountName %></li>
+            <% end %>
+            <% if @info_customer.deposit %>
+              <li>保证金额度：<%= @info_customer.deposit %></li>
+            <% end %>
+            <% if @info_customer.alarmMoney %>
+              <li>预警金额：<%= @info_customer.alarmMoney %></li>
+            <% end %>
+            <% if @info_customer.payType %>
+              <li>支付方式：<%= @info_customer.payType %></li>
+            <% end %>
+            <li>创建时间：<%= @info_customer.finance.created_at.localtime().strftime('%Y-%m-%d %H:%M:%S') %></li>
+          </ul>
+        </div>
+      </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @info_customer.address %>
-</p>
+      <div class="span4">
+        <div class="invoice-to pull-left">
+          <h5>折扣优惠</h5>
+          <ul class="plus-list">
+            <li>是否打折：<%= if @info_customer.rebateFlag
+                           '是'
+                         else
+                           '否'
+                         end %></li>
+            <% if @info_customer.upper %>
+              <li>上级经销商：<%= @info_customer.upper.name %></li>
+            <% end %>
+            <% unless @info_customer.lowers.empty? %>
+              <li>下级经销商：<%= @info_customer.lowers.count %></li>
+              <li>总返点金额：<%= @info_customer.finance.backAmount %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar" style="margin-top: 1px">
+    <div class="navbar-inner">
+      <h6>近期订单记录</h6>
+      <%= link_to '返回', info_customers_path, :class => 'btn btn-warning pull-right' %>
+      <%= link_to '查看全部', edit_info_customer_path(@info_customer), :class => 'btn btn-success pull-right' %>
+      <button type="button" class="btn btn-info pull-right">新增订单</button>
+    </div>
+  </div>
 
-<p>
-  <strong>Zip:</strong>
-  <%= @info_customer.zip %>
-</p>
+  <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>Product</th>
+      <th>Descrition</th>
+      <th>Discount</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Concept</td>
+      <td>Creating project concept and logic</td>
+      <td>0</td>
+      <td><strong>$1,100</strong></td>
+    </tr>
+    <tr>
+      <td>General design</td>
+      <td>Design prototype</td>
+      <td>0</td>
+      <td><strong>$2,000</strong></td>
+    </tr>
+    <tr>
+      <td>Front end development</td>
+      <td>Coding and connecting front end</td>
+      <td>0</td>
+      <td><strong>$1,600</strong></td>
+    </tr>
+    <tr>
+      <td>Database</td>
+      <td>Creating and connecting database</td>
+      <td>0</td>
+      <td><strong>$890</strong></td>
+    </tr>
+    </tbody>
+  </table>
 
-<p>
-  <strong>Bank:</strong>
-  <%= @info_customer.bank %>
-</p>
+  <div class="navbar" style="margin-top: 1px">
+    <div class="navbar-inner">
+      <h6>近期出入账记录</h6>
+      <%= link_to '返回', info_customers_path, :class => 'btn btn-warning pull-right' %>
+      <%= link_to '查看全部', edit_info_customer_path(@info_customer), :class => 'btn btn-success pull-right' %>
+      <button type="button" class="btn btn-info pull-right">新增出入账</button>
+    </div>
+  </div>
 
-<p>
-  <strong>Bankaccountnum:</strong>
-  <%= @info_customer.bankAccountNum %>
-</p>
+  <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>Product</th>
+      <th>Descrition</th>
+      <th>Discount</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Concept</td>
+      <td>Creating project concept and logic</td>
+      <td>0</td>
+      <td><strong>$1,100</strong></td>
+    </tr>
+    <tr>
+      <td>General design</td>
+      <td>Design prototype</td>
+      <td>0</td>
+      <td><strong>$2,000</strong></td>
+    </tr>
+    <tr>
+      <td>Front end development</td>
+      <td>Coding and connecting front end</td>
+      <td>0</td>
+      <td><strong>$1,600</strong></td>
+    </tr>
+    <tr>
+      <td>Database</td>
+      <td>Creating and connecting database</td>
+      <td>0</td>
+      <td><strong>$890</strong></td>
+    </tr>
+    </tbody>
+  </table>
 
-<p>
-  <strong>Bankaccountname:</strong>
-  <%= @info_customer.bankAccountName %>
-</p>
-
-<p>
-  <strong>Deposit:</strong>
-  <%= @info_customer.deposit %>
-</p>
-
-<p>
-  <strong>Alarmmoney:</strong>
-  <%= @info_customer.alarmMoney %>
-</p>
-
-<p>
-  <strong>Paytype:</strong>
-  <%= @info_customer.payType %>
-</p>
-
-<p>
-  <strong>Rebateflag:</strong>
-  <%= @info_customer.rebateFlag %>
-</p>
-
-<p>
-  <strong>Upper:</strong>
-  <%= @info_customer.upper_id %>
-</p>
-
-<p>
-  <strong>Lower:</strong>
-  <%= @info_customer.lower_id %>
-</p>
-
-<%= link_to 'Edit', edit_info_customer_path(@info_customer) %> |
-<%= link_to 'Back', info_customers_path %>
+</div>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :info do
-    resources :customers
+    resources :customer_fin_dtls
   end
 
   resources :o_orders
@@ -35,6 +35,10 @@ Rails.application.routes.draw do
 
   get 'admin' => 'admin#index'
   get 'static_pages/403' => 'static_pages#page_403'
+
+  namespace :info do
+    resources :customers
+  end
 
   #---------------------------------------LEE ADD END
 

@@ -1,11 +1,8 @@
-$(window).bind('page:change', function () {
-    initPage();
-})
-function initPage()
+var initPage;
+initPage = function ()
 {
 
     //===== Hide/show sidebar =====//
-
     $('.fullview').click(function () {
         $("body").toggleClass("clean");
         $('#sidebar').toggleClass("hide-sidebar mobile-sidebar");
@@ -14,7 +11,6 @@ function initPage()
 
 
     //===== Hide/show action tabs =====//
-
     $('.showmenu').click(function () {
         $('.actions-wrapper').slideToggle(100);
     });
@@ -29,7 +25,6 @@ function initPage()
     });*/
 
     //===== Collapsible plugin for main nav =====//
-
     $('.expand').collapsible({
         defaultOpen: 'current,third',
         cookieName: 'navAct',
@@ -39,3 +34,5 @@ function initPage()
     });
 
 }
+$(document).ready(initPage);
+$(document).on('page:load', initPage);
