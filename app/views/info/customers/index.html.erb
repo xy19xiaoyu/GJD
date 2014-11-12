@@ -2,12 +2,12 @@
 <div class="navbar">
   <div class="navbar-inner">
     <h6>客户列表</h6>
-    <%= link_to '新增客户', new_info_customer_path, :class => 'btn btn-info pull-right' %>
+    <%= link_to '新建客户', new_info_customer_path, :class => 'btn btn-info pull-right' %>
   </div>
 </div>
 <% if @info_customers.empty? %>
   <div class="alert">
-    <strong>Sorry！</strong>系统中暂时还没有客户，请点击新增客户进行添加
+    <strong>Sorry！</strong>系统中暂时还没有客户，请点击新建客户进行添加
   </div>
 <% else %>
   <table class="table table-striped table-bordered" id="filer-table">

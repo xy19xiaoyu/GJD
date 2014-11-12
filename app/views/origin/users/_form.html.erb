@@ -1,4 +1,4 @@
-<%= form_for(@origin_user) do |f| %>
+<%= form_for(@origin_user, :html => {:class => 'form-horizontal'}) do |f| %>
   <% if @origin_user.errors.any? %>
     <div id="error_explanation">
       <h2>有<%= @origin_user.errors.count %>个验证条件没有通过</h2>
@@ -12,25 +12,41 @@
   <% end %>
 
   <fieldset>
-    <legend>请输入用户信息</legend>
-    <div>
-      <%= f.label :name, '用户名' %>:
-      <%= f.text_field :name, :size => 40 %>
-    </div>
-    <div>
-      <%= f.label :password, '密码' %>:
-      <%= f.password_field :password, :size => 40 %>
-    </div>
-    <div>
-      <%= f.label :password_confirmation, '重复密码' %>:
-      <%= f.password_field :password_confirmation, :size => 40 %>
-    </div>
-    <div>
-      <%= f.label :role_id, '角色' %>:
-      <%= f.select :role_id, Origin::Role.all.map { |role| [role.name, role.id] } %>
-    </div>
-    <div>
-      <%= f.submit %>
+
+    <div class="widget row-fluid">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>用户表单</h6>
+        </div>
+      </div>
+      <div class="well">
+        <div class="control-group">
+          <%= f.label :name, '用户名：', :class => 'control-label' %>
+          <div class="controls"><%= f.text_field :name, :size => 40, :class => 'span12' %></div>
+        </div>
+        <div class="control-group">
+          <%= f.label :pname, '姓名：', :class => 'control-label' %>
+          <div class="controls"><%= f.text_field :pname, :class => 'span12' %></div>
+        </div>
+        <div class="control-group">
+          <%= f.label :password, '密码：', :class => 'control-label' %>
+          <div class="controls"><%= f.password_field :password, :size => 40, :class => 'span12' %></div>
+        </div>
+        <div class="control-group">
+          <%= f.label :password_confirmation, '重复密码：', :class => 'control-label' %>
+          <div class="controls"><%= f.password_field :password_confirmation, :size => 40, :class => 'span12' %></div>
+        </div>
+        <div class="control-group">
+          <%= f.label :role_id, '角色：', :class => 'control-label' %>
+          <div class="controls"><%= f.select :role_id, Origin::Role.all.map { |role| [role.name, role.id] }, :class => 'styled' %></div>
+        </div>
+        <div class="form-actions align-right">
+
+          <button type="submit" class="btn btn-primary">提交</button>
+          <button type="button" class="btn btn-danger" onclick="history.back()">取消</button>
+          <button type="reset" class="btn">重置</button>
+        </div>
+      </div>
     </div>
   </fieldset>
 <% end %>

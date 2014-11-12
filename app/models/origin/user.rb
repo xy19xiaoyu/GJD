@@ -12,11 +12,15 @@ class Origin::User < ActiveRecord::Base
 
   after_destroy :ensure_an_admin_remains
 
+  def self.authenticate_by_id(id, password)
+    if user = find(id)
+      self.do_authenticate(user, password)
+    end
+  end
+
   def self.authenticate(name, password)
     if user = find_by_name(name)
-      if user.hashed_password == encrypt_password(password, user.salt)
-        user
-      end
+      self.do_authenticate(user, password)
     end
   end
 
@@ -45,6 +49,12 @@ class Origin::User < ActiveRecord::Base
   end
 
   private
+
+  def self.do_authenticate(user, password)
+    if user.hashed_password == encrypt_password(password, user.salt)
+      user
+    end
+  end
 
   def password_must_be_present
     errors.add(:password, '密码不能为空') unless hashed_password.present?

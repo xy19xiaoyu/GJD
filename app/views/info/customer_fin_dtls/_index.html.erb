@@ -7,10 +7,10 @@
   <table class="table table-striped table-bordered" id="filer-table">
     <thead>
     <tr>
+      <th>编号</th>
       <% if @info_customer.nil? %>
         <th>客户名称</th>
       <% end %>
-      <th>编号</th>
       <th>说明</th>
       <th>金额</th>
       <th>修改时间</th>
@@ -21,10 +21,10 @@
     <tbody>
     <% @info_customer_fin_dtls.order(:updated_at => :desc).each do |dtl| %>
       <tr>
+        <td><%= link_to dtl.cfd_id, dtl %></td>
         <% if @info_customer.nil? %>
           <td><%= link_to dtl.finance.customer.name, dtl.finance.customer %>
         <% end %>
-        <td><%= link_to dtl.cfd_id, dtl %></td>
         <td><%= dtl.comment %></td>
         <td><%= dtl.money %></td>
         <td><%= dtl.updated_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>

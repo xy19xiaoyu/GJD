@@ -7,7 +7,7 @@
       <h6>出入账表单</h6>
       <%= link_to '返回', info_customer_fin_dtls_path, :class => 'btn btn-warning pull-right' %>
       <% if @info_customer_fin_dtl.status_id == 0 %>
-        <%= link_to '删除', info_customer_fin_dtls, method: :delete, data: {confirm: '确定要删除吗？'}, :class => 'btn btn-danger pull-right' %>
+        <%= link_to '删除', info_customer_fin_dtl_path, method: :delete, data: {confirm: '确定要删除吗？'}, :class => 'btn btn-danger pull-right' %>
         <%= link_to '编辑', edit_info_customer_fin_dtl_path(@info_customer_fin_dtl), :class => 'btn btn-success pull-right' %>
         <%= link_to '执行', info_cfd_proceed_path(@info_customer_fin_dtl), :class => 'btn btn-info pull-right' %>
       <% end %>

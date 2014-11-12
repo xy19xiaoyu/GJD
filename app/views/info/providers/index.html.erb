@@ -1,0 +1,37 @@
+<h5 class="widget-name"><i class="fa fa-list"></i>供应商列表</h5>
+<div class="navbar">
+  <div class="navbar-inner">
+    <h6>供应商列表</h6>
+    <%= link_to '新建供应商', new_info_provider_path, :class => 'btn btn-info pull-right' %>
+  </div>
+</div>
+<% if @info_providers.empty? %>
+  <div class="alert">
+    <strong>Sorry！</strong>系统中暂时还没有供应商，请点击新建供应商进行添加
+  </div>
+<% else %>
+  <table class="table table-striped table-bordered" id="filer-table">
+    <thead>
+    <tr>
+      <th>供应商编号</th>
+      <th>名称</th>
+      <th>联系人</th>
+      <th>电话</th>
+      <th>地址</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @info_providers.each do |info_provider| %>
+      <tr>
+        <td><%= info_provider.pid %></td>
+        <td>
+          <%= link_to info_provider.name, info_provider %>
+        </td>
+        <td><%= info_provider.contact %></td>
+        <td><%= info_provider.tel %></td>
+        <td><%= info_provider.address %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

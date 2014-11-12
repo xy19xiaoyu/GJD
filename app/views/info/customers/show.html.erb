@@ -6,7 +6,7 @@
   <div class="navbar-inner">
     <h6>客户资料</h6>
     <%= link_to '返回', info_customers_path, :class => 'btn btn-warning pull-right' %>
-    <button href="<%= edit_info_customer_path(@info_customer) %>" type="button" class="btn btn-danger pull-right">删除</button>
+    <%= link_to '删除', @info_customer, method: :delete, data: {confirm: '确认删除吗?'}, :class => 'btn btn-danger pull-right' %>
     <%= link_to '编辑', edit_info_customer_path(@info_customer), :class => 'btn btn-success pull-right' %>
     <%= link_to '财务信息', info_customer_finance_path(@info_customer), :class => 'btn btn-info pull-right' %>
   </div>
@@ -34,8 +34,8 @@
       <div class="invoice-from pull-left">
         <h5>联系信息</h5>
         <ul class="plus-list">
-          <li><%= @info_customer.address %></li>
-          <li><%= @info_customer.contact %></li>
+          <li>地址：<%= @info_customer.address %></li>
+          <li>联系人：<%= @info_customer.contact %></li>
           <% if @info_customer.tel %>
             <li>固定电话：<strong class="text-error"><%= @info_customer.tel %></strong></li>
           <% end %>
@@ -105,10 +105,10 @@
 </div>
 <div class="navbar" style="margin-top: 1px">
   <div class="navbar-inner">
-    <h6>近期订单记录</h6>
+    <h6>近期销售订单记录</h6>
     <%= link_to '返回', info_customers_path, :class => 'btn btn-warning pull-right' %>
     <%= link_to '查看全部', edit_info_customer_path(@info_customer), :class => 'btn btn-success pull-right' %>
-    <button type="button" class="btn btn-info pull-right">新增订单</button>
+    <button type="button" class="btn btn-info pull-right">新建订单</button>
   </div>
 </div>
 
@@ -154,7 +154,7 @@
     <h6>近期出入账记录</h6>
     <%= link_to '返回', info_customers_path, :class => 'btn btn-warning pull-right' %>
     <%= link_to "查看全部(#{@info_customer.finance.fin_dtls.count})", info_cfd_index_with_customer_path(@info_customer), :class => 'btn btn-success pull-right' %>
-    <%= link_to '新增出入账', info_cfd_new_with_customer_path(@info_customer), :class => 'btn btn-info pull-right' %>
+    <%= link_to '新建出入账', info_cfd_new_with_customer_path(@info_customer), :class => 'btn btn-info pull-right' %>
   </div>
 </div>
 
@@ -178,7 +178,7 @@
     <tbody>
     <% @info_customer.finance.fin_dtls.order(:updated_at => :desc).limit(5).each do |dtl| %>
       <tr>
-        <td><%= dtl.cfd_id %></td>
+        <td><%= link_to dtl.cfd_id, dtl %></td>
         <td><%= dtl.comment %></td>
         <td><%= dtl.money %></td>
         <td><%= dtl.updated_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>

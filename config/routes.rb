@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       get 'login' => :new
       post 'login' => :create
       get 'logout' => :destroy
+      post 'ajax_authorize' => :ajax_authorize
+      post 'ajax_changepass' => :ajax_changepass
     end
   end
 
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
 
   namespace :info do
     resources :customers
+    resources :providers
     resources :customer_fin_dtls
 
     controller :customers do

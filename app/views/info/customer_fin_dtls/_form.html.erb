@@ -27,7 +27,7 @@
       <% else %>
         <div class="control-group">
           <%= f.label :customer_fin_id, '请选择客户：', :class => 'control-label' %>
-          <div class="controls"><%= f.select :customer_fin_id, Info::Customer.all.map { |c| [c.name, c.id] }, :class => 'styled' %></div>
+          <div class="controls"><%= f.select :customer_fin_id, Info::Customer.all.map { |c| [c.name, c.finance.id] }, :class => 'styled' %></div>
         </div>
       <% end %>
       <div class="control-group">
@@ -45,7 +45,7 @@
       <div class="form-actions align-right">
 
 
-        <button type="submit" class="btn btn-primary" name="save">执行</button>
+        <button type="submit" class="btn btn-primary" name="proceed">执行</button>
         <button type="submit" class="btn btn-success" name="save">保存</button>
         <button type="button" class="btn btn-danger" onclick="history.back()">取消</button>
         <button type="reset" class="btn">重置</button>

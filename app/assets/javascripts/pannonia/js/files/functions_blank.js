@@ -1,6 +1,5 @@
 var initPage;
-initPage = function ()
-{
+initPage = function () {
 
     //===== Hide/show sidebar =====//
     $('.fullview').click(function () {
@@ -19,10 +18,10 @@ initPage = function ()
     //===== Easy tabs =====//
 
     /*$('.sidebar-tabs').easytabs({
-        animationSpeed: 150,
-        collapsible: false,
-        tabActiveClass: "active"
-    });*/
+     animationSpeed: 150,
+     collapsible: false,
+     tabActiveClass: "active"
+     });*/
 
     //===== Collapsible plugin for main nav =====//
     $('.expand').collapsible({
@@ -36,6 +35,10 @@ initPage = function ()
     //===== Datatables =====//
 
     oTable = $('#filer-table').dataTable({
+
+        "aaSorting": [
+            [ 0, 'desc' ]
+        ],
         "bJQueryUI": false,
         "bAutoWidth": false,
         "sPaginationType": "full_numbers",
@@ -48,6 +51,75 @@ initPage = function ()
         }
     });
 
+    //===== Bootboxes =====//
+
+    $("a.reset-password").click(function (e) {
+
+            f = "\
+            <form id='infos' action=''>\
+                <div class='control-group'>\
+                    <label class='control-label'>原密码：</label>\
+                    <div class='controls'>\
+                        <input type='password' class='span12' id='cpass-input-old' name='oldpass'>\
+                    </div>\
+                </div>\
+                <div class='control-group'>\
+                    <label class='control-label'>新密码：</label>\
+                    <div class='controls'>\
+                        <input class='span12' type='password' id='cpass-input-pass' name='newpass'>\
+                    </div>\
+                </div>\
+                <div class='control-group'>\
+                    <label class='control-label'>重复新密码：</label>\
+                    <div class='controls'>\
+                        <input class='span12' type='password' id='cpass-input-pass2' name='newpass2'>\
+                    </div>\
+                </div>\
+            </form>";
+            cb = [
+                {
+                    "取消": function () {
+                        return true;
+                    }
+                },
+                {
+                    "提交": function () {
+                        xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("POST", "/origin/ajax_authorize", false);
+                        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xmlhttp.send("password=" + $("#cpass-input-old").val());
+                        if (xmlhttp.responseText == "failed") {
+                            bootbox.alert("原密码不正确！", function () {
+                                bootbox.dialog(f, cb);
+                            });
+                            return true;
+                        } else if ($("#cpass-input-pass").val() == "") {
+                            bootbox.alert("新密码不能为空！", function () {
+                                bootbox.dialog(f, cb);
+                            });
+                            return true;
+                        }
+                        else if ($("#cpass-input-pass").val() != $("#cpass-input-pass2").val()) {
+                            bootbox.alert("两次密码输入必须一致！", function () {
+                                bootbox.dialog(f, cb);
+                            });
+                            return true;
+                        }
+                        else {
+                            xmlhttp = new XMLHttpRequest();
+                            xmlhttp.open("POST", "/origin/ajax_changepass", false);
+                            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            xmlhttp.send("password=" + $("#cpass-input-pass").val());
+                            bootbox.alert("修改成功！");
+                            return true;
+                        }
+                    }
+                }
+            ];
+            e.preventDefault();
+            bootbox.dialog(f, cb);
+        }
+    );
 }
 $(document).ready(initPage);
 $(document).on('page:load', initPage);

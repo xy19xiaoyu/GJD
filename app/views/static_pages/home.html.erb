@@ -1,5 +1,206 @@
-<h1>我是全局页</h1>
-<%= @num %>
-<div id="partid">
-  <%= render :partial => 'part' %>
+<div class="page-header">
+  <div class="page-title">
+    <h5>管家爹控制台</h5>
+    <span><%= h = Time.now.localtime.strftime('%H').to_i
+              if h < 11
+                '早上好，'
+              elsif h < 15
+                '中午好，'
+              elsif h < 19
+                '下午好，'
+              else
+                '晚上好，'
+              end %><%= Origin::User.find(session[:user_id]).name %>！</span>
+  </div>
+</div>
+<div class="actions-wrapper">
+</div>
+<div class="widget">
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>待办销售订单</h6>
+        </div>
+      </div>
+      <div class="well body">
+        <table class="table table-condensed table-hover table-striped">
+          <thead>
+          <tr>
+            <th>供应商编号</th>
+            <th>名称</th>
+            <th>联系人</th>
+            <th>电话</th>
+            <th>地址</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>11</td>
+            <td>dd
+            </td>
+            <td>33</td>
+            <td>ff</td>
+            <td>aa</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>待办采购订单</h6>
+        </div>
+      </div>
+      <div class="well body">
+        <table class="table table-condensed table-hover table-striped">
+          <thead>
+          <tr>
+            <th>供应商编号</th>
+            <th>名称</th>
+            <th>联系人</th>
+            <th>电话</th>
+            <th>地址</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>11</td>
+            <td>dd</td>
+            <td>33</td>
+            <td>ff</td>
+            <td>aa</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="widget">
+
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>待办入库单</h6>
+        </div>
+      </div>
+      <div class="well body">
+        <table class="table table-condensed table-hover table-striped">
+          <thead>
+          <tr>
+            <th>供应商编号</th>
+            <th>名称</th>
+            <th>联系人</th>
+            <th>电话</th>
+            <th>地址</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>11</td>
+            <td>dd</td>
+            <td>33</td>
+            <td>ff</td>
+            <td>aa</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>待办出库单</h6>
+        </div>
+      </div>
+      <div class="well body">
+        <table class="table table-condensed table-hover table-striped">
+          <thead>
+          <tr>
+            <th>供应商编号</th>
+            <th>名称</th>
+            <th>联系人</th>
+            <th>电话</th>
+            <th>地址</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>11</td>
+            <td>dd</td>
+            <td>33</td>
+            <td>ff</td>
+            <td>aa</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="widget">
+
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>待办财务出入账</h6>
+        </div>
+      </div>
+      <div class="well body">
+        <table class="table table-condensed table-hover table-striped">
+          <thead>
+          <tr>
+            <th>供应商编号</th>
+            <th>名称</th>
+            <th>联系人</th>
+            <th>电话</th>
+            <th>地址</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>11</td>
+            <td>dd</td>
+            <td>33</td>
+            <td>ff</td>
+            <td>aa</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>待办客户出入账</h6>
+        </div>
+      </div>
+      <div class="well body">
+        <table class="table table-condensed table-hover table-striped">
+          <thead>
+          <tr>
+            <th>供应商编号</th>
+            <th>名称</th>
+            <th>联系人</th>
+            <th>电话</th>
+            <th>地址</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>11</td>
+            <td>dd</td>
+            <td>33</td>
+            <td>ff</td>
+            <td>aa</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
