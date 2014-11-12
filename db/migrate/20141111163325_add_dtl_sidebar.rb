@@ -9,7 +9,7 @@ class AddDtlSidebar < ActiveRecord::Migration
     item.site_id = 1
     item.save
 
-    item.sub_items.build({:name => '客户资料管理', :url => '/info/customers'}).save
+    item.sub_items.build({:name => '客户信息管理', :url => '/info/customers'}).save
     item.sub_items.build({:name => '客户出入账管理', :url => '/info/customer_fin_dtls'}).save
   end
 
