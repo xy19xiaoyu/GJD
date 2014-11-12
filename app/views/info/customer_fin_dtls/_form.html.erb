@@ -1,41 +1,55 @@
-<%= form_for(@info_customer_fin_dtl) do |f| %>
+<%= form_for(@info_customer_fin_dtl, :html => {:class => 'form-horizontal'}) do |f| %>
   <% if @info_customer_fin_dtl.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@info_customer_fin_dtl.errors.count, "error") %> prohibited this info_customer_fin_dtl from being saved:</h2>
+      <h2><%= pluralize(@info_customer_fin_dtl.errors.count, "error") %> prohibited this info_customer_fin_dtl from
+        being saved:</h2>
 
       <ul>
-      <% @info_customer_fin_dtl.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @info_customer_fin_dtl.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :customer_fin_id %><br>
-    <%= f.number_field :customer_fin_id %>
-  </div>
-  <div class="field">
-    <%= f.label :do_time %><br>
-    <%= f.text_field :do_time %>
-  </div>
-  <div class="field">
-    <%= f.label :in_or_out %><br>
-    <%= f.check_box :in_or_out %>
-  </div>
-  <div class="field">
-    <%= f.label :money %><br>
-    <%= f.text_field :money %>
-  </div>
-  <div class="field">
-    <%= f.label :cfd_id %><br>
-    <%= f.number_field :cfd_id %>
-  </div>
-  <div class="field">
-    <%= f.label :status_id %><br>
-    <%= f.number_field :status_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <fieldset>
+
+    <% unless @info_customer_fin_dtl.finance %>
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>出入账表单</h6>
+        </div>
+      </div>
+    <% end %>
+    <div class="well">
+      <% if @info_customer_fin_dtl.finance %>
+        <%= f.hidden_field :customer_fin_id %>
+      <% else %>
+        <div class="control-group">
+          <%= f.label :customer_fin_id, '请选择客户：', :class => 'control-label' %>
+          <div class="controls"><%= f.select :customer_fin_id, Info::Customer.all.map { |c| [c.name, c.id] }, :class => 'styled' %></div>
+        </div>
+      <% end %>
+      <div class="control-group">
+        <%= f.label :in_or_out, '进出款类型：', :class => 'control-label' %>
+        <div class="controls"><%= f.select :in_or_out, [['进款', true], ['出款', false]], :class => 'styled' %></div>
+      </div>
+      <div class="control-group">
+        <%= f.label :money, '金额：', :class => 'control-label' %>
+        <div class="controls"><%= f.text_field :money, :class => 'span12' %></div>
+      </div>
+      <div class="control-group">
+        <%= f.label :comment, '备注：', :class => 'control-label' %>
+        <div class="controls"><%= f.text_field :comment, :class => 'span12' %></div>
+      </div>
+      <div class="form-actions align-right">
+
+
+        <button type="submit" class="btn btn-primary" name="save">执行</button>
+        <button type="submit" class="btn btn-success" name="save">保存</button>
+        <button type="button" class="btn btn-danger" onclick="history.back()">取消</button>
+        <button type="reset" class="btn">重置</button>
+      </div>
+    </div>
+  </fieldset>
 <% end %>

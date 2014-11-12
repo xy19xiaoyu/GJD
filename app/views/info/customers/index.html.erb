@@ -1,40 +1,39 @@
-<h1>客户列表</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>客户编号</th>
-    <th>名称</th>
-    <th>联系人</th>
-    <th>电话</th>
-    <th>地址</th>
-    <th>当前账户金额</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @info_customers.each do |info_customer| %>
+<h5 class="widget-name"><i class="fa fa-list"></i>客户列表</h5>
+<div class="navbar">
+  <div class="navbar-inner">
+    <h6>客户列表</h6>
+    <%= link_to '新增客户', new_info_customer_path, :class => 'btn btn-info pull-right' %>
+  </div>
+</div>
+<% if @info_customers.empty? %>
+  <div class="alert">
+    <strong>Sorry！</strong>系统中暂时还没有客户，请点击新增客户进行添加
+  </div>
+<% else %>
+  <table class="table table-striped table-bordered" id="filer-table">
+    <thead>
     <tr>
-      <td><%= info_customer.cid %></td>
-      <td>
-        <% if info_customer.has_short_name? %>
-          <%= info_customer.shortName %>
-        <% else %>
-          <%= info_customer.name %>
-        <% end %>
-      </td>
-      <td><%= info_customer.contact %></td>
-      <td><%= info_customer.tel %></td>
-      <td><%= info_customer.address %></td>
-      <td></td>
-      <td><%= link_to 'Show', info_customer %></td>
-      <td><%= link_to 'Edit', edit_info_customer_path(info_customer) %></td>
-      <td><%= link_to 'Destroy', info_customer, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      <th>客户编号</th>
+      <th>名称</th>
+      <th>联系人</th>
+      <th>电话</th>
+      <th>地址</th>
+      <th>当前账户金额</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to '增加客户', new_info_customer_path %>
+    </thead>
+    <tbody>
+    <% @info_customers.each do |info_customer| %>
+      <tr>
+        <td><%= info_customer.cid %></td>
+        <td>
+          <%= link_to info_customer.name, info_customer %>
+        </td>
+        <td><%= info_customer.contact %></td>
+        <td><%= info_customer.tel %></td>
+        <td><%= info_customer.address %></td>
+        <td><%= info_customer.finance.amount %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

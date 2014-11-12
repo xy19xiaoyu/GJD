@@ -2,7 +2,7 @@ class Info::Customer < ActiveRecord::Base
   has_one :finance, :class_name => 'Info::CustomerFinance', :foreign_key => :customer_id, :dependent => :destroy
   has_many :lowers, :class_name => 'Info::Customer', :foreign_key => :upper_id, :dependent => :nullify
   belongs_to :upper, :class_name => 'Info::Customer', :foreign_key => :upper_id
-             after_create :create_finance_method
+  after_create :create_finance_method
   before_create :generate_customer_num
 
 

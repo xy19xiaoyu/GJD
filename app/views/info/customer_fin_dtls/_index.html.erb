@@ -1,0 +1,47 @@
+<% if @info_customer_fin_dtls.empty? %>
+  <div class="alert">
+    <strong>Sorry！</strong>此客户近期没有出入账记录！
+  </div>
+<% else %>
+
+  <table class="table table-striped table-bordered" id="filer-table">
+    <thead>
+    <tr>
+      <% if @info_customer.nil? %>
+        <th>客户名称</th>
+      <% end %>
+      <th>编号</th>
+      <th>说明</th>
+      <th>金额</th>
+      <th>修改时间</th>
+      <th>进出账</th>
+      <th>状态</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @info_customer_fin_dtls.order(:updated_at => :desc).each do |dtl| %>
+      <tr>
+        <% if @info_customer.nil? %>
+          <td><%= link_to dtl.finance.customer.name, dtl.finance.customer %>
+        <% end %>
+        <td><%= link_to dtl.cfd_id, dtl %></td>
+        <td><%= dtl.comment %></td>
+        <td><%= dtl.money %></td>
+        <td><%= dtl.updated_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= if dtl.in_or_out
+                  raw '<span class="label label-warning"><strong>进账</strong></span>'
+                else
+                  raw '<span class="label label-success"><strong>出账</strong></span>'
+                end %></td>
+        <td><%= if dtl.status_id == 0
+                  raw "<span class=\"label label-success\">#{GJD::Application::DICT_CFD_STATUS[dtl.status_id]}</span>"
+                elsif dtl.status_id == 1
+                  raw "<span class=\"label label-important\">#{GJD::Application::DICT_CFD_STATUS[dtl.status_id]}</span>"
+                elsif dtl.status_id == 2
+                  raw "<span class=\"label\">#{GJD::Application::DICT_CFD_STATUS[dtl.status_id]}</span>"
+                end %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

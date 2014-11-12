@@ -1,8 +1,10 @@
-<h5 class="widget-name"><i class="fa fa-plus"></i>新增出入账</h5>
+<h5 class="widget-name"><i class="fa fa-list"></i>出入账列表</h5>
 <div class="row-fluid" style="margin-bottom: 1px">
   <div class="navbar">
     <div class="navbar-inner">
-      <h6>出入账表单</h6>
+      <h6>出入账列表</h6>
+      <%= link_to '返回', @info_customer, :class => 'btn btn-warning pull-right' %>
+      <%= link_to '新增出入账', info_cfd_new_with_customer_path(@info_customer), :class => 'btn btn-info pull-right' %>
     </div>
   </div>
 
@@ -24,4 +26,4 @@
     </div>
   </div>
 </div>
-<%= render 'form' %>
+<%= render 'index' %>

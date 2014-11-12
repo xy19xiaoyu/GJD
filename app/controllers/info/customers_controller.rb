@@ -1,5 +1,5 @@
 class Info::CustomersController < ApplicationController
-  before_action :set_info_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_info_customer, only: [:show, :edit, :update, :destroy, :show_finance]
 
   # GET /info/customers
   # GET /info/customers.json
@@ -61,14 +61,18 @@ class Info::CustomersController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_info_customer
-      @info_customer = Info::Customer.find(params[:id])
-    end
+  def show_finance
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def info_customer_params
-      params.require(:info_customer).permit(:cid, :shortName, :name, :contact, :email, :tel, :mobile_tel, :fax, :address, :zip, :bank, :bankAccountNum, :bankAccountName, :deposit, :alarmMoney, :payType, :rebateFlag, :upper_id, :lower_id, :finance_id)
-    end
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_info_customer
+    @info_customer = Info::Customer.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def info_customer_params
+    params.require(:info_customer).permit(:cid, :shortName, :name, :contact, :email, :tel, :mobile_tel, :fax, :address, :zip, :bank, :bankAccountNum, :bankAccountName, :deposit, :alarmMoney, :payType, :rebateFlag, :upper_id, :lower_id, :finance_id)
+  end
 end

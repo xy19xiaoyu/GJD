@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :info do
-    resources :customer_fin_dtls
-  end
-
   resources :o_orders
   post 'o_orders/CreateOutOrder' => 'o_orders#CreateOutOrder'
   get 'o_orders/split/:id' => 'o_orders#split'
@@ -38,6 +34,18 @@ Rails.application.routes.draw do
 
   namespace :info do
     resources :customers
+    resources :customer_fin_dtls
+
+    controller :customers do
+      get 'customers/:id/finance' => :show_finance, :as => :customer_finance
+    end
+
+    controller :customer_fin_dtls do
+      get 'customers/:id/finance_dtls/new' => :new_with_customer, :as => :cfd_new_with_customer
+      get 'customers/:id/finance_dtls/index' => :index_with_customer, :as => :cfd_index_with_customer
+      post 'customer_fin_dtl/proceed' => :save_and_proceed, :as => :cfd_save_and_proceed
+      get 'customer_fin_dtl/:id/proceed' => :proceed, :as => :cfd_proceed
+    end
   end
 
   #---------------------------------------LEE ADD END

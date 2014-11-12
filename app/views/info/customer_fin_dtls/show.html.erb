@@ -1,34 +1,72 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Customer fin:</strong>
-  <%= @info_customer_fin_dtl.customer_fin_id %>
-</p>
+<h5 class="widget-name"><i class="fa fa-plus"></i>出入账明细</h5>
+<div class="row-fluid" style="margin-bottom: 1px">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <h6>出入账表单</h6>
+      <%= link_to '返回', info_customer_fin_dtls_path, :class => 'btn btn-warning pull-right' %>
+      <% if @info_customer_fin_dtl.status_id == 0 %>
+        <%= link_to '删除', info_customer_fin_dtls, method: :delete, data: {confirm: '确定要删除吗？'}, :class => 'btn btn-danger pull-right' %>
+        <%= link_to '编辑', edit_info_customer_fin_dtl_path(@info_customer_fin_dtl), :class => 'btn btn-success pull-right' %>
+        <%= link_to '执行', info_cfd_proceed_path(@info_customer_fin_dtl), :class => 'btn btn-info pull-right' %>
+      <% end %>
+    </div>
+  </div>
 
-<p>
-  <strong>Do time:</strong>
-  <%= @info_customer_fin_dtl.do_time %>
-</p>
+  <div class="well invoice">
+    <div class="invoice-logo" style="margin-left: 20px; ">
+      <span>客户编号：<%= @info_customer.cid %></span>
 
-<p>
-  <strong>In or out:</strong>
-  <%= @info_customer_fin_dtl.in_or_out %>
-</p>
+      <h1 style="line-height: 20px;"><%= @info_customer.name %>
+        <% if @info_customer.has_short_name? %>（<%= @info_customer.shortName %>）
+        <% end %></h1>
+    </div>
 
-<p>
-  <strong>Money:</strong>
-  <%= @info_customer_fin_dtl.money %>
-</p>
+    <div class="total pull-right" style="margin: 0px; margin-right: 20px;">
+      <span>当前账户余额</span>
+      <strong class="text-error">￥<%= @info_customer.finance.amount %></strong>
+    </div>
+    <div class="row-fluid">
 
-<p>
-  <strong>Cfd:</strong>
-  <%= @info_customer_fin_dtl.cfd_id %>
-</p>
+    </div>
+  </div>
+</div>
+<div class="well invoice">
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="invoice-from pull-left">
+        <h5>出入账编号：<span class="text-error"><%= @info_customer_fin_dtl.cfd_id %></span></h5>
+        <ul class="plus-list">
+          <li>说明：<%= @info_customer_fin_dtl.comment %></li>
+          <li>进出类型：<%= if @info_customer_fin_dtl.in_or_out
+                         raw '<span class="text-error"><strong>进账</strong></span>'
+                       else
+                         raw '<span class="text-success"><strong>出账</strong></span>'
+                       end %></li>
+          <li>当前状态：<%= if @info_customer_fin_dtl.status_id == 0
+                         raw "<span class=\"label label-success\">#{GJD::Application::DICT_CFD_STATUS[@info_customer_fin_dtl.status_id]}</span>"
+                       elsif @info_customer_fin_dtl.status_id == 1
+                         raw "<span class=\"label label-important\">#{GJD::Application::DICT_CFD_STATUS[@info_customer_fin_dtl.status_id]}</span>"
+                       elsif @info_customer_fin_dtl.status_id == 2
+                         raw "<span class=\"label\">#{GJD::Application::DICT_CFD_STATUS[@info_customer_fin_dtl.status_id]}</span>"
+                       end %></li>
+          <li>修改时间：<%= @info_customer_fin_dtl.updated_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></li>
+        </ul>
+      </div>
+    </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @info_customer_fin_dtl.status_id %>
-</p>
-
-<%= link_to 'Edit', edit_info_customer_fin_dtl_path(@info_customer_fin_dtl) %> |
-<%= link_to 'Back', info_customer_fin_dtls_path %>
+    <div class="span6">
+      <div class="total pull-right">
+        <span>出入账金额</span>
+        <strong class="text-error">
+          <%= if @info_customer_fin_dtl.in_or_out
+                raw "<strong class=\"text-error\">￥#{@info_customer_fin_dtl.money}</strong>"
+              else
+                raw "<strong class=\"text-success\">￥#{@info_customer_fin_dtl.money}</strong>"
+              end %>
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>
