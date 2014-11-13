@@ -2,6 +2,7 @@
 class Origin::SessionsController < ApplicationController
   skip_before_filter :authorize
   layout 'login', :only => :new
+  skip_before_action :verify_authenticity_token
 
   def new
   end
@@ -18,5 +19,19 @@ class Origin::SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to home_url, :notice => '您已经成功登出'
+  end
+
+  def ajax_authorize
+    if Origin::User.authenticate_by_id(session[:user_id], params[:password])
+      render json: 'success'
+    else
+      render json: 'failed'
+    end
+  end
+
+  def ajax_changepass
+    user = Origin::User.find(session[:user_id])
+    user.password = params[:password]
+    user.save
   end
 end

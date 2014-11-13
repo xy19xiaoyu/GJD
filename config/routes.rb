@@ -26,11 +26,30 @@ Rails.application.routes.draw do
       get 'login' => :new
       post 'login' => :create
       get 'logout' => :destroy
+      post 'ajax_authorize' => :ajax_authorize
+      post 'ajax_changepass' => :ajax_changepass
     end
   end
 
   get 'admin' => 'admin#index'
   get 'static_pages/403' => 'static_pages#page_403'
+
+  namespace :info do
+    resources :customers
+    resources :providers
+    resources :customer_fin_dtls
+
+    controller :customers do
+      get 'customers/:id/finance' => :show_finance, :as => :customer_finance
+    end
+
+    controller :customer_fin_dtls do
+      get 'customers/:id/finance_dtls/new' => :new_with_customer, :as => :cfd_new_with_customer
+      get 'customers/:id/finance_dtls/index' => :index_with_customer, :as => :cfd_index_with_customer
+      post 'customer_fin_dtl/proceed' => :save_and_proceed, :as => :cfd_save_and_proceed
+      get 'customer_fin_dtl/:id/proceed' => :proceed, :as => :cfd_proceed
+    end
+  end
 
   #---------------------------------------LEE ADD END
 

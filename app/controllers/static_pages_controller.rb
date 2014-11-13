@@ -4,7 +4,7 @@ class StaticPagesController < ApplicationController
   end
 
   def help
-    render action: :home
+    redirect_to :back
   end
 
   def page_403

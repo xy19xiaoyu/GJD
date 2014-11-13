@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cid: MyString
+  shortName: MyString
+  name: MyString
+  contact: MyString
+  email: MyString
+  tel: MyString
+  fax: MyString
+  address: MyString
+  zip: MyString
+  bank: MyString
+  bankAccountNum: MyString
+  bankAccountName: MyString
+  deposit: 1
+  alarmMoney: 1
+  payType: 1
+  rebateFlag: false
+  upper_id: 1
+  lower_id: 1
+
+two:
+  cid: MyString
+  shortName: MyString
+  name: MyString
+  contact: MyString
+  email: MyString
+  tel: MyString
+  fax: MyString
+  address: MyString
+  zip: MyString
+  bank: MyString
+  bankAccountNum: MyString
+  bankAccountName: MyString
+  deposit: 1
+  alarmMoney: 1
+  payType: 1
+  rebateFlag: false
+  upper_id: 1
+  lower_id: 1

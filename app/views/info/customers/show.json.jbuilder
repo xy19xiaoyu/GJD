@@ -1,0 +1,1 @@
+json.extract! @info_customer, :id, :cid, :shortName, :name, :contact, :email, :tel, :fax, :address, :zip, :bank, :bankAccountNum, :bankAccountName, :deposit, :alarmMoney, :payType, :rebateFlag, :upper_id, :lower_id, :created_at, :updated_at

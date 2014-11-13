@@ -1,19 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @origin_user.name %>
-</p>
+<!-- Modals -->
+<h5 class="widget-name"><i class="fa fa-user"></i>用户资料</h5>
 
-<p>
-  <strong>Hashed password:</strong>
-  <%= @origin_user.hashed_password %>
-</p>
+<div class="widget">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <h6>用户资料</h6>
+      <%= link_to '返回', origin_users_path, :class => 'btn btn-warning pull-right' %>
+      <%= link_to '编辑', edit_origin_user_path(@origin_user), :class => 'btn btn-success pull-right' %>
+    </div>
+  </div>
+  <div class="row-fluid well body">
+    <div class="span6">
+      <ul class="nav nav-list well-white">
+        <li class="nav-header"><h5>基本信息</h5></li>
+        <li><a>用户名：<%= @origin_user.name %></a></li>
+        <li><a>姓名：<%= @origin_user.pname %></a></li>
+        <% if @origin_user.role %>
+          <li><a>角色：<%= @origin_user.role.name %></a></li>
+        <% end %>
+        <li><a>创建时间：<%= @origin_user.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></a></li>
+        <li><a>最后登录时间：</a></li>
+      </ul>
+    </div>
 
-<p>
-  <strong>Salt:</strong>
-  <%= @origin_user.salt %>
-</p>
-
-<%= link_to 'Edit', edit_origin_user_path(@origin_user) %> |
-<%= link_to 'Back', origin_users_path %>
+    <div class="span6">
+      <ul class="nav nav-list well-white">
+        <li class="nav-header"><h5>操作历史</h5></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /modals -->
