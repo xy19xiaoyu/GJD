@@ -3,9 +3,10 @@ require 'digest/sha2'
 
 class Origin::User < ActiveRecord::Base
   belongs_to :role, :class_name => 'Origin::Role', foreign_key: :role_id
-  validate :name, :presence => true, :uniqueness => true
-  validate :password, :presence => true
-  validates_confirmation_of :password, message: '两次密码输入不一致'
+  validates :name, :presence => { message: '用户名不能为空' }, :uniqueness => { message: '用户名必须唯一' }
+  validates :pname, :presence => { message: '姓名不能为空' }
+  validates :password, :presence => { message: '密码不能为空' }
+  validates :password, :confirmation => { message: '两次密码输入不一致' }
 
   attr_reader :password
   validate :password_must_be_present
