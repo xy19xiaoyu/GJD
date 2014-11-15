@@ -1,3 +1,4 @@
+#encoding: utf-8
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -13,3 +14,22 @@
 #admin= User.Create([{name: 'admin'}])
 #Category.delete_all
 #caretegories = Category.Create([{Name: "", Type: ""}])
+
+# 添加供应商
+Info::Provider.delete_all
+x = Info::Provider.new
+x.name="李靖超"
+x.save()
+
+# 添加仓库信息
+GoDown.delete_all
+g = GoDown.new
+g.Name = "海淀一号"
+g.Address = "大柳树北路17号"
+g.Admin = "陈晓雨"
+g.Tel = "18612345678"
+g.save()
+
+#添加品目信息
+#添加品目规格
+#添加物品信息

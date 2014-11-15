@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :base_orders
+
+  resources :purchase_orders
+
   resources :o_orders
   post 'o_orders/CreateOutOrder' => 'o_orders#CreateOutOrder'
   get 'o_orders/split/:id' => 'o_orders#split'
