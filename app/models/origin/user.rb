@@ -3,9 +3,9 @@ require 'digest/sha2'
 
 class Origin::User < ActiveRecord::Base
   belongs_to :role, :class_name => 'Origin::Role', foreign_key: :role_id
-  validate :name, :presence => true, :uniqueness => true
-  validate :password, :presence => true
-  validates_confirmation_of :password, message: '两次密码输入不一致'
+  validates :name, :presence => true, :uniqueness => true
+  validates :pname, :presence => true
+  validates :password, :confirmation => true
 
   attr_reader :password
   validate :password_must_be_present
@@ -57,7 +57,7 @@ class Origin::User < ActiveRecord::Base
   end
 
   def password_must_be_present
-    errors.add(:password, '密码不能为空') unless hashed_password.present?
+    errors.add(:password, '不能为空') unless hashed_password.present?
   end
 
   def generate_salt
