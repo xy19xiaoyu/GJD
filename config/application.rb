@@ -32,6 +32,8 @@ module GJD
       html_tag
     }
 
-    config.autoload_paths << Rails.root.join('lib')
+    #config.autoload_paths << Rails.root.join('lib')
   end
 end
+
+require "#{Rails.root}/lib/gjd/ext/has_history"
