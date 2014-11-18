@@ -1,4 +1,5 @@
 class Info::Customer < Info::Relationship
+  has_history
   has_one :finance, :class_name => 'Info::CustomerFinance', :foreign_key => :customer_id, :dependent => :destroy
   has_many :lowers, :class_name => 'Info::Customer', :foreign_key => :upper_id, :dependent => :nullify
   belongs_to :upper, :class_name => 'Info::Customer', :foreign_key => :upper_id

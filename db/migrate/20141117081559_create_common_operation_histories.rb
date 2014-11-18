@@ -5,6 +5,7 @@ class CreateCommonOperationHistories < ActiveRecord::Migration
       t.integer :item_id
       t.string :type
       t.string :detail
+      t.string :op_type
 
       t.timestamps
     end
