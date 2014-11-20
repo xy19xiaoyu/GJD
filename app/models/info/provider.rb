@@ -1,5 +1,5 @@
 class Info::Provider < Info::Relationship
-
+  has_history
   before_create :generate_provider_num
 
   def pid=(value)

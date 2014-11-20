@@ -1,4 +1,5 @@
 class Info::CustomerFinDtl < ActiveRecord::Base
+  has_history
   belongs_to :finance, :class_name => 'Info::CustomerFinance', foreign_key: :customer_fin_id
   before_create :generate_cfd_id
 
