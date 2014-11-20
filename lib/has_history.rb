@@ -1,7 +1,7 @@
 module HasHistory
 
   module ClassMethods
-    def has_history(name=:histories, options = {})
+    def has_history(name=:histories, options={})
       base_name = self.to_s.split('::')[-1] + 'History'
       unless defined?(base_name) && base_name.is_a?(Class)
         Common.const_set(base_name, create_tmp_class)
