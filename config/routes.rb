@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :billhis
+
+  resources :order_item_his
+
+  resources :order_items
+
   resources :base_orders
 
   resources :purchase_orders

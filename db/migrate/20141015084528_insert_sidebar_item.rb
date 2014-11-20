@@ -17,7 +17,9 @@ class InsertSidebarItem < ActiveRecord::Migration
 
       dingdan_item = site.sidebar_items.build(name: '订单管理', url: '#')
       dingdan_item.sub_items.build(name: '采购订单', url:'/orders/?type=1')
+      dingdan_item.sub_items.build(name: '采购订单1', url:'/purchase_orders')
       dingdan_item.sub_items.build(name: '销售订单', url:'/o_orders')
+      dingdan_item.sub_items.build(name: '采购订单1', url:'/sale_orders')
 
       cangku_item = site.sidebar_items.build(name: '仓库管理', url: '#')
       cangku_item.sub_items.build(name: '入库管理', url:'/in_orders')
