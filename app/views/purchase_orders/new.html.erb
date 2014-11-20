@@ -2,8 +2,7 @@
     select {
         width: 170px;
     }
-
-    input[type="text"] {
+    .table input[type="text"] {
         width: 80px;
     }
 
@@ -29,7 +28,7 @@
           <div class="span3">
             <div class="input-prepend">
               <span class="add-on">订单编号： </span>
-              <%= f.text_field :OrderId %>
+              <%= f.text_field :OrderId ,{:Class=> "input-medium"} %>
             </div>
           </div>
           <div class="span3">
@@ -49,7 +48,7 @@
             <th>物品名称</th>
             <th>品目</th>
             <th>型号</th>
-            <th>进货价格</th>
+            <th>参考价格</th>
             <th>实际进货价</th>
             <th>数量</th>
             <th>仓库</th>
