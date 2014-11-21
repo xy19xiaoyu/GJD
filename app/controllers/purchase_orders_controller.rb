@@ -11,11 +11,13 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders/1
   # GET /purchase_orders/1.json
   def show
+    @orderitems = @purchase_order.order_items
   end
 
   # GET /purchase_orders/new
   def new
     @purchase_order = PurchaseOrder.new
+
     @GoDwons = GoDown.all
     @providers = Info::Provider.all
   end
@@ -36,16 +38,16 @@ class PurchaseOrdersController < ApplicationController
     @purchase_order.CreateTime = Time.now.localtime.strftime("%Y-%m-%d %H:%M:%S")
     #订单供货商信息
     @purchase_order.From = "李靖超" #供货商名称
-    @purchase_order.FromAddress = "" #供货商地址
-    @purchase_order.From_Back = "" #供货商银行-开户行
-    @purchase_order.From_BackAccountNum = "" #供货商帐号
-    @purchase_order.From_BackAccountName = "" #供货商银行注册名称
+    @purchase_order.FromAddress = "北京市海淀区知春路1号学院国际" #供货商地址
+    @purchase_order.From_Back = "工商银行 北京分行 车道沟支行" #供货商银行-开户行
+    @purchase_order.From_BackAccountNum = "6222020200087654321" #供货商帐号
+    @purchase_order.From_BackAccountName = "李靖超" #供货商银行注册名称
 
     #订单收货方信息
     #针对系统使用应做一个基本信息设置
     @purchase_order.To = "陈晓雨" #进货者名称
     @purchase_order.ToAddress  = "北京市海淀区大柳树北路17号911" #收货地址
-    @purchase_order.To_Back = "中国银行 北京分行 车道沟支行" #
+    @purchase_order.To_Back = "中国银行 北京分行 皂君庙支行" #
     @purchase_order.To_BackAccountNum=  "622202020012345678" #银行帐号
     @purchase_order.To_BackAccountName = "陈晓雨" #银行帐号注册名称
 
