@@ -13,7 +13,7 @@ module HasHistory
 
         options.each do |key, value|
           if value
-            eval("self.after_#{key} :after_#{key}_his")
+            eval("self.around_#{key} :around_#{key}_his")
           end
         end
 
@@ -31,18 +31,20 @@ module HasHistory
   module InstanceMethods
 
     def respond_to?(method, pri=false)
-      (method.to_s =~ /^after_(\w+)_his$/) || super
+      (method.to_s =~ /^around_(\w+)_his$/) || super
     end
 
     def method_missing(sym, *args)
-      if sym.to_s =~ /^after_(\w+)_his$/
+      if sym.to_s =~ /^around_(\w+)_his$/
         unless defined?(session)
           return
         end
+        diff = self.changes
+        yield
         pattern = $1
         attr_name = self.tmp_his_attr
         hisArr = instance_eval(attr_name.to_s)
-        hisArr.build(:user_id => session[:user_id], :item_id => self.id, :op_type => pattern).save
+        hisArr.build(:user_id => session[:user_id], :item_id => self.id, :op_type => pattern, :detail => diff).save
       else
         super
       end
