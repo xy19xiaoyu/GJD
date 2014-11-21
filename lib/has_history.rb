@@ -36,6 +36,9 @@ module HasHistory
 
     def method_missing(sym, *args)
       if sym.to_s =~ /^after_(\w+)_his$/
+        unless defined?(session)
+          return
+        end
         pattern = $1
         attr_name = self.tmp_his_attr
         hisArr = instance_eval(attr_name.to_s)
