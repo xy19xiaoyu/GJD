@@ -19,7 +19,7 @@
 site = Origin::Site.first
 site = Origin::Site.new unless site
 site.title = '管家爹' unless site.title
-site.sidebar_items.delete_all
+site.sidebar_items.destroy_all
 if (site.sidebar_items.empty?)
   site.sidebar_items.build(name: '管家爹控制台', url: '/')
 
@@ -81,13 +81,10 @@ Origin::User.find_or_create_by(name: 'lee') do |user|
 end
 
 # 添加供应商
-Info::Provider.delete_all
-x = Info::Provider.new
-x.name="李靖超"
-x.save()
+x = Info::Provider.find_or_create_by(name: '李靖超').save
 
 # 添加仓库信息
-GoDown.delete_all
+GoDown.destroy_all
 g = GoDown.new
 g.GoDownId = "G_0001"
 g.Name = "海淀一号"
@@ -97,8 +94,8 @@ g.Tel = "18612345678"
 g.save()
 
 #添加品目信息
-SubCategory.delete_all
-Category.delete_all
+SubCategory.destroy_all
+Category.destroy_all
 pm = Category.new
 pm.Name = "凡士林"
 pm.Type= "原料"
@@ -108,7 +105,7 @@ pm.save()
 #添加品目规格
 
 #添加物品信息
-Item.delete_all
+Item.destroy_all
 item  = Item.new
 item.Name= "百雀羚"
 item.CategoryName= "凡士林"
@@ -121,7 +118,7 @@ item.Discount = 8
 item.save()
 
 #生产批次
-Batch.delete_all
+Batch.destroy_all
 bh = Batch.new
 bh.Batchid = "B_00001"
 bh.Date= Time.now.localtime.strftime("%Y-%m-%d %H:%M:%S")

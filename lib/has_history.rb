@@ -37,6 +37,7 @@ module HasHistory
     def method_missing(sym, *args)
       if sym.to_s =~ /^around_(\w+)_his$/
         unless defined?(session)
+          yield
           return
         end
         diff = self.changes
