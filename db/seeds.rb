@@ -21,7 +21,13 @@ site = Origin::Site.new unless site
 site.title = '管家爹' unless site.title
 site.sidebar_items.destroy_all
 if (site.sidebar_items.empty?)
-  site.sidebar_items.build(name: '管家爹控制台', url: '/')
+  site.sidebar_items.build(name: '控制台', url: '/')
+
+  site_item = site.sidebar_items.build(name: site.title, url: '#')
+  site_item.sub_items.build(name: '基本设置', url: '/origin/sites/show')
+  site_item.sub_items.build(name: '财务信息', url: '#')
+  site_item.sub_items.build(name: '数据报表', url: '#')
+  site_item.sub_items.build(name: '公司资料', url: '#')
 
   peizhi_item = site.sidebar_items.build(name: '配置管理', url: '#')
   peizhi_item.sub_items.build(name: '品目配置', url: '/categories')
@@ -42,6 +48,13 @@ if (site.sidebar_items.empty?)
 
   xitong_item = site.sidebar_items.build(name: '系统管理', url: '#')
   xitong_item.sub_items.build(name: '用户管理', url:'/origin/users')
+  xitong_item.sub_items.build(name: '角色管理', url:'/origin/roles')
+  xitong_item.sub_items.build(name: '菜单项管理', url:'/origin/sidebar_items')
+
+  kehu_item = site.sidebar_items.build(name: '资料管理', url: '#')
+  kehu_item.sub_items.build(name: '客户资料管理', url:'/info/customers')
+  kehu_item.sub_items.build(name: '客户出入账管理', url:'/info/customer_fin_dtls')
+  kehu_item.sub_items.build(name: '供应商资料管理', url:'/info/prs')
 end
 site.save
 

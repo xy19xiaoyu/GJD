@@ -1,6 +1,6 @@
 class Info::Customer < Info::Relationship
   has_history
-  has_one :finance, :class_name => 'Info::CustomerFinance', :foreign_key => :customer_id, :dependent => :destroy
+  has_one :finance, :class_name => 'Info::CustomerFinance', :foreign_key => :parent_id, :dependent => :destroy
   has_many :lowers, :class_name => 'Info::Customer', :foreign_key => :upper_id, :dependent => :nullify
   belongs_to :upper, :class_name => 'Info::Customer', :foreign_key => :upper_id
   after_create :create_finance_method
@@ -27,6 +27,6 @@ class Info::Customer < Info::Relationship
   end
 
   def create_finance_method
-    self.create_finance(:amount => 0) unless self.finance
+    self.create_finance(:amount => 0, :back_amount => 0) unless self.finance
   end
 end

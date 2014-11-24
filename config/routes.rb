@@ -30,7 +30,6 @@ Rails.application.routes.draw do
   namespace :origin do
     resources :sidebar_items
     resources :roles
-    resources :sites
     resources :users
     controller :sessions do
       get 'login' => :new
@@ -38,6 +37,12 @@ Rails.application.routes.draw do
       get 'logout' => :destroy
       post 'ajax_authorize' => :ajax_authorize
       post 'ajax_changepass' => :ajax_changepass
+    end
+
+    controller :sites do
+      get 'site' => :show, :as => :site
+      get 'site/edit' => :edit, :as => :edit_site
+      put 'site' => :update
     end
   end
 

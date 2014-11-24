@@ -23,7 +23,7 @@
     <% end %>
     <div class="well">
       <% if @info_customer_fin_dtl.finance %>
-        <%= f.hidden_field :customer_fin_id %>
+        <%= f.hidden_field :fin_id %>
       <% else %>
         <div class="control-group">
           <%= f.label :customer_fin_id, '请选择客户：', :class => 'control-label' %>
