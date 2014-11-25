@@ -12,7 +12,7 @@ class InOrdersController < ApplicationController
   def show
     puts params
     @orderid = params[:id]
-    @order = Order.find(@orderid)
+    @order = BaseOrder.find(@orderid)
     @in_orders = InOrder.where(:Order_id => @orderid)
     @gds = @in_orders.select(:GoDown_id).map(&:GoDown_id).uniq
   end
@@ -20,7 +20,7 @@ class InOrdersController < ApplicationController
   def exec
     @inorderid = params[:id]
     @in_order = InOrder.find(@inorderid)
-    @order = Order.find(@in_order.Order_id)
+    @order = BaseOrder.find(@in_order.Order_id)
     @gd = GoDown.find(@in_order.GoDown_id)
     @sub_orders = SubOrder.where(:Order_id => @order.id,:GoDown_id => @gd.id)
   end

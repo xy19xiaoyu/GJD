@@ -6,17 +6,13 @@
     <table class="table">
       <tr>
         <th>入库单编号</th>
-        <th>仓库名称</th>
-        <th>执行时间</th>
-        <th>执行人</th>
+        <th>仓库</th>
         <th>状态</th>
       </tr>
       <% InOrder.where(:State => "新建").each do |inorder| %>
           <tr>
             <td><%= inorder.InOrderId %></td>
             <td><%= GoDown.find(inorder.GoDown_id).Name %></td>
-            <td><%= inorder.ExecTime %></td>
-            <td><%= inorder.Execer %></td>
             <td>
               <% if inorder.State == "新建" %>
                   <a class="btn btn-success" href="/in_orders/exec/<%= inorder.id %>">执行入库</a>

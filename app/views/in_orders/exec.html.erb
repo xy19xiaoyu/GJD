@@ -1,9 +1,5 @@
-<style>
-    .add-on {
-        width: 200px;
-    }
-</style>
-<div class="row-fluid">
+<div class="widget">
+  <h5 class="widget-title">入库</h5>
   <%= form_tag(in_orders_ingodown_path) do |f| %>
       <% if @in_order.errors.any? %>
           <div id="error_explanation">
@@ -17,9 +13,6 @@
           </div>
       <% end %>
       <div class="right-content span12">
-        <div class="nav">
-          <div class="navbar-inner"><h6>入库</h6></div>
-        </div>
         <div class="well-white body">
           <div class="row-fluid">
             <%= hidden_field :in_order, :id %>
@@ -27,12 +20,6 @@
               <div class="input-prepend">
                 <span class="add-on">订单编号： </span>
                 <input type="text" readonly="true" value="<%= @order.OrderId %>" class="input-prepend">
-              </div>
-            </div>
-            <div class="span3">
-              <div class="input-prepend">
-                <span class="add-on">订单名称： </span>
-                <input type="text" readonly="true" value="<%= @order.Name %>" class="input-prepend">
               </div>
             </div>
             <div class="span3">

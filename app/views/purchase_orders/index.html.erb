@@ -27,7 +27,7 @@
             <td><%= order.State %></td>
             <td><%= link_to '查看', order %>&nbsp;
               <% if order.State =="新建" %>
-                  <%= link_to '编辑', edit_order_path(order) %>&nbsp;<%= link_to '删除', order, method: :delete, data: {confirm: 'Are you sure?'} %>
+                  <%= link_to '编辑', edit_purchase_order_path(order) %>&nbsp;<%= link_to '删除', order, method: :delete, data: {confirm: 'Are you sure?'} %>
               <% end %>
             </td>
           </tr>

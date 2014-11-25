@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   #---------------------------------------LEE ADD END
 
   get 'orders/split/:id' => 'orders#split'
+  get 'purchase_orders/split/:id' => 'purchase_orders#split'
 
   resources :sub_orders
 
