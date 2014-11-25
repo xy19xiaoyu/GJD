@@ -3,8 +3,6 @@ class Info::Customer < Info::Relationship
   has_one :finance, :class_name => 'Info::CustomerFinance', :foreign_key => :parent_id, :dependent => :destroy
   has_many :lowers, :class_name => 'Info::Customer', :foreign_key => :upper_id, :dependent => :nullify
   belongs_to :upper, :class_name => 'Info::Customer', :foreign_key => :upper_id
-  after_create :create_finance_method
-  before_create :generate_customer_num
 
   def cid=(value)
     self.rid = value
@@ -16,7 +14,7 @@ class Info::Customer < Info::Relationship
 
   private
 
-  def generate_customer_num
+  def generate_num
     if Info::Customer.count == 0
       self.cid, self.tmp_rid = 'C00001', 1
     else

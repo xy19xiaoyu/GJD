@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get 'site' => :show, :as => :site
       get 'site/edit' => :edit, :as => :edit_site
       put 'site' => :update
+      patch 'site' => :update
     end
   end
 
