@@ -47,6 +47,14 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :finance do
+    controller :accounts do
+      get 'show' => :show
+      get 'index_in' => :index_in
+      get 'index_out' => :index_out
+    end
+  end
+
   get 'admin' => 'admin#index'
   get 'static_pages/403' => 'static_pages#page_403'
 
@@ -54,6 +62,7 @@ Rails.application.routes.draw do
     resources :customers
     resources :providers
     resources :customer_fin_dtls
+    resources :provider_fin_dtls
 
     controller :customers do
       get 'customers/:id/finance' => :show_finance, :as => :customer_finance
@@ -64,6 +73,12 @@ Rails.application.routes.draw do
       get 'customers/:id/finance_dtls/index' => :index_with_customer, :as => :cfd_index_with_customer
       post 'customer_fin_dtl/proceed' => :save_and_proceed, :as => :cfd_save_and_proceed
       get 'customer_fin_dtl/:id/proceed' => :proceed, :as => :cfd_proceed
+    end
+
+    controller :provider_fin_dtls do
+      get 'providers/:id/finance_dtls/new' => :new_with_provider, :as => :pfd_new_with_provider
+      get 'providers/:id/finance_dtls/index' => :index_with_provider, :as => :pfd_index_with_provider
+      get 'provider_fin_dtl/:id/proceed' => :proceed, :as => :pfd_proceed
     end
   end
 

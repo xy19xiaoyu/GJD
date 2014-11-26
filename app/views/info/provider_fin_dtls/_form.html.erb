@@ -1,0 +1,55 @@
+<%= form_for(@info_customer_fin_dtl, :html => {:class => 'form-horizontal'}) do |f| %>
+  <% if @info_customer_fin_dtl.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@info_customer_fin_dtl.errors.count, "error") %> prohibited this info_customer_fin_dtl from
+        being saved:</h2>
+
+      <ul>
+        <% @info_customer_fin_dtl.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+
+    <% unless @info_customer_fin_dtl.finance %>
+      <div class="navbar">
+        <div class="navbar-inner">
+          <h6>出入账表单</h6>
+        </div>
+      </div>
+    <% end %>
+    <div class="well">
+      <% if @info_customer_fin_dtl.finance %>
+        <%= f.hidden_field :fin_id %>
+      <% else %>
+        <div class="control-group">
+          <%= f.label :customer_fin_id, '请选择客户：', :class => 'control-label' %>
+          <div class="controls"><%= f.select :customer_fin_id, Info::Customer.all.map { |c| [c.name, c.finance.id] }, :class => 'styled' %></div>
+        </div>
+      <% end %>
+      <div class="control-group">
+        <%= f.label :in_or_out, '进出款类型：', :class => 'control-label' %>
+        <div class="controls"><%= f.select :in_or_out, [['进款', true], ['出款', false]], :class => 'styled' %></div>
+      </div>
+      <div class="control-group">
+        <%= f.label :money, '金额：', :class => 'control-label' %>
+        <div class="controls"><%= f.text_field :money, :class => 'span12' %></div>
+      </div>
+      <div class="control-group">
+        <%= f.label :comment, '备注：', :class => 'control-label' %>
+        <div class="controls"><%= f.text_field :comment, :class => 'span12' %></div>
+      </div>
+      <div class="form-actions align-right">
+
+
+        <button type="submit" class="btn btn-primary" name="proceed">执行</button>
+        <button type="submit" class="btn btn-success" name="save">保存</button>
+        <button type="button" class="btn btn-danger" onclick="history.back()">取消</button>
+        <button type="reset" class="btn">重置</button>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

@@ -82,7 +82,6 @@
   <div class="navbar" style="margin-top: 1px">
     <div class="navbar-inner">
       <h6>近期采购订单记录</h6>
-      <%= link_to '返回', info_providers_path, :class => 'btn btn-warning pull-right' %>
       <%= link_to '查看全部', edit_info_provider_path(@info_provider), :class => 'btn btn-success pull-right' %>
       <button type="button" class="btn btn-info pull-right">新建订单</button>
     </div>
@@ -128,8 +127,7 @@
   <div class="navbar" style="margin-top: 1px">
     <div class="navbar-inner">
       <h6>近期账务记录</h6>
-      <%= link_to '返回', info_customers_path, :class => 'btn btn-warning pull-right' %>
-      <%= link_to "查看全部(#{@info_provider.finance.fin_dtls.count})", info_cfd_index_with_customer_path(@info_provider), :class => 'btn btn-success pull-right' %>
+      <%= link_to "查看全部(#{@info_provider.finance.fin_dtls.count})", info_pfd_index_with_provider_path(@info_provider), :class => 'btn btn-success pull-right' %>
     </div>
   </div>
   <% if @info_provider.finance.fin_dtls.empty? %>
@@ -152,7 +150,7 @@
       <tbody>
       <% @info_provider.finance.fin_dtls.order(:updated_at => :desc).limit(5).each do |dtl| %>
         <tr>
-          <td><%= link_to dtl.cfd_id, dtl %></td>
+          <td><%= link_to dtl.pfd_id, dtl %></td>
           <td><%= dtl.comment %></td>
           <td><%= dtl.money %></td>
           <td><%= dtl.updated_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
@@ -170,7 +168,7 @@
                   end %></td>
           <td>
             <% if dtl.status_id == 0 %>
-              <%= link_to '执行', info_cfd_proceed_path(dtl) %>
+              <%= link_to '执行', info_pfd_proceed_path(dtl) %>
             <% end %>
           </td>
         </tr>

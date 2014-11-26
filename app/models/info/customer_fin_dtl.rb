@@ -1,7 +1,6 @@
 class Info::CustomerFinDtl < Info::RelationshipFinDtl
   has_history
   belongs_to :finance, :class_name => 'Info::CustomerFinance', foreign_key: :fin_id
-  before_create :generate_cfd_id
 
   def cfd_id
     rfd_id
@@ -12,7 +11,7 @@ class Info::CustomerFinDtl < Info::RelationshipFinDtl
   end
 
   private
-  def generate_cfd_id
+  def generate_rfd_id
     cdate = Time.now.localtime().strftime('%Y%m%d')
     wherestr = "date_tmp = '#{cdate}'"
     if self.order_id.nil?
