@@ -22,7 +22,7 @@ class InOrdersController < ApplicationController
     @in_order = InOrder.find(@inorderid)
     @order = BaseOrder.find(@in_order.Order_id)
     @gd = GoDown.find(@in_order.GoDown_id)
-    @sub_orders = SubOrder.where(:Order_id => @order.id,:GoDown_id => @gd.id)
+    @sub_orders = OrderItem.where(:BaseOrder_id=>@order.id,:GoDown_id => @gd.id)
   end
   # GET /in_orders/new
   def new

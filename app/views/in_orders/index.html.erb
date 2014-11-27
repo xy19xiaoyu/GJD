@@ -6,12 +6,14 @@
     <table class="table">
       <tr>
         <th>入库单编号</th>
+        <th>供货商</th>
         <th>仓库</th>
         <th>状态</th>
       </tr>
       <% InOrder.where(:State => "新建").each do |inorder| %>
           <tr>
             <td><%= inorder.InOrderId %></td>
+            <td><%= BaseOrder.find(inorder.Order_id).From %></td>
             <td><%= GoDown.find(inorder.GoDown_id).Name %></td>
             <td>
               <% if inorder.State == "新建" %>

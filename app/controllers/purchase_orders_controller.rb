@@ -84,15 +84,18 @@ class PurchaseOrdersController < ApplicationController
     puts @purchase_order.State
     gdids = @purchase_order.order_items.select(:GoDown_id).map(&:GoDown_id).uniq
     puts gdids.count
+    #根据仓库生成入库单
     gdids.each do |gdid|
       puts "gdid:#{gdid}"
 
-      @InOrder = InOrder.new()
-      @InOrder.InOrderId = "#{@purchase_order.OrderId}_#{i.to_s}"
-      @InOrder.GoDown_id = gdid
-      @InOrder.Order_id = @purchase_order.id
-      @InOrder.State = "新建"
-      @InOrder.save();
+      inorder = InOrder.new()
+      inorder.InOrderId = "#{@purchase_order.OrderId}_#{i.to_s}"
+      inorder.GoDown_id = gdid
+      inorder.Order_id = @purchase_order.id
+      inorder.State = "新建"
+
+
+      inorder.save();
 
       i = i+1
     end
