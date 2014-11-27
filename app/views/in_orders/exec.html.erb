@@ -21,6 +21,7 @@
       <div class="well invoice">
         <div class="invoice-head">
           <ul class="pull-left minus-list invoice-data">
+            <li>入库单编号: <strong class="text-info pull-right"><%= @in_order.InOrderId %></strong></li>
             <li>订单编号: <strong class="text-info pull-right"><%= @order.OrderId %></strong></li>
             <li>创建人: <span class="pull-right"><%= @order.CreateUser %></span></li>
             <li>创建时间 <strong class="pull-right text-error"><%= @order.CreateTime %></strong></li>

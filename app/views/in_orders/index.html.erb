@@ -5,6 +5,7 @@
   <div class="well-white body">
     <table class="table">
       <tr>
+        <th>订单编号</th>
         <th>入库单编号</th>
         <th>供货商</th>
         <th>仓库</th>
@@ -12,6 +13,7 @@
       </tr>
       <% InOrder.where(:State => "新建").each do |inorder| %>
           <tr>
+            <td><%= BaseOrder.find(inorder.Order_id).OrderId %></td>
             <td><%= inorder.InOrderId %></td>
             <td><%= BaseOrder.find(inorder.Order_id).From %></td>
             <td><%= GoDown.find(inorder.GoDown_id).Name %></td>
