@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :work_shops
+
+  resources :make_orders
+
   resources :billhis
 
   resources :order_item_his
@@ -65,6 +69,7 @@ Rails.application.routes.draw do
 
   get 'orders/split/:id' => 'orders#split'
   get 'purchase_orders/split/:id' => 'purchase_orders#split'
+  get 'make_orders/split/:id' => 'make_orders#split'
 
   resources :sub_orders
 
