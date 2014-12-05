@@ -36,7 +36,7 @@ if (site.sidebar_items.empty?)
   dingdan_item.sub_items.build(name: '采购订单1', url: '/sale_orders')
 
   dingdan_item = site.sidebar_items.build(name: '生产管理', url: '#')
-  dingdan_item.sub_items.build(name: '原料出库', url: '/purchase_orders')
+  dingdan_item.sub_items.build(name: '原料出库', url: '/item_out_orders')
   dingdan_item.sub_items.build(name: '产品入库', url: '/make_orders')
 
   cangku_item = site.sidebar_items.build(name: '仓库管理', url: '#')
