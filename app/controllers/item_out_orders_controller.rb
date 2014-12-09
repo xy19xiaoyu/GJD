@@ -1,6 +1,6 @@
 #encoding : utf-8
 class ItemOutOrdersController < ApplicationController
-  before_action :set_item_out_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_item_out_order, only: [:show, :edit, :update, :destroy,:split]
 
   # GET /item_out_orders
   # GET /item_out_orders.json
@@ -12,6 +12,7 @@ class ItemOutOrdersController < ApplicationController
   # GET /item_out_orders/1.json
   def show
     logger.warn '测试logger-show'
+    @orderitems = @item_out_order.order_items
   end
 
   # GET /item_out_orders/new
@@ -22,6 +23,10 @@ class ItemOutOrdersController < ApplicationController
 
   # GET /item_out_orders/1/edit
   def edit
+  end
+
+  def split
+
   end
 
   # POST /item_out_orders
@@ -45,7 +50,7 @@ class ItemOutOrdersController < ApplicationController
     end
     respond_to do |format|
       if @item_out_order.save
-        format.html { redirect_to @item_out_order, notice: 'Item out order was successfully created.' }
+        format.html { redirect_to @item_out_order, notice: '原料出库订单已经创建成功！' }
         format.json { render :show, status: :created, location: @item_out_order }
       else
         format.html { render :new }

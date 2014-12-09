@@ -71,6 +71,7 @@ Rails.application.routes.draw do
 
   get 'orders/split/:id' => 'orders#split'
   get 'purchase_orders/split/:id' => 'purchase_orders#split'
+  get 'item_out_orders/split/:id' => 'item_out_orders#split'
   get 'make_orders/split/:id' => 'make_orders#split'
 
   resources :sub_orders
