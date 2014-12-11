@@ -1,6 +1,6 @@
 #encoding : utf-8
 class ItemOutOrdersController < ApplicationController
-  before_action :set_item_out_order, only: [:show, :edit, :update, :destroy,:split]
+  before_action :set_item_out_order, only: [:show, :edit, :update, :destroy, :split]
 
   # GET /item_out_orders
   # GET /item_out_orders.json
@@ -11,7 +11,6 @@ class ItemOutOrdersController < ApplicationController
   # GET /item_out_orders/1
   # GET /item_out_orders/1.json
   def show
-    logger.warn '测试logger-show'
     @orderitems = @item_out_order.order_items
   end
 
@@ -29,6 +28,49 @@ class ItemOutOrdersController < ApplicationController
 
   end
 
+  def CreateOutOrder
+    item_out_order = ItemOutOrder.find(params[:id])\
+
+    #得到用所选择的出库库存信息
+    arygds = Array.new
+    params.each do |p|
+      tmpgd = /outOrder(\d{1,4})/.match(p[0])
+      unless tmpgd.nil?
+        arygds << tmpgd
+      end
+    end
+
+
+    gods = Array.new
+    items = Array.new
+    for x in arygds
+      tmp = params.require("#{x}").permit(:Item_Id, :BatchId, :CreateTime, :GoDown_id, :Sum)
+      if tmp[:Sum] != ""
+        gods<< tmp[:GoDown_id]
+        items<<tmp
+      end
+    end
+
+    i =0
+    gods.each do |godid|
+      i = i +1
+      out_Order = OutOrder.new()
+      out_Order.Order_id =item_out_order.id
+      out_Order.GoDown_id = godid
+      out_Order.OutOrderId ="#{item_out_order.OrderId}_#{@i}"
+      out_Order.State = "新建"
+      out_Order.CreateTime= Time.new.strftime("%Y-%m-%d %H:%M:%S")
+      out_Order.CreateUser ="陈晓雨"
+      items.each do |item|
+        if item[:GoDown_id] ==godid
+          out_Order.item_out_order.build(:OOrder_id => item_out_order.id, :Item_id => item[:Item_Id], :GoDown_id => item[:GoDown_id], :BatchId => item[:BatchId], :CreateTime => item[:CreateTime], :Sum => item[:Sum])
+        end
+      end
+      out_Order.save()
+    end
+    item_out_order.update(:State => "待出库")
+  end
+
   # POST /item_out_orders
   # POST /item_out_orders.json
   def create
@@ -41,7 +83,7 @@ class ItemOutOrdersController < ApplicationController
     worshop = WorkShop.find(@item_out_order.To)
     @item_out_order.To = worshop.name
     @item_out_order.ToAddress = worshop.address
-    logger.warn "3432432"
+
     Item.where(:Type => "原料").each do |item|
       itemid = item.id
       itemCount = params[:"orderitemid_#{itemid}"]

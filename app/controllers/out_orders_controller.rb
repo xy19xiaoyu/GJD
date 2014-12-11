@@ -4,7 +4,7 @@ class OutOrdersController < ApplicationController
   # GET /out_orders
   # GET /out_orders.json
   def index
-    @OOrders = OOrder.where(:State => "待出库")
+    @out_order = OutOrder.where(:State => "新建")
   end
 
   # GET /out_orders/1
@@ -12,7 +12,7 @@ class OutOrdersController < ApplicationController
   def show
     puts params
     @orderid = params[:id]
-    @OOrders = OOrder.where(:id => @orderid)
+    @out_order = OutOrder.where(:id => @orderid)
   end
 
   # GET /out_orders/new
@@ -43,7 +43,7 @@ class OutOrdersController < ApplicationController
   def exec
     @outorderid = params[:id]
     @out_order = OutOrder.find(@outorderid)
-    @order = OOrder.find(@out_order.Order_id)
+    @order = BaseOrder.find(@out_order.Order_id)
     @gd = GoDown.find(@out_order.GoDown_id)
     @o_order_items = @out_order.out_order_items
   end

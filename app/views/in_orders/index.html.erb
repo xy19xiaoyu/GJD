@@ -12,11 +12,12 @@
         <th>状态</th>
       </tr>
       <% InOrder.where(:State => "新建").each do |inorder| %>
+          <% baseorder  = BaseOrder.find(inorder.Order_id)%>
           <tr>
-            <td><%= BaseOrder.find(inorder.Order_id).OrderId %></td>
+            <td><%= baseorder.OrderId %></td>
             <td><%= inorder.InOrderId %></td>
-            <td><%= BaseOrder.find(inorder.Order_id).From %></td>
-            <td><%= GoDown.find(inorder.GoDown_id).Name %></td>
+            <td><%= baseorder.From %></td>
+            <td><%= baseorder.Name %></td>
             <td>
               <% if inorder.State == "新建" %>
                   <a class="btn btn-success" href="/in_orders/exec/<%= inorder.id %>">执行入库</a>

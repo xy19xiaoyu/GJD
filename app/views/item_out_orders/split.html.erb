@@ -12,7 +12,7 @@
               <div class="well body">
                 <dl class="dl-horizontal">
                   <dt>订单编号：</dt>
-                  <dd><%= @item_out_order.OrderId %>&nbsp;</dd>
+                  <dd><%= @item_out_order.OrderId %>&nbsp;<input type="hidden" id="id" name="id" value="<%= @item_out_order.id%>"> </dd>
                   <dt>订单状态：</dt>
                   <dd><%= @item_out_order.State %></dd>
                   <dt>创建人：</dt>
@@ -71,7 +71,9 @@
                   <td><%= @item.subCategoryName %></td>
                   <td class="max"><%= item.Sum %></td>
                   <td>
-                    <div><input type="text" id="sum<%= i %>" value="0" max="<%= item.Sum %>" class="input-mini align-center" readonly="true"/></div>
+                    <div>
+                      <input type="text" id="sum<%= i %>" value="0" max="<%= item.Sum %>" class="input-mini align-center" readonly="true"/>
+                    </div>
                   </td>
                   <td><a href="#" data="<%= i %>" type="button" onclick="test(this);" class="btn">选择库存</a></td>
                 </tr>
@@ -136,9 +138,9 @@
         .table input[type="text"] {
             width: 80px;
         }
-        .control-group
-        {
-            padding:0px;
+
+        .control-group {
+            padding: 0px;
         }
 
 
@@ -149,28 +151,24 @@
             $(".max").each(function () {
                 debugger;
                 var max = parseInt($(this).html());
-                var value =$(this).next().find("input").val();
-                if(value == "")
-                {
+                var value = $(this).next().find("input").val();
+                if (value == "") {
                     $(this).next().find("input").parent().addClass("control-group error");
                 }
-                else
-                {
+                else {
                     var intvalue = parseInt(value);
-                    if(max != intvalue)
-                    {
+                    if (max != intvalue) {
                         $(this).next().find("input").parent().addClass("control-group error");
                         return false;
                     }
-                    else
-                    {
+                    else {
                         $(this).next().find("input").parent().removeClass("control-group error");
                     }
 
                 }
                 //bootbox.alert($(this).next.first().val());
             });
-            return false;
+            return true;
 
         }
         function test(obj) {
@@ -191,6 +189,7 @@
             });
             if (input_sum != max) {
                 bootbox.alert("选择数量与订单数量不符，请核对！");
+                //alert("选择数量与订单数量不符，请核对！");
             }
             else {
                 $("#sum" + row_id).val(input_sum);

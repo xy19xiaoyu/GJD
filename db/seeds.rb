@@ -174,3 +174,21 @@ workshop.address = "装盒003"
 workshop.admin = "装盒人丙"
 workshop.save()
 
+
+#清空各种订单
+BaseOrder.delete_all
+OrderItem.delete_all
+
+#清空库存信息
+GoDownItem.delete_all
+
+#清空入库单
+InOrder.delete_all
+
+#出库单
+OutOrder.delete_all
+#出库单详细
+OutOrderItem.delete_all
+OutOrderItemHis.delete_all
+
+
