@@ -40,10 +40,12 @@ if (site.sidebar_items.empty?)
   dingdan_item.sub_items.build(name: '产品入库', url: '/make_orders')
 
   cangku_item = site.sidebar_items.build(name: '仓库管理', url: '#')
+  cangku_item.sub_items.build(name: '库存查询', url: '/go_down_items')
   cangku_item.sub_items.build(name: '入库管理', url: '/in_orders')
   cangku_item.sub_items.build(name: '出库管理', url: '/out_orders')
   cangku_item.sub_items.build(name: '物品转库', url: '/move_orders')
-  cangku_item.sub_items.build(name: '库存查询', url: '/go_down_items')
+  cangku_item.sub_items.build(name: '入库历史', url: '/go_down_items')
+  cangku_item.sub_items.build(name: '出库历史', url: '/go_down_items')
 
   xitong_item = site.sidebar_items.build(name: '系统管理', url: '#')
   xitong_item.sub_items.build(name: '用户管理', url: '/origin/users')
@@ -90,6 +92,13 @@ Info::Provider.delete_all
 x = Info::Provider.new
 x.name="李靖超"
 x.save()
+
+##添加客户
+#Info::Customer.delete_all
+#c = Info::Customer.new
+#c.name = "柳娜"
+#c.save()
+
 
 # 添加仓库信息
 GoDown.delete_all

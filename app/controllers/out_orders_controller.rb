@@ -51,40 +51,43 @@ class OutOrdersController < ApplicationController
   # POST /in_orders
   # POST /in_orders.json
   def outgodown
-    @out_order = OutOrder.find(params.require(:out_order).permit(:id)[:id])
-    @oorder = OOrder.find(@out_order.Order_id)
-    for x in 1..@out_order.out_order_items.count
-      @tmp = params.require("itemline#{x}").permit(:out_item_id, :Sum)
+    out_order = OutOrder.find(params.require(:out_order).permit(:id)[:id])
+    baseorder = BaseOrder.find(out_order.Order_id)
+    for x in 1..out_order.out_order_items.count
+      tmp = params.require("itemline#{x}").permit(:out_item_id, :Sum)
       #得到出库物品的物品编号、生产批次、生产日期、仓库id
-      puts @tmp[:out_item_id]
-      @outitem = OutOrderItem.find(@tmp[:out_item_id])
-      puts @outitem.CreateTime
+      outitem = OutOrderItem.find(tmp[:out_item_id])
+      puts "Item_id:#{outitem.Item_id}\tBatchId:#{outitem.BatchId}\tCreateTime:#{outitem.CreateTime}"
       #查询库存
-      #      @gditem = GoDownItem.where(:Item_id => @outitem.Item_id, :GoDown_id => @outitem.GoDown_id, :BatchId => @outitem.BatchId, :CreateTime => @outitem.CreateTime).first()
-      @gditem = GoDownItem.where(:Item_id => @outitem.Item_id, :GoDown_id => @outitem.GoDown_id, :BatchId => @outitem.BatchId).first()
-      puts @gditem
-      @sum=@tmp[:Sum].to_i
-      if @gditem.Sum < @sum
+      #      @gditem = GoDownItem.where(:Item_id => outitem.Item_id, :GoDown_id => outitem.GoDown_id, :BatchId => outitem.BatchId, :CreateTime => outitem.CreateTime).first()
+      gditem = GoDownItem.where(:Item_id => outitem.Item_id, :GoDown_id => outitem.GoDown_id, :BatchId => outitem.BatchId, :CreateTime => outitem.CreateTime).first()
+      puts gditem.Sum
+      sum=tmp[:Sum].to_i
+      if gditem.Sum < sum
         #库存不足
-        redirect_to "/out_orders/exec/#{@out_order.id}"
+        redirect_to "/out_orders/exec/#{out_order.id}"
       else
         #更新仓库库存数量
-        @gditem.update(:Sum => @gditem.Sum-@sum)
+        gditem.update(:Sum => gditem.Sum-sum)
         #插入出库历史表
-        @outitemhis = OutOrderItemHis.new()
-        @outitemhis.OOrder_id = @outitem.OOrder_id
-        @outitemhis.OutOrder_id = @outitem.OutOrder_id
-        @outitemhis.Item_id = @outitem.Item_id
-        @outitemhis.GoDown_id = @outitem.GoDown_id
-        @outitemhis.BatchId = @outitem.BatchId
-        @outitemhis.CreateTime = @outitem.CreateTime
-        @outitemhis.Sum =@tmp[:Sum]
-        @outitemhis.ExecTime =Time.new.strftime("%Y-%m-%d %H:%M:%S")
-        @outitemhis.Execer = "陈晓雨"
-        @outitemhis.save
+        outitemhis = OutOrderItemHis.new()
+        outitemhis.OOrder_id = outitem.OOrder_id
+        outitemhis.OutOrder_id = outitem.OutOrder_id
+        outitemhis.Item_id = outitem.Item_id
+        outitemhis.GoDown_id = outitem.GoDown_id
+        outitemhis.BatchId = outitem.BatchId
+        outitemhis.CreateTime = outitem.CreateTime
+        outitemhis.Sum =tmp[:Sum]
+        outitemhis.ExecTime =Time.new.strftime("%Y-%m-%d %H:%M:%S")
+        outitemhis.Execer = "陈晓雨"
+        outitemhis.save
+        #更新出库单
+        out_order.update(:State => "已出库", :Execer => "陈晓雨", :ExecTime => Time.new.strftime("%Y-%m-%d %H:%M:%S"))
+        #更新原料出库单
+        baseorder.update(:State => "已出库")
       end
     end
-    @out_order.update(:State => "已执行", :Execer => "陈晓雨", :ExecTime => Time.new.strftime("%Y-%m-%d %H:%M:%S"))
+
     #redirect_to @out_order
   end
 

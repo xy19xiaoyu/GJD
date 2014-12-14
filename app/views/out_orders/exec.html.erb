@@ -21,9 +21,11 @@
           </div>
           <div class="well body">
             <dl class="dl-horizontal">
-              <dt>产品入库单编号：</dt>
-              <dd><%= @order.OrderId %></dd>
-              <dt>产品入库单状态：</dt>
+              <dt>产品出库单编号：</dt>
+              <dd><%= @order.OrderId %>
+                <%= hidden_field :out_order, :id %>
+              </dd>
+              <dt>产品出库单状态：</dt>
               <dd><%= @order.State %></dd>
               <dt>创建人：</dt>
               <dd><%= @order.CreateUser %></dd>
@@ -36,7 +38,7 @@
       <div class="span4">
         <div class="widget ">
           <div class="navbar">
-            <div class="navbar-inner"><h6>订单信息</h6></div>
+            <div class="navbar-inner"><h6>仓库信息</h6></div>
           </div>
           <div class="well body">
             <dl class="dl-horizontal">

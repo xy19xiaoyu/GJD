@@ -29,7 +29,7 @@ function iniItems() {
     iniGodwns();
     iniBatchs();
     var type = $("#order_Type").val();
-    alert(type);
+//    alert(type);
     if (type == "1") {
         select = "原料";
     }

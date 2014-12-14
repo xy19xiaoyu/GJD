@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :sale_orders
+
   resources :item_out_orders
 
   resources :work_shops

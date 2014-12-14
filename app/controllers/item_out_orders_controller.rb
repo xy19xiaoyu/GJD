@@ -57,13 +57,13 @@ class ItemOutOrdersController < ApplicationController
       out_Order = OutOrder.new()
       out_Order.Order_id =item_out_order.id
       out_Order.GoDown_id = godid
-      out_Order.OutOrderId ="#{item_out_order.OrderId}_#{@i}"
+      out_Order.OutOrderId ="#{item_out_order.OrderId}_#{i}"
       out_Order.State = "新建"
       out_Order.CreateTime= Time.new.strftime("%Y-%m-%d %H:%M:%S")
       out_Order.CreateUser ="陈晓雨"
       items.each do |item|
         if item[:GoDown_id] ==godid
-          out_Order.item_out_order.build(:OOrder_id => item_out_order.id, :Item_id => item[:Item_Id], :GoDown_id => item[:GoDown_id], :BatchId => item[:BatchId], :CreateTime => item[:CreateTime], :Sum => item[:Sum])
+          out_Order.out_order_items.build(:OOrder_id => item_out_order.id, :Item_id => item[:Item_Id], :GoDown_id => item[:GoDown_id], :BatchId => item[:BatchId], :CreateTime => item[:CreateTime], :Sum => item[:Sum])
         end
       end
       out_Order.save()

@@ -12,31 +12,34 @@
             </ul>
           </div>
       <% end %>
-      <div class="navbar">
-        <div class="navbar-inner">
-          <h6>订单信息</h6>
-        </div>
-      </div>
 
-      <div class="well invoice">
-        <div class="invoice-head">
-          <ul class="pull-left minus-list invoice-data">
-            <li>入库单编号: <strong class="text-info pull-right"><%= @in_order.InOrderId %></strong></li>
-            <li>订单编号: <strong class="text-info pull-right"><%= @order.OrderId %></strong></li>
-            <li>订单类型: <strong class="text-info pull-right"><%= @order.type %></strong></li>
-            <li>创建人: <span class="pull-right"><%= @order.CreateUser %></span></li>
-            <li>创建时间 <strong class="pull-right text-error"><%= @order.CreateTime %></strong></li>
-          </ul>
-        </div>
-      </div>
       <div class="row-fluid">
-        <div class="span6">
+        <div class="span4">
+          <div class="navbar">
+            <div class="navbar-inner">
+              <h6>订单信息</h6>
+            </div>
+          </div>
+
+          <div class="well invoice">
+            <div class="invoice-head">
+              <ul class="pull-left minus-list invoice-data">
+                <li>入库单编号: <strong class="text-info pull-right"><%= @in_order.InOrderId %></strong></li>
+                <li>订单编号: <strong class="text-info pull-right"><%= @order.OrderId %></strong></li>
+                <li>订单类型: <strong class="text-info pull-right"><%= @order.type %></strong></li>
+                <li>创建人: <span class="pull-right"><%= @order.CreateUser %></span></li>
+                <li>创建时间 <strong class="pull-right text-error"><%= @order.CreateTime %></strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="span4">
           <div class="navbar">
             <div class="navbar-inner">
               <h6>供货商信息</h6>
             </div>
           </div>
-          <div class="well">
+          <div class="well invoice">
             <dl class="dl-horizontal">
               <dt>供货商:</dt>
               <dd><%= @order.From %></dd>
@@ -44,17 +47,23 @@
               <dd><%= @order.FromAddress %></dd>
               <dt>&nbsp;</dt>
               <dd>&nbsp;</dd>
+              <dt>&nbsp;</dt>
+              <dd>&nbsp;</dd>
+              <dt>&nbsp;</dt>
+              <dd>&nbsp;</dd>
+              <dt>&nbsp;</dt>
+              <dd>&nbsp;</dd>
             </dl>
           </div>
         </div>
 
-        <div class="span6">
+        <div class="span4">
           <div class="navbar">
             <div class="navbar-inner">
               <h6>仓库信息</h6>
             </div>
           </div>
-          <div class="well">
+          <div class="well invoice">
             <dl class="dl-horizontal">
               <dt>仓库:</dt>
               <dd><%= @gd.Name %></dd>
@@ -62,6 +71,12 @@
               <dd><%= @gd.Address %></dd>
               <dt>负责人:</dt>
               <dd><%= @gd.Admin %></dd>
+              <dt>&nbsp;</dt>
+              <dd>&nbsp;</dd>
+              <dt>&nbsp;</dt>
+              <dd>&nbsp;</dd>
+              <dt>&nbsp;</dt>
+              <dd>&nbsp;</dd>
             </dl>
           </div>
         </div>
